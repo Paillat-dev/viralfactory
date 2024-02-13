@@ -1,0 +1,6 @@
+{
+    "TTSEngine": [
+        "CoquiTTSEngine",
+        "ElevenLabsTTSEngine"
+    ]
+}
