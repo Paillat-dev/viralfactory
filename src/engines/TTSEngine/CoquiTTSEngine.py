@@ -89,15 +89,25 @@ class CoquiTTSEngine(BaseTTSEngine):
         "hi",  # Hindi
     ]
     options = [
-        gr.Dropdown(
-            voices, value=voices[0], label="voice", max_choices=1
-        ),
-        gr.Dropwdown(
-            languages, value=languages[0], label="language", max_choices=1
-        ),
+        {
+            "type": "dropdown",
+            "label": "Voice",
+            "choices": voices,
+            "max": 1,
+        },
+        {
+            "type": "dropdown",
+            "label": "Language",
+            "choices": languages,
+            "max": 1,
+        },
     ]
-    def __init__(self):
+
+    def __init__(self, options: list):
         super().__init__()
+
+        self.voice = options[0][0]
+        self.language = options[1][0]
 
         os.environ["COQUI_TOS_AGREED"] = "1"
         self.tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2")
@@ -105,7 +115,5 @@ class CoquiTTSEngine(BaseTTSEngine):
         self.tts.to(device)
 
     def synthesize(self, text: str, path: str) -> str:
-        voice = self.options[0].value
-        language = self.options[1].value
-        self.tts.tts_to_file(text=text, file_path=path, lang=language, speaker=voice)
+        self.tts.tts_to_file(text=text, file_path=path, lang=self.language, speaker=self.voice)
         return path
