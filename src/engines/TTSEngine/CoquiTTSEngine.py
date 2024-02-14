@@ -1,7 +1,9 @@
 import gradio as gr
-import TTS
+
+# import TTS
 import os
-import torch
+
+# import torch
 
 from .BaseTTSEngine import BaseTTSEngine
 
@@ -88,20 +90,7 @@ class CoquiTTSEngine(BaseTTSEngine):
         "ko",  # Korean
         "hi",  # Hindi
     ]
-    options = [
-        {
-            "type": "dropdown",
-            "label": "Voice",
-            "choices": voices,
-            "max": 1,
-        },
-        {
-            "type": "dropdown",
-            "label": "Language",
-            "choices": languages,
-            "max": 1,
-        },
-    ]
+    num_options = 2
 
     def __init__(self, options: list):
         super().__init__()
@@ -110,10 +99,28 @@ class CoquiTTSEngine(BaseTTSEngine):
         self.language = options[1][0]
 
         os.environ["COQUI_TOS_AGREED"] = "1"
-        self.tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2")
-        device = "cuda" if torch.cuda.is_available() else "cpu"
-        self.tts.to(device)
+
+    #        self.tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2")
+    #       device = "cuda" if torch.cuda.is_available() else "cpu"
+    #       self.tts.to(device)
 
     def synthesize(self, text: str, path: str) -> str:
-        self.tts.tts_to_file(text=text, file_path=path, lang=self.language, speaker=self.voice)
+        #      self.tts.tts_to_file(text=text, file_path=path, lang=self.language, speaker=self.voice)
         return path
+
+    @classmethod
+    def get_options(cls) -> list:
+        return [
+            gr.Dropdown(
+                label="Voice",
+                choices=cls.voices,
+                max_choices=1,
+                value=cls.voices[0],
+            ),
+            gr.Dropdown(
+                label="Language",
+                choices=cls.languages,
+                max_choices=1,
+                value=cls.languages[0],
+            ),
+        ]

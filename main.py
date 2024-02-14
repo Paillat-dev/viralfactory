@@ -1,4 +1,4 @@
-from interfaces import GenerateUI
+from ui import GenerateUI
 
 if __name__ == "__main__":
     ui_generator = GenerateUI()
