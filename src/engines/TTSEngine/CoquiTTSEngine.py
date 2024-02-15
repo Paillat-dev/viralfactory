@@ -90,13 +90,15 @@ class CoquiTTSEngine(BaseTTSEngine):
         "ko",  # Korean
         "hi",  # Hindi
     ]
-    num_options = 2
+    num_options = 4
 
     def __init__(self, options: list):
         super().__init__()
 
         self.voice = options[0][0]
         self.language = options[1][0]
+        self.to_force_duration = options[2][0]
+        self.duration = options[3]
 
         os.environ["COQUI_TOS_AGREED"] = "1"
 
@@ -106,11 +108,13 @@ class CoquiTTSEngine(BaseTTSEngine):
 
     def synthesize(self, text: str, path: str) -> str:
         #      self.tts.tts_to_file(text=text, file_path=path, lang=self.language, speaker=self.voice)
+        if self.to_force_duration:
+            self.force_duration(float(self.duration), path)
         return path
 
     @classmethod
     def get_options(cls) -> list:
-        return [
+        options = [
             gr.Dropdown(
                 label="Voice",
                 choices=cls.voices,
@@ -124,3 +128,13 @@ class CoquiTTSEngine(BaseTTSEngine):
                 value=cls.languages[0],
             ),
         ]
+    
+        duration_checkbox = gr.Checkbox(value=False)
+        duration = gr.Number(label="Duration", value=57, step=1, minimum=10, visible=False)
+        duration_switch = lambda x: gr.update(visible=x)
+        duration_checkbox.change(duration_switch, inputs=[duration_checkbox], outputs=[duration])
+        duration_checkbox_group = gr.CheckboxGroup([duration_checkbox], label="Force duration")
+
+        options.append(duration_checkbox_group)
+        options.append(duration)
+        return options

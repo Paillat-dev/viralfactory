@@ -52,7 +52,7 @@ class GenerateUI:
                             inputs.append(engine_dropdown)
                             engine_rows = []
                             for i, engine in enumerate(engines):
-                                with gr.Row(visible=(i == 0)) as engine_row:
+                                with gr.Row(equal_height=True, visible=(i == 0)) as engine_row:
                                     engine_rows.append(engine_row)
                                     options = engine.get_options()
                                     inputs.extend(options)

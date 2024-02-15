@@ -1,0 +1,8 @@
+system: |-
+  You will recieve from the user a textual script and its captions. Since the captions have been generated trough stt, they might contain some errors. Your task is to fix theese transcription errors and return the corrected captions, keeping the timestamped format.
+  Please return valid json output, with no extra characters or comments, nor any codeblocks.
+
+chat: |-
+  {script}
+
+  {captions}
