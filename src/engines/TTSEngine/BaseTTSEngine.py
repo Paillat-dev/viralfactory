@@ -49,7 +49,7 @@ class BaseTTSEngine(BaseEngine):
         model = wt.load_model("tiny", device=device)
 
         result = wt.transcribe(model=model, audio=audio)
-        results = [word for chunk in result for word in chunk["words"]]
+        results = [word for chunk in result["segments"] for word in chunk["words"]]
         for result in results:
             # Not needed for the current use case
             del result["confidence"]
