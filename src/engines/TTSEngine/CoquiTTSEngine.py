@@ -1,9 +1,9 @@
 import gradio as gr
 
-# import TTS
+import TTS
 import os
 
-# import torch
+import torch
 
 from .BaseTTSEngine import BaseTTSEngine
 
@@ -102,15 +102,25 @@ class CoquiTTSEngine(BaseTTSEngine):
 
         os.environ["COQUI_TOS_AGREED"] = "1"
 
-    #        self.tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2")
-    #       device = "cuda" if torch.cuda.is_available() else "cpu"
-    #       self.tts.to(device)
+        self.tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2")
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.tts.to(device)
 
-    def synthesize(self, text: str, path: str) -> str:
-        #      self.tts.tts_to_file(text=text, file_path=path, lang=self.language, speaker=self.voice)
-        if self.to_force_duration:
-            self.force_duration(float(self.duration), path)
-        return path
+    def synthesize(self, text: str, path: str):
+            """
+            Synthesizes the given text into speech and saves it to the specified file path.
+
+            Args:
+                text (str): The text to synthesize into speech.
+                path (str): The file path to save the synthesized speech.
+
+            Returns:
+                float: The time taken to synthesize the speech with whispering effect.
+            """
+            self.tts.tts_to_file(text=text, file_path=path, lang=self.language, speaker=self.voice)
+            if self.to_force_duration:
+                self.force_duration(float(self.duration), path)
+            return self.time_with_whisper(path)
 
     @classmethod
     def get_options(cls) -> list:
@@ -129,12 +139,11 @@ class CoquiTTSEngine(BaseTTSEngine):
             ),
         ]
     
-        duration_checkbox = gr.Checkbox(value=False)
-        duration = gr.Number(label="Duration", value=57, step=1, minimum=10, visible=False)
+        duration_checkbox = gr.Checkbox(label="Force duration", info="Force the duration of the generated audio to be at most the specified value", value=False)
+        duration = gr.Number(label="Duration [s]", value=57, step=1, minimum=10, visible=False)
         duration_switch = lambda x: gr.update(visible=x)
         duration_checkbox.change(duration_switch, inputs=[duration_checkbox], outputs=[duration])
-        duration_checkbox_group = gr.CheckboxGroup([duration_checkbox], label="Force duration")
 
-        options.append(duration_checkbox_group)
+        options.append(duration_checkbox)
         options.append(duration)
         return options
