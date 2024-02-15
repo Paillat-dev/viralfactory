@@ -1,6 +1,6 @@
 import gradio as gr
 
-import TTS
+from TTS.api import TTS
 import os
 
 import torch
@@ -95,9 +95,9 @@ class CoquiTTSEngine(BaseTTSEngine):
     def __init__(self, options: list):
         super().__init__()
 
-        self.voice = options[0][0]
-        self.language = options[1][0]
-        self.to_force_duration = options[2][0]
+        self.voice = options[0]
+        self.language = options[1]
+        self.to_force_duration = options[2]
         self.duration = options[3]
 
         os.environ["COQUI_TOS_AGREED"] = "1"
@@ -107,20 +107,22 @@ class CoquiTTSEngine(BaseTTSEngine):
         self.tts.to(device)
 
     def synthesize(self, text: str, path: str):
-            """
-            Synthesizes the given text into speech and saves it to the specified file path.
+        """
+        Synthesizes the given text into speech and saves it to the specified file path.
 
-            Args:
-                text (str): The text to synthesize into speech.
-                path (str): The file path to save the synthesized speech.
+        Args:
+            text (str): The text to synthesize into speech.
+            path (str): The file path to save the synthesized speech.
 
-            Returns:
-                float: The time taken to synthesize the speech with whispering effect.
-            """
-            self.tts.tts_to_file(text=text, file_path=path, lang=self.language, speaker=self.voice)
-            if self.to_force_duration:
-                self.force_duration(float(self.duration), path)
-            return self.time_with_whisper(path)
+        Returns:
+            float: The time taken to synthesize the speech with whispering effect.
+        """
+        self.tts.tts_to_file(
+            text=text, file_path=path, lang=self.language, speaker=self.voice
+        )
+        if self.to_force_duration:
+            self.force_duration(float(self.duration), path)
+        return self.time_with_whisper(path)
 
     @classmethod
     def get_options(cls) -> list:
@@ -138,11 +140,19 @@ class CoquiTTSEngine(BaseTTSEngine):
                 value=cls.languages[0],
             ),
         ]
-    
-        duration_checkbox = gr.Checkbox(label="Force duration", info="Force the duration of the generated audio to be at most the specified value", value=False)
-        duration = gr.Number(label="Duration [s]", value=57, step=1, minimum=10, visible=False)
+
+        duration_checkbox = gr.Checkbox(
+            label="Force duration",
+            info="Force the duration of the generated audio to be at most the specified value",
+            value=False,
+        )
+        duration = gr.Number(
+            label="Duration [s]", value=57, step=1, minimum=10, visible=False
+        )
         duration_switch = lambda x: gr.update(visible=x)
-        duration_checkbox.change(duration_switch, inputs=[duration_checkbox], outputs=[duration])
+        duration_checkbox.change(
+            duration_switch, inputs=[duration_checkbox], outputs=[duration]
+        )
 
         options.append(duration_checkbox)
         options.append(duration)
