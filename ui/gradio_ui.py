@@ -40,7 +40,7 @@ class GenerateUI:
 
     def get_generate_interface(self) -> gr.Blocks:
         with gr.Blocks() as interface:
-            with gr.Row() as row:
+            with gr.Row(equal_height=False) as row:
                 inputs = []
                 with gr.Blocks() as col1:
                     for engine_type, engines in ENGINES.items():

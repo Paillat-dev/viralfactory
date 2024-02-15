@@ -1,5 +1,6 @@
 import openai
 import gradio as gr
+import orjson
 
 from abc import ABC, abstractmethod
 
@@ -15,10 +16,29 @@ class OpenaiLLMEngine(BaseLLMEngine):
     name = "OpenAI"
     description = "OpenAI language model engine."
 
+    def __init__(self, options: list) -> None:
+        self.model = options[0]
+        super().__init__()
+    
     def generate(self, system_prompt: str, chat_prompt: str, max_tokens: int = 512, temperature: float = 1.0, json_mode: bool= False, top_p: float = 1, frequency_penalty: float = 0, presence_penalty: float = 0) -> str:
-        ... # TODO: Implement this method
+        response = openai.chat.completions.create(
+            model=self.model,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": chat_prompt},
+            ],
+            max_tokens=max_tokens,
+            temperature=temperature,
+            top_p=top_p,
+            frequency_penalty=frequency_penalty,
+            presence_penalty=presence_penalty,
+            response_format={ "type": "json_object" } if json_mode else openai._types.NOT_GIVEN
+        )
+        return response.choices[0].message.content if not json_mode else orjson.loads(response.choices[0].message.content)
 
-    def get_options(self) -> list:
+
+    @classmethod
+    def get_options(cls) -> list:
         return [
             gr.Dropdown(
                 label="Model",

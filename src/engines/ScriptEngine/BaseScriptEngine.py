@@ -8,3 +8,6 @@ class BaseScriptEngine(BaseEngine):
     @abstractmethod
     def generate(self) -> str:
         pass
+
+    def time_script(self):
+        ...
