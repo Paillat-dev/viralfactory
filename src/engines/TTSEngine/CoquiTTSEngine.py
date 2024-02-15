@@ -118,7 +118,7 @@ class CoquiTTSEngine(BaseTTSEngine):
             float: The time taken to synthesize the speech with whispering effect.
         """
         self.tts.tts_to_file(
-            text=text, file_path=path, lang=self.language, speaker=self.voice
+            text=text, file_path=path, language=self.language, speaker=self.voice
         )
         if self.to_force_duration:
             self.force_duration(float(self.duration), path)
