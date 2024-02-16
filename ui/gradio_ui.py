@@ -24,7 +24,7 @@ class GenerateUI:
 
     def launch_ui(self):
         ui = gr.TabbedInterface(
-            *self.get_interfaces(), "Viral Automator", "NoCrypt/miku", css=self.css
+            *self.get_interfaces(), "Viral Factory", "NoCrypt/miku", css=self.css
         )
         ui.launch()
 
