@@ -13,10 +13,12 @@ class GenerateUI:
         """
 
     def get_switcher_func(self, engine_names: list[str]) -> list[gr.update]:
-        def switch(selected: str):
+        def switch(selected: str | list[str]):
+            if isinstance(selected, str):
+                selected = [selected]
             returnable = []
             for i, name in enumerate(engine_names):
-                returnable.append(gr.update(visible=name == selected))
+                returnable.append(gr.update(visible=name in selected))
 
             return returnable
 
@@ -51,14 +53,15 @@ class GenerateUI:
                                 choices=engine_names,
                                 value=engine_names[0],
                                 multiselect=multiselect,
-                                label="Engine provider:"
+                                label="Engine provider:" if not multiselect else "Engine providers:",
                             )
                             inputs.append(engine_dropdown)
                             engine_rows = []
                             for i, engine in enumerate(engines):
-                                with gr.Row(
-                                    equal_height=True, visible=(i == 0)
+                                with gr.Group(
+                                    visible=(i == 0)
                                 ) as engine_row:
+                                    gr.Label(engine.name)
                                     engine_rows.append(engine_row)
                                     options = engine.get_options()
                                     inputs.extend(options)

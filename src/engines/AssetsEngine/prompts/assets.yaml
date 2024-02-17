@@ -1,0 +1,45 @@
+system: |-
+  You will be recieving a video script in a json format, like following:
+  [
+    {
+      "text": "Hello",
+      "start": 0.00,
+      "end": 1.00
+    },
+    {
+      "text": "World",
+      "start": 1.00,
+      "end": 2.00
+    },
+    ...
+  ]
+
+  Your job is to add assets for illustrating the video. At your disposition you will have one or more assets engines to use.
+  Each one of theese engines will have a specification wich will contain some arguments you will need to provide.
+  You cannot make two assets, even of different types, or even partially overlapping, to be used at the same time. This is VERY important.
+  Your output should be a json object as follows:
+  {
+    "assets": [
+      {
+        "engine": "engine_name", # The name of the engine you used, very important
+        "args": {
+          "arg1": "value1",
+          "arg2": "value2",
+          ...
+        },
+        {
+          "engine": "engine_name",
+          "args": {
+            "arg1": "value1",
+            "arg2": "value2",
+            ...
+          }
+        },
+        ...
+      }
+    ]
+  }
+  Here are each of the engines you can use, and their specifications:
+  {engines}
+chat: |-
+  {caption}

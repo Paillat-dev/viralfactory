@@ -5,6 +5,7 @@ from . import TTSEngine
 from . import ScriptEngine
 from . import LLMEngine
 from . import CaptioningEngine
+from . import AssetsEngine
 
 
 class EngineDict(TypedDict):
@@ -35,5 +36,9 @@ ENGINES: dict[str, EngineDict] = {
     "CaptioningEngine": {
         "classes": [CaptioningEngine.SimpleCaptioningEngine, NoneEngine],
         "multiple": False,
+    },
+    "AssetsEngine": {
+        "classes": [AssetsEngine.DallEAssetsEngine, NoneEngine],
+        "multiple": True,
     },
 }

@@ -15,6 +15,7 @@ class GenerationContext:
         scriptengine,
         ttsengine,
         captioningengine,
+        assetsengine,
     ) -> None:
         self.powerfulllmengine: engines.LLMEngine.BaseLLMEngine = powerfulllmengine[0]
         self.powerfulllmengine.ctx = self
@@ -32,6 +33,12 @@ class GenerationContext:
             captioningengine[0]
         )
         self.captioningengine.ctx = self
+
+        self.assetsengine: list[engines.AssetsEngine.BaseAssetsEngine] = assetsengine
+        for eng in self.assetsengine:
+            eng.ctx = self
+        self.assetsengineselector = engines.AssetsEngine.AssetsEngineSelector()
+        self.assetsengineselector.ctx = self
 
     def setup_dir(self):
         self.dir = f"output/{time.time()}"
@@ -56,6 +63,15 @@ class GenerationContext:
             self.script, self.get_file_path("tts.wav")
         )
 
+        self.assetsengine = [
+            engine for engine in self.assetsengine if not isinstance(engine, engines.NoneEngine)
+        ]
+        if len(self.assetsengine) > 0:
+            self.assets = self.assetsengineselector.get_assets()
+        else:
+            self.assets = []
+
+
         if not isinstance(self.captioningengine, engines.NoneEngine):
             self.captions = self.captioningengine.get_captions()
         else:
@@ -65,8 +81,9 @@ class GenerationContext:
 
         # we render to a file called final.mp4
         # using moviepy CompositeVideoClip
-
-        clip = mp.CompositeVideoClip(self.captions, size=(self.width, self.height))
+        clips = [*self.assets, *self.captions]
+        clip = mp.CompositeVideoClip(clips, size=(self.width, self.height))
         audio = mp.AudioFileClip(self.get_file_path("tts.wav"))
         clip = clip.set_audio(audio)
         clip.write_videofile(self.get_file_path("final.mp4"), fps=60)
+        

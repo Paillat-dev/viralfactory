@@ -12,6 +12,7 @@ class BaseLLMEngine(BaseEngine):
         chat_prompt: str,
         max_tokens: int,
         temperature: float,
+        json_mode: bool,
         top_p: float,
         frequency_penalty: float,
         presence_penalty: float,
