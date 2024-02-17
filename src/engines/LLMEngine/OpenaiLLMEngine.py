@@ -38,7 +38,7 @@ class OpenaiLLMEngine(BaseLLMEngine):
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": chat_prompt},
             ],
-            max_tokens=max_tokens,
+            max_tokens=int(max_tokens) if max_tokens else openai._types.NOT_GIVEN,
             temperature=temperature,
             top_p=top_p,
             frequency_penalty=frequency_penalty,

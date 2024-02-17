@@ -16,8 +16,22 @@ class Word(TypedDict):
 
 class BaseTTSEngine(BaseEngine):
     @abstractmethod
-    def synthesize(self, text: str, path: str) -> str:
+    def synthesize(self, text: str, path: str) -> list[Word]:
         pass
+    
+    def remove_punctuation(self, text: str) -> str:
+        return text.translate(str.maketrans("", "", ".,!?;:"))
+
+    def fix_captions(self, script: str, captions: list[Word]) -> list[Word]:
+        script = script.split(" ")
+        new_captions = []
+        for i, word in enumerate(script):
+            original_word = self.remove_punctuation(word.lower())
+            stt_word = self.remove_punctuation(word.lower())
+            if stt_word in original_word:
+                captions[i]["text"] = word
+                new_captions.append(captions[i])
+            #elif there is a word more in the stt than in the original, we 
 
     def time_with_whisper(self, path: str) -> list[Word]:
         """
@@ -46,7 +60,7 @@ class BaseTTSEngine(BaseEngine):
         """
         device = "cuda" if is_available() else "cpu"
         audio = wt.load_audio(path)
-        model = wt.load_model("tiny", device=device)
+        model = wt.load_model("small", device=device)
 
         result = wt.transcribe(model=model, audio=audio)
         results = [word for chunk in result["segments"] for word in chunk["words"]]

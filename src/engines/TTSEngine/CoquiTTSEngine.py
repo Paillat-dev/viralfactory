@@ -5,8 +5,9 @@ import os
 
 import torch
 
-from .BaseTTSEngine import BaseTTSEngine
+from .BaseTTSEngine import BaseTTSEngine, Word
 
+from ...utils.prompting import get_prompt
 
 class CoquiTTSEngine(BaseTTSEngine):
     voices = [
@@ -122,8 +123,10 @@ class CoquiTTSEngine(BaseTTSEngine):
         )
         if self.to_force_duration:
             self.force_duration(float(self.duration), path)
+        
         return self.time_with_whisper(path)
 
+        
     @classmethod
     def get_options(cls) -> list:
         options = [
@@ -131,7 +134,7 @@ class CoquiTTSEngine(BaseTTSEngine):
                 label="Voice",
                 choices=cls.voices,
                 max_choices=1,
-                value=cls.voices[0],
+                value="Damien Black",
             ),
             gr.Dropdown(
                 label="Language",
@@ -145,6 +148,7 @@ class CoquiTTSEngine(BaseTTSEngine):
             label="Force duration",
             info="Force the duration of the generated audio to be at most the specified value",
             value=False,
+            show_label=True,
         )
         duration = gr.Number(
             label="Duration [s]", value=57, step=1, minimum=10, visible=False
