@@ -6,7 +6,7 @@ from . import ScriptEngine
 from . import LLMEngine
 from . import CaptioningEngine
 from . import AssetsEngine
-
+from . import SettingsEngine
 
 class EngineDict(TypedDict):
     classes: list[BaseEngine]
@@ -14,6 +14,12 @@ class EngineDict(TypedDict):
 
 
 ENGINES: dict[str, EngineDict] = {
+    "SettingsEngine": {
+        "classes": [SettingsEngine.SettingsEngine],
+        "multiple": False,
+        "show_dropdown": False,
+    },
+
     "SimpleLLMEngine": {
         "classes": [LLMEngine.OpenaiLLMEngine, LLMEngine.AnthropicLLMEngine],
         "multiple": False,
