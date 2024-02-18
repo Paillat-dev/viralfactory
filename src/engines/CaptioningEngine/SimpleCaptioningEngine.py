@@ -23,6 +23,8 @@ class SimpleCaptioningEngine(BaseCaptioningEngine):
             fontsize=self.font_size,
             color=self.font_color,
             font=self.font,
+            stroke_color=self.stroke_color,
+            stroke_width=self.stroke_width,
             method="caption",
             size=(self.ctx.width /3 * 2, None),
         ).set_position(('center', 0.65), relative=True).set_start(start).set_duration(end - start)
@@ -89,7 +91,7 @@ class SimpleCaptioningEngine(BaseCaptioningEngine):
                     minimum=0,
                     maximum=40,
                     step=1,
-                    value=4,
+                    value=6,
                 )
                 font_stroke_color = gr.ColorPicker(label="Stroke Color", value="#000000")
         return [font, font_size, font_stroke_width, font_color, font_stroke_color]
