@@ -1,6 +1,7 @@
 import gradio as gr
 import openai
 import moviepy.editor as mp
+from moviepy.video.fx.resize import resize
 import io
 import base64
 import time
@@ -38,6 +39,7 @@ class DallEAssetsEngine(BaseAssetsEngine):
         super().__init__()
     
     def get_assets(self, options: list[Spec]) -> list[mp.ImageClip]:
+        max_width = self.ctx.width / 3 * 2
         clips = []
         for option in options:
             prompt = option["prompt"]
@@ -67,9 +69,10 @@ class DallEAssetsEngine(BaseAssetsEngine):
             os.remove("temp.png")
 
             img: mp.ImageClip = img.set_duration(end - start)
-            img = img.set_start(start)
+            img: mp.ImageClip = img.set_start(start)
+            img: mp.ImageClip = resize(img, width=max_width)
             if self.aspect_ratio == "portrait":
-                img = img.set_position(("center", "top"))
+                img: mp.ImageClip = img.set_position(("center", "top"))
             elif self.aspect_ratio == "landscape":
                 img = img.set_position(("center", "center"))
             elif self.aspect_ratio == "square":
