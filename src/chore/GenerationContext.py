@@ -16,6 +16,7 @@ class GenerationContext:
         ttsengine,
         captioningengine,
         assetsengine,
+        settingsengine,
     ) -> None:
         self.powerfulllmengine: engines.LLMEngine.BaseLLMEngine = powerfulllmengine[0]
         self.powerfulllmengine.ctx = self
@@ -40,6 +41,9 @@ class GenerationContext:
         self.assetsengineselector = engines.AssetsEngine.AssetsEngineSelector()
         self.assetsengineselector.ctx = self
 
+        self.settingsengine: engines.SettingsEngine.SettingsEngine = settingsengine[0]
+        self.settingsengine.ctx = self
+
     def setup_dir(self):
         self.dir = f"output/{time.time()}"
         os.makedirs(self.dir)
@@ -50,11 +54,10 @@ class GenerationContext:
     def process(self):
         # ⚠️ IMPORTANT NOTE: All methods called here are expected to be defined as abstract methods in the base classes, if not there is an issue with the engine implementation.
 
+        # we start by loading the settings
         progress = gr.Progress()
-        self.width, self.height = (
-            1080,
-            1920,
-        )  # TODO: Add support for custom resolution, for now it's tiktok's resolution
+        self.settingsengine.load()
+        
         self.setup_dir()
 
         self.script = self.scriptengine.generate()
