@@ -46,6 +46,7 @@ class GenerateUI:
                 with gr.Blocks() as col1:
                     for engine_type, engines in ENGINES.items():
                         multiselect = engines["multiple"]
+                        show_dropdown = engines.get("show_dropdown", True)
                         engines = engines["classes"]
                         with gr.Tab(engine_type) as engine_tab:
                             engine_names = [engine.name for engine in engines]
@@ -54,6 +55,7 @@ class GenerateUI:
                                 value=engine_names[0],
                                 multiselect=multiselect,
                                 label="Engine provider:" if not multiselect else "Engine providers:",
+                                visible=show_dropdown,
                             )
                             inputs.append(engine_dropdown)
                             engine_rows = []
@@ -61,7 +63,7 @@ class GenerateUI:
                                 with gr.Group(
                                     visible=(i == 0)
                                 ) as engine_row:
-                                    gr.Label(engine.name)
+                                    gr.Markdown(value = " ", label=f"{engine.name}", show_label=True)
                                     engine_rows.append(engine_row)
                                     options = engine.get_options()
                                     inputs.extend(options)
