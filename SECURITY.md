@@ -1,0 +1,25 @@
+# Security Policy
+
+## Supported Versions
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 1.x.x   | :white_check_mark: |
+
+## Contact information
+
+Open an issue or contact me@paillat.dev
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mDMEZdNT2xYJKwYBBAHaRw8BAQdAnCtfbJT3t+BfJAawCvXQL5vJtiFB/nFltDea
+KIY1X8G0IErDqXLDqW1pZSBDb3R0aSA8bWVAcGFpbGxhdC5kZXY+iJkEExYKAEEW
+IQSWgB4jFaZSxJaCpmTfK9QArJGPLAUCZdNT2wIbAwUJBaTM1QULCQgHAgIiAgYV
+CgkICwIEFgIDAQIeBwIXgAAKCRDfK9QArJGPLHAyAQDhdDQ+5cudrMJ0pZcWKvqL
+JknYASaV28/2I44uiE6s2gD+PtMoXUUZLwEvXfoFgdcutxcN6S5qNbfP+MZFDiDu
+MQu4OARl01PbEgorBgEEAZdVAQUBAQdABGPuPdrXXKhsBYi98Q5Ki3ez3ExP8VDg
+ineYdA7UHRIDAQgHiH4EGBYKACYWIQSWgB4jFaZSxJaCpmTfK9QArJGPLAUCZdNT
+2wIbDAUJBaTM1QAKCRDfK9QArJGPLIjKAQDI2pPBVV8bgYkQO8IDkDXjCS/9w2Fd
+/ucuJusIerBUowEArBf57bkNkXbL5yRNO/Bu9ZmvDo0VaYYYz6JWMMXFGQM=
+=Potf
+-----END PGP PUBLIC KEY BLOCK-----
