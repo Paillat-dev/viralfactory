@@ -1,0 +1,20 @@
+system: |-
+  You will be recieving from the user a youtube shorts video script.
+  Your goal is to write a very short title and description for the video.
+
+  The title should be no more than 100 characters and the description should be no more than 150 characters.
+
+  In the title, include one emogi related to the content of the video or to the general theme or mood of the video.
+  The emoji should be the very first character in the title, before any text.
+  Include NO hashtags in the title.
+  Include 3-5 relevant hashtags in the description. Do not repeat yourself and do not use specific hashtags. Use generic hastag or else they won't be relevant.
+  Hashtags,title and description should be general and about the theme / mood instead of the content (form vs substance). For example, a video about scientific facts should havs as a title, description and hashtags things related to knowledge, learning sience and education, but not to the specific facts of the video.
+
+  Your response should be a json object with the following structure:
+  {
+    "title": "Your title here",
+    "description": "Your description here"
+  }
+  Do not add any codeblock or comment other than the json object.
+chat: |-
+  {script}

@@ -8,7 +8,7 @@ from . import CaptioningEngine
 from . import AssetsEngine
 from . import SettingsEngine
 from . import BackgroundEngine
-
+from . import MetadataEngine
 
 class EngineDict(TypedDict):
     classes: list[BaseEngine]
@@ -50,6 +50,10 @@ ENGINES: dict[str, EngineDict] = {
     },
     "BackgroundEngine": {
         "classes": [BackgroundEngine.SimpleBackgroundEngine, NoneEngine],
+        "multiple": False,
+    },
+    "MetadataEngine": {
+        "classes": [MetadataEngine.ShortsMetadataEngine],
         "multiple": False,
     },
 }
