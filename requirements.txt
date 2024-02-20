@@ -47,6 +47,7 @@ fsspec==2024.2.0
 g2pkk==0.1.2
 gradio==4.19.0
 gradio_client==0.10.0
+greenlet==3.0.3
 grpcio==1.60.1
 gruut==2.2.3
 gruut-ipa==0.13.0
@@ -139,6 +140,7 @@ soxr==0.3.7
 spacy==3.7.2
 spacy-legacy==3.0.12
 spacy-loggers==1.0.5
+SQLAlchemy==2.0.27
 srsly==2.4.8
 starlette==0.36.3
 SudachiDict-core==20240109
