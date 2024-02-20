@@ -47,6 +47,7 @@ class GenerateUI:
                 engines = engines["classes"]
                 with gr.Tab(engine_type) as engine_tab:
                     for engine in engines:
+                        gr.Markdown(f"## {engine.name}")
                         engine.get_settings()
         return interface
 
@@ -75,9 +76,8 @@ class GenerateUI:
                             for i, engine in enumerate(engines):
                                 with gr.Group(visible=(i == 0)) as engine_row:
                                     gr.Markdown(
-                                        value=" ",
-                                        label=f"{engine.name}",
-                                        show_label=True,
+                                        value=f"## {engine.name}",
+                                        render=False,
                                     )
                                     engine_rows.append(engine_row)
                                     options = engine.get_options()
