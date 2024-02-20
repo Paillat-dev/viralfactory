@@ -47,7 +47,7 @@ class BaseEngine(ABC):
                     .scalars()
                     .all()
                 )
-    
+
     @classmethod
     def add_asset(cls, *, path: str, metadata: dict, type: str = None):
         with SessionLocal() as db:

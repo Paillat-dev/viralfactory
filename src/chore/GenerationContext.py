@@ -18,7 +18,7 @@ class GenerationContext:
         assetsengine,
         settingsengine,
         backgroundengine,
-        progress
+        progress,
     ) -> None:
         self.progress = progress
 
@@ -64,8 +64,8 @@ class GenerationContext:
         # ⚠️ IMPORTANT NOTE: All methods called here are expected to be defined as abstract methods in the base classes, if not there is an issue with the engine implementation.
 
         # we start by loading the settings
-        
-        self.progress(0.1,"Loading settings...")
+
+        self.progress(0.1, "Loading settings...")
         self.settingsengine.load()
 
         self.setup_dir()

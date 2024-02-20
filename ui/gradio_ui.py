@@ -4,6 +4,7 @@ import gradio as gr
 from src.engines import ENGINES, BaseEngine
 from src.chore import GenerationContext
 
+
 class GenerateUI:
     def __init__(self):
         self.css = """.generate_button {
@@ -95,7 +96,11 @@ class GenerateUI:
                         elem_classes="generate_button",
                     )
                     output_gallery = gr.Markdown("aaa", render=False)
-                    button.click(self.run_generate_interface, inputs=inputs, outputs=output_gallery)
+                    button.click(
+                        self.run_generate_interface,
+                        inputs=inputs,
+                        outputs=output_gallery,
+                    )
             output_gallery.render()
         return interface
 
@@ -106,6 +111,7 @@ class GenerateUI:
         ctx = GenerationContext(**arugments, progress=progress)
         ctx.process()  # Here we go ! 🚀
         return gr.update(value=ctx.get_file_path("final.mp4"))
+
     def repack_options(self, *args) -> dict[BaseEngine]:
         """
         Repacks the options provided as arguments into a dictionary based on the selected engine.

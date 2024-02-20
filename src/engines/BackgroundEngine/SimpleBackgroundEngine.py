@@ -23,7 +23,11 @@ class SimpleBackgroundEngine(BaseBackgroundEngine):
     @classmethod
     def get_options(cls) -> list:
         assets = cls.get_assets(type="bcg_video")
-        choices=[asset.data["name"] for asset in assets] if len(assets) > 0 else ["No videos available"]
+        choices = (
+            [asset.data["name"] for asset in assets]
+            if len(assets) > 0
+            else ["No videos available"]
+        )
 
         return [
             gr.Dropdown(
@@ -35,9 +39,7 @@ class SimpleBackgroundEngine(BaseBackgroundEngine):
         ]
 
     def get_background(self) -> mp.VideoClip:
-        background = mp.VideoFileClip(
-            f"{self.background_video}", audio=False
-        )
+        background = mp.VideoFileClip(f"{self.background_video}", audio=False)
         background_max_start = background.duration - self.ctx.duration
         if background_max_start < 0:
             raise ValueError(
@@ -46,7 +48,13 @@ class SimpleBackgroundEngine(BaseBackgroundEngine):
         start = random.uniform(0, background_max_start)
         clip = background.subclip(start, start + self.ctx.duration)
         w, h = clip.size
-        return crop(clip, width=self.ctx.width, height=self.ctx.height, x_center=w / 2, y_center=h / 2)
+        return crop(
+            clip,
+            width=self.ctx.width,
+            height=self.ctx.height,
+            x_center=w / 2,
+            y_center=h / 2,
+        )
 
     @classmethod
     def get_settings(cls) -> list:
