@@ -7,6 +7,8 @@ from . import LLMEngine
 from . import CaptioningEngine
 from . import AssetsEngine
 from . import SettingsEngine
+from . import BackgroundEngine
+
 
 class EngineDict(TypedDict):
     classes: list[BaseEngine]
@@ -19,7 +21,6 @@ ENGINES: dict[str, EngineDict] = {
         "multiple": False,
         "show_dropdown": False,
     },
-
     "SimpleLLMEngine": {
         "classes": [LLMEngine.OpenaiLLMEngine, LLMEngine.AnthropicLLMEngine],
         "multiple": False,
@@ -46,5 +47,9 @@ ENGINES: dict[str, EngineDict] = {
     "AssetsEngine": {
         "classes": [AssetsEngine.DallEAssetsEngine, NoneEngine],
         "multiple": True,
+    },
+    "BackgroundEngine": {
+        "classes": [BackgroundEngine.SimpleBackgroundEngine, NoneEngine],
+        "multiple": False,
     },
 }
