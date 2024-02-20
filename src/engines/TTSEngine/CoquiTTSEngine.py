@@ -9,6 +9,7 @@ from .BaseTTSEngine import BaseTTSEngine, Word
 
 from ...utils.prompting import get_prompt
 
+
 class CoquiTTSEngine(BaseTTSEngine):
     voices = [
         "Claribel Dervla",
@@ -123,10 +124,11 @@ class CoquiTTSEngine(BaseTTSEngine):
         )
         if self.to_force_duration:
             self.force_duration(float(self.duration), path)
-        
+
+        self.ctx.duration = self.get_audio_duration(path)
+
         return self.time_with_whisper(path)
 
-        
     @classmethod
     def get_options(cls) -> list:
         options = [
