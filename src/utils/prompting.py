@@ -8,11 +8,15 @@ class Prompt(TypedDict):
     chat: str
 
 
-def get_prompt(name, *, location: str="src/chore/prompts", by_file_location: str = None) -> tuple[str, str]:
+def get_prompt(
+    name, *, location: str = "src/chore/prompts", by_file_location: str = None
+) -> tuple[str, str]:
     if by_file_location:
         path = os.path.join(
-                os.path.dirname(os.path.abspath(by_file_location)), "prompts", f"{name}.yaml"
-            )
+            os.path.dirname(os.path.abspath(by_file_location)),
+            "prompts",
+            f"{name}.yaml",
+        )
     else:
         path = os.path.join(os.getcwd(), location, f"{name}.yaml")
     if not os.path.exists(path):

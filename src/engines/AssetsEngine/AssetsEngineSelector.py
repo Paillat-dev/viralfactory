@@ -2,6 +2,8 @@ import json
 
 from ...utils.prompting import get_prompt
 from ...chore import GenerationContext
+
+
 class AssetsEngineSelector:
     def __init__(self):
         self.ctx: GenerationContext
@@ -9,12 +11,16 @@ class AssetsEngineSelector:
     def get_assets(self):
         system_prompt, chat_prompt = get_prompt("assets", by_file_location=__file__)
         engines_descriptors = ""
-        
+
         for engine in self.ctx.assetsengine:
-            engines_descriptors += f"name: '{engine.name}'\n{json.dumps(engine.specification)}\n"
-        
+            engines_descriptors += (
+                f"name: '{engine.name}'\n{json.dumps(engine.specification)}\n"
+            )
+
         system_prompt = system_prompt.replace("{engines}", engines_descriptors)
-        chat_prompt = chat_prompt.replace("{caption}", json.dumps(self.ctx.timed_script))
+        chat_prompt = chat_prompt.replace(
+            "{caption}", json.dumps(self.ctx.timed_script)
+        )
 
         assets = self.ctx.powerfulllmengine.generate(
             system_prompt=system_prompt,

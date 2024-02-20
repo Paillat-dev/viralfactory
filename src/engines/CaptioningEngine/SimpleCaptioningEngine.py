@@ -17,23 +17,30 @@ class SimpleCaptioningEngine(BaseCaptioningEngine):
         self.stroke_color = options[4]
 
         super().__init__()
+
     def build_caption_object(self, text: str, start: float, end: float) -> TextClip:
-        return TextClip(
-            text,
-            fontsize=self.font_size,
-            color=self.font_color,
-            font=self.font,
-            stroke_color=self.stroke_color,
-            stroke_width=self.stroke_width,
-            method="caption",
-            size=(self.ctx.width /3 * 2, None),
-        ).set_position(('center', 0.65), relative=True).set_start(start).set_duration(end - start)
+        return (
+            TextClip(
+                text,
+                fontsize=self.font_size,
+                color=self.font_color,
+                font=self.font,
+                stroke_color=self.stroke_color,
+                stroke_width=self.stroke_width,
+                method="caption",
+                size=(self.ctx.width / 3 * 2, None),
+            )
+            .set_position(("center", 0.65), relative=True)
+            .set_start(start)
+            .set_duration(end - start)
+        )
+
     def ends_with_punctuation(self, text: str) -> bool:
         punctuations = (".", "?", "!", ",", ":", ";")
         return text.strip().endswith(tuple(punctuations))
 
     def get_captions(self) -> list[TextClip]:
-        #3 words per 1000 px, we do the math
+        # 3 words per 1000 px, we do the math
         max_words = int(self.ctx.width / 1000 * 3)
 
         clips = []
@@ -51,7 +58,11 @@ class SimpleCaptioningEngine(BaseCaptioningEngine):
             pause = self.ends_with_punctuation(current_line.strip())
 
             if len(line_with_new_word.split(" ")) > max_words or pause:
-                clips.append(self.build_caption_object(current_line.strip(), current_start, current_end))
+                clips.append(
+                    self.build_caption_object(
+                        current_line.strip(), current_start, current_end
+                    )
+                )
                 current_line = word["text"]  # Start a new line with the current word
                 current_start = word["start"]
                 current_end = word["end"]
@@ -62,7 +73,9 @@ class SimpleCaptioningEngine(BaseCaptioningEngine):
         # Don't forget to add the last line if it exists
         if current_line:
             clips.append(
-                self.build_caption_object(current_line.strip(), current_start, words[-1]["end"])
+                self.build_caption_object(
+                    current_line.strip(), current_start, words[-1]["end"]
+                )
             )
 
         return clips
@@ -73,7 +86,7 @@ class SimpleCaptioningEngine(BaseCaptioningEngine):
             with gr.Group():
                 font = gr.Dropdown(
                     label="Font",
-                    choices=TextClip.list('font'),
+                    choices=TextClip.list("font"),
                     value="Arial",
                 )
                 font_size = gr.Number(
@@ -93,5 +106,7 @@ class SimpleCaptioningEngine(BaseCaptioningEngine):
                     step=1,
                     value=6,
                 )
-                font_stroke_color = gr.ColorPicker(label="Stroke Color", value="#000000")
+                font_stroke_color = gr.ColorPicker(
+                    label="Stroke Color", value="#000000"
+                )
         return [font, font_size, font_stroke_width, font_color, font_stroke_color]

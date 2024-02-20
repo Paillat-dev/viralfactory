@@ -18,7 +18,7 @@ class BaseTTSEngine(BaseEngine):
     @abstractmethod
     def synthesize(self, text: str, path: str) -> list[Word]:
         pass
-    
+
     def remove_punctuation(self, text: str) -> str:
         return text.translate(str.maketrans("", "", ".,!?;:"))
 
@@ -31,7 +31,7 @@ class BaseTTSEngine(BaseEngine):
             if stt_word in original_word:
                 captions[i]["text"] = word
                 new_captions.append(captions[i])
-            #elif there is a word more in the stt than in the original, we 
+            # elif there is a word more in the stt than in the original, we
 
     def time_with_whisper(self, path: str) -> list[Word]:
         """

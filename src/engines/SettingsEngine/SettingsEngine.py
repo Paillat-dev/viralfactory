@@ -16,10 +16,13 @@ class SettingsEngine(BaseEngine):
     def load(self):
         self.ctx.width = self.width
         self.ctx.height = self.height
+
     @classmethod
     def get_options(cls):
-        #minimum is 720p, maximum is 4k, default is portrait hd
+        # minimum is 720p, maximum is 4k, default is portrait hd
         width = gr.Number(value=1080, minimum=720, maximum=3840, label="Width", step=1)
-        height = gr.Number(value=1920, minimum=720, maximum=3840, label="Height", step=1)
+        height = gr.Number(
+            value=1920, minimum=720, maximum=3840, label="Height", step=1
+        )
 
         return [width, height]

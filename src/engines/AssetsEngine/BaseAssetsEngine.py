@@ -4,7 +4,6 @@ from typing import TypedDict
 from moviepy.editor import ImageClip, VideoFileClip
 
 
-
 class BaseAssetsEngine(BaseEngine):
     """
     The base class for all assets engines.
