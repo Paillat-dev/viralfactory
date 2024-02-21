@@ -6,5 +6,5 @@ from moviepy.editor import TextClip
 
 class BaseCaptioningEngine(BaseEngine):
     @abstractmethod
-    def get_captions(self) -> list[TextClip]:
+    def get_captions(self) -> None:
         ...

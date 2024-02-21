@@ -63,27 +63,33 @@ class GenerationContext:
     def process(self):
         # ⚠️ IMPORTANT NOTE: All methods called here are expected to be defined as abstract methods in the base classes, if not there is an issue with the engine implementation.
 
-        # we start by loading the settings
+        # Kinda like in css, we have a z-index of moviepy clips (any). Then the engines append some clips to this, and we render it all with index 0 below, and index 9 at the top.
+        self.index_0 = []
+        self.index_1 = []
+        self.index_2 = []
+        self.index_3 = []
+        self.index_4 = []
+        self.index_5 = []
+        self.index_6 = []
+        self.index_7 = []
+        self.index_8 = []
+        self.index_9 = []
 
         self.progress(0.1, "Loading settings...")
+        self.setup_dir()
         self.settingsengine.load()
 
-        self.setup_dir()
-
         self.progress(0.2, "Generating script...")
-        self.script = self.scriptengine.generate()
+        self.scriptengine.generate()
 
         self.progress(0.3, "Generating synthtetizing voice...")
-        self.timed_script = self.ttsengine.synthesize(
-            self.script, self.get_file_path("tts.wav")
-        )
-
-        self.assets = []
+        self.ttsengine.synthesize(self.script, self.get_file_path("tts.wav"))
+        self.duration: float #for type hinting
 
         if not isinstance(self.backgroundengine, engines.NoneEngine):
             self.progress(0.4, "Generating background...")
-            self.background = self.backgroundengine.get_background()
-            self.assets.append(self.background)
+            self.backgroundengine.get_background()
+
         self.assetsengine = [
             engine
             for engine in self.assetsengine
@@ -91,21 +97,32 @@ class GenerationContext:
         ]
         if len(self.assetsengine) > 0:
             self.progress(0.5, "Generating assets...")
-            self.assets.extend(self.assetsengineselector.get_assets())
+            self.assetsengineselector.get_assets()
 
         if not isinstance(self.captioningengine, engines.NoneEngine):
             self.progress(0.6, "Generating captions...")
-            self.captions = self.captioningengine.get_captions()
+            self.captioningengine.get_captions()
         else:
             self.captions = []
 
         # add any other processing steps here
 
         # we render to a file called final.mp4
-        # using moviepy CompositeVideoClip
         self.progress(0.7, "Rendering video...")
-        clips = [*self.assets, *self.captions]
+        clips = [
+            *self.index_0,
+            *self.index_1,
+            *self.index_2,
+            *self.index_3,
+            *self.index_4,
+            *self.index_5,
+            *self.index_6,
+            *self.index_7,
+            *self.index_8,
+            *self.index_9,
+        ]
         clip = mp.CompositeVideoClip(clips, size=(self.width, self.height))
+        clip.set_duration(self.duration)
         audio = mp.AudioFileClip(self.get_file_path("tts.wav"))
         clip = clip.set_audio(audio)
         clip.write_videofile(self.get_file_path("final.mp4"), fps=60)

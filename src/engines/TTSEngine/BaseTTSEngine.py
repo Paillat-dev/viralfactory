@@ -16,7 +16,7 @@ class Word(TypedDict):
 
 class BaseTTSEngine(BaseEngine):
     @abstractmethod
-    def synthesize(self, text: str, path: str) -> list[Word]:
+    def synthesize(self, text: str, path: str) -> None:
         pass
 
     def remove_punctuation(self, text: str) -> str:

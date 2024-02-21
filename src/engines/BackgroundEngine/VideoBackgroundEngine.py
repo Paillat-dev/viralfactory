@@ -10,7 +10,7 @@ from moviepy.video.fx.crop import crop
 from . import BaseBackgroundEngine
 
 
-class SimpleBackgroundEngine(BaseBackgroundEngine):
+class VideoBackgroundEngine(BaseBackgroundEngine):
     name = "SImple Background Engine"
     description = "A basic background engine to set the background of the video from a local file."
     num_options = 1
@@ -48,12 +48,14 @@ class SimpleBackgroundEngine(BaseBackgroundEngine):
         start = random.uniform(0, background_max_start)
         clip = background.subclip(start, start + self.ctx.duration)
         w, h = clip.size
-        return crop(
-            clip,
-            width=self.ctx.width,
-            height=self.ctx.height,
-            x_center=w / 2,
-            y_center=h / 2,
+        self.ctx.index_0.append(
+            crop(
+                clip,
+                width=self.ctx.width,
+                height=self.ctx.height,
+                x_center=w / 2,
+                y_center=h / 2,
+            )
         )
 
     @classmethod

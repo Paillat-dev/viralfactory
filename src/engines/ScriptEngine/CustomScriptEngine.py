@@ -12,7 +12,7 @@ class CustomScriptEngine(BaseScriptEngine):
         super().__init__()
 
     def generate(self, *args, **kwargs) -> str:
-        return self.script
+        self.ctx.script = self.script.strip().copy()
 
     @classmethod
     def get_options(cls) -> list:

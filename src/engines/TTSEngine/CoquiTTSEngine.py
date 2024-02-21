@@ -127,7 +127,7 @@ class CoquiTTSEngine(BaseTTSEngine):
 
         self.ctx.duration = self.get_audio_duration(path)
 
-        return self.time_with_whisper(path)
+        self.ctx.timed_script = self.time_with_whisper(path)
 
     @classmethod
     def get_options(cls) -> list:

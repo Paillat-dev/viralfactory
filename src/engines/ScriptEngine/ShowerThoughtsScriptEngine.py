@@ -23,12 +23,16 @@ class ShowerThoughtsScriptEngine(BaseScriptEngine):
         )
         sys_prompt = sys_prompt.format(n_sentences=self.n_sentences)
         chat_prompt = chat_prompt.format(n_sentences=self.n_sentences)
-        return self.ctx.powerfulllmengine.generate(
-            system_prompt=sys_prompt,
-            chat_prompt=chat_prompt,
-            max_tokens=20 * self.n_sentences,
-            temperature=1.3,
-            json_mode=False,
+        self.ctx.script = (
+            self.ctx.powerfulllmengine.generate(
+                system_prompt=sys_prompt,
+                chat_prompt=chat_prompt,
+                max_tokens=20 * self.n_sentences,
+                temperature=1.3,
+                json_mode=False,
+            )
+            .strip()
+            .copy()
         )
 
     @classmethod

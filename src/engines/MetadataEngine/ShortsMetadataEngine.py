@@ -4,6 +4,11 @@ from ...utils.prompting import get_prompt
 
 
 class ShortsMetadataEngine(BaseMetadataEngine):
+    name = "ShortsMetadata"
+    description = "Generate metadata for YouTube Shorts / TikTok format videos"
+
+    num_options = 0
+
     def __init__(self, **kwargs) -> None:
         ...
 
@@ -13,9 +18,12 @@ class ShortsMetadataEngine(BaseMetadataEngine):
         )
         chat_prompt = chat_prompt.replace("{script}", self.ctx.script)
 
-        return self.ctx.simplellmengine.generate(
+        result = self.ctx.simplellmengine.generate(
             chat_prompt=chat_prompt, system_prompt=sytsem_prompt, json_mode=True
         )
+        self.ctx.title = result["title"]
+        self.ctx.description = result["description"]
 
-    def get_options(self):
+    @classmethod
+    def get_options(cls):
         return []

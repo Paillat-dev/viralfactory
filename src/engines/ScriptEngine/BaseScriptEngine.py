@@ -6,7 +6,7 @@ class BaseScriptEngine(BaseEngine):
     pass
 
     @abstractmethod
-    def generate(self) -> str:
+    def generate(self) -> None:
         pass
 
     def time_script(self):

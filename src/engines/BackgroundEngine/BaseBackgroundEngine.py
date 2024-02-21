@@ -6,5 +6,5 @@ from moviepy.editor import VideoClip
 
 class BaseBackgroundEngine(BaseEngine):
     @abstractmethod
-    def get_background(self) -> VideoClip:
+    def get_background(self) -> None:
         ...

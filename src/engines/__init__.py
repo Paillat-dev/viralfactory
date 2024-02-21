@@ -50,7 +50,7 @@ ENGINES: dict[str, EngineDict] = {
         "multiple": True,
     },
     "BackgroundEngine": {
-        "classes": [BackgroundEngine.SimpleBackgroundEngine, NoneEngine],
+        "classes": [BackgroundEngine.VideoBackgroundEngine, NoneEngine],
         "multiple": False,
     },
     "MetadataEngine": {

@@ -39,7 +39,7 @@ class SimpleCaptioningEngine(BaseCaptioningEngine):
         punctuations = (".", "?", "!", ",", ":", ";")
         return text.strip().endswith(tuple(punctuations))
 
-    def get_captions(self) -> list[TextClip]:
+    def get_captions(self):
         # 3 words per 1000 px, we do the math
         max_words = int(self.ctx.width / 1000 * 3)
 
@@ -78,7 +78,7 @@ class SimpleCaptioningEngine(BaseCaptioningEngine):
                 )
             )
 
-        return clips
+        self.ctx.index_7.extend(clips)
 
     @classmethod
     def get_options(cls) -> list:

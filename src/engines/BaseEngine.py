@@ -19,7 +19,7 @@ class BaseEngine(ABC):
 
     @classmethod
     @abstractmethod
-    def get_options():
+    def get_options(cls):
         ...
 
     def get_video_duration(self, path: str) -> float:
