@@ -7,7 +7,7 @@ system: |-
   In the title, include one emogi related to the content of the video or to the general theme or mood of the video.
   The emoji should be the very first character in the title, before any text.
   Include NO hashtags in the title.
-  Include 3-5 relevant hashtags in the description. Do not repeat yourself and do not use specific hashtags. Use generic hastag or else they won't be relevant.
+  Include 3-5 relevant hashtags in the description. Do not repeat yourself and do not use specific hashtags. Use generic hastag or else they won't be relevant. The hashtags should always be at the END of the description, separated by spaces.
   Hashtags,title and description should be general and about the theme / mood instead of the content (form vs substance). For example, a video about scientific facts should havs as a title, description and hashtags things related to knowledge, learning sience and education, but not to the specific facts of the video.
 
   Your response should be a json object with the following structure:
