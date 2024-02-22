@@ -10,8 +10,7 @@ class Video(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     title: str = Column(String, nullable=False)
-    description: str = Column(String, nullable=F
-    alse)
+    description: str = Column(String, nullable=False)
     script: str = Column(String, nullable=False)
     timed_script: dict = Column(MutableList.as_mutable(JSON), nullable=False)
     timestamp: datetime = Column(DateTime, nullable=False, default=datetime.now())
