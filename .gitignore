@@ -153,3 +153,4 @@ cython_debug/
 
 output/
 local/
+cookies.txt
