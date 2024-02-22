@@ -9,6 +9,7 @@ from . import AssetsEngine
 from . import SettingsEngine
 from . import BackgroundEngine
 from . import MetadataEngine
+from . import UploadEngine
 
 
 class EngineDict(TypedDict):
@@ -38,7 +39,7 @@ ENGINES: dict[str, EngineDict] = {
         "multiple": False,
     },
     "TTSEngine": {
-        "classes": [TTSEngine.CoquiTTSEngine, TTSEngine.ElevenLabsTTSEngine],
+        "classes": [TTSEngine.CoquiTTSEngine],
         "multiple": False,
     },
     "CaptioningEngine": {
@@ -46,7 +47,11 @@ ENGINES: dict[str, EngineDict] = {
         "multiple": False,
     },
     "AssetsEngine": {
-        "classes": [AssetsEngine.DallEAssetsEngine, NoneEngine],
+        "classes": [
+            AssetsEngine.DallEAssetsEngine,
+            AssetsEngine.GoogleAssetsEngine,
+            NoneEngine,
+        ],
         "multiple": True,
     },
     "BackgroundEngine": {
@@ -56,5 +61,9 @@ ENGINES: dict[str, EngineDict] = {
     "MetadataEngine": {
         "classes": [MetadataEngine.ShortsMetadataEngine],
         "multiple": False,
+    },
+    "UploadEngine": {
+        "classes": [UploadEngine.TikTokUploadEngine, UploadEngine.YouTubeUploadEngine, NoneEngine],
+        "multiple": True,
     },
 }
