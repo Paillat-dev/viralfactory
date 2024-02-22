@@ -1,3 +1,4 @@
 from .BaseAssetsEngine import BaseAssetsEngine
 from .DallEAssetsEngine import DallEAssetsEngine
 from .AssetsEngineSelector import AssetsEngineSelector
+from .GoogleAssetsEngine import GoogleAssetsEngine
