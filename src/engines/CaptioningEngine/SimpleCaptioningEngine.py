@@ -87,7 +87,7 @@ class SimpleCaptioningEngine(BaseCaptioningEngine):
                 font = gr.Dropdown(
                     label="Font",
                     choices=TextClip.list("font"),
-                    value="Arial",
+                    value="Comic-Sans-MS",
                 )
                 font_size = gr.Number(
                     label="Font Size",
@@ -104,7 +104,7 @@ class SimpleCaptioningEngine(BaseCaptioningEngine):
                     minimum=0,
                     maximum=40,
                     step=1,
-                    value=6,
+                    value=5,
                 )
                 font_stroke_color = gr.ColorPicker(
                     label="Stroke Color", value="#000000"
