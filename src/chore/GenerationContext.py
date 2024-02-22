@@ -3,11 +3,28 @@ import time
 import os
 import gradio as gr
 
+from datetime import datetime
+
 from .. import engines
 from ..utils.prompting import get_prompt
+from ..models import Video, SessionLocal
 
 
 class GenerationContext:
+    def store_in_db(self):
+        with SessionLocal() as db:
+            db.add(
+                Video(
+                    title=self.title,
+                    description=self.description,
+                    script=self.script,
+                    timed_script=self.timed_script,
+                    timestamp=datetime.now(),
+                    path=self.dir,
+                )
+            )
+            db.commit()
+
     def __init__(
         self,
         powerfulllmengine,
@@ -18,6 +35,8 @@ class GenerationContext:
         assetsengine,
         settingsengine,
         backgroundengine,
+        metadataengine,
+        uploadengine,
         progress,
     ) -> None:
         self.progress = progress
@@ -53,6 +72,15 @@ class GenerationContext:
         )
         self.backgroundengine.ctx = self
 
+        self.metadataengine: engines.MetadataEngine.BaseMetadataEngine = metadataengine[
+            0
+        ]
+        self.metadataengine.ctx = self
+
+        self.uploadengine: list[engines.UploadEngine.BaseUploadEngine] = uploadengine
+        for eng in self.uploadengine:
+            eng.ctx = self
+
     def setup_dir(self):
         self.dir = f"output/{time.time()}"
         os.makedirs(self.dir)
@@ -84,7 +112,7 @@ class GenerationContext:
 
         self.progress(0.3, "Generating synthtetizing voice...")
         self.ttsengine.synthesize(self.script, self.get_file_path("tts.wav"))
-        self.duration: float #for type hinting
+        self.duration: float  # for type hinting
 
         if not isinstance(self.backgroundengine, engines.NoneEngine):
             self.progress(0.4, "Generating background...")
@@ -124,5 +152,16 @@ class GenerationContext:
         clip = mp.CompositeVideoClip(clips, size=(self.width, self.height))
         clip.set_duration(self.duration)
         audio = mp.AudioFileClip(self.get_file_path("tts.wav"))
-        clip = clip.set_audio(audio)
-        clip.write_videofile(self.get_file_path("final.mp4"), fps=60)
+        clip: mp.CompositeVideoClip = clip.set_audio(audio)
+        clip.write_videofile(self.get_file_path("final.mp4"), fps=60, threads=4)
+
+        self.progress(0.8, "Generating metadata...")
+        self.metadataengine.get_metadata()
+
+        self.progress(0.9, "Uploading video...")
+        for engine in self.uploadengine:
+            engine.upload()
+
+        self.progress(0.99, "Storing in database...")
+        self.store_in_db()
+        self.progress(1, "Done!")
