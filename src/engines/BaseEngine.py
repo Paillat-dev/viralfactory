@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 
-import gradio as gr
 import moviepy.editor as mp
 from sqlalchemy.future import select
 
@@ -8,6 +7,7 @@ from ..chore import GenerationContext
 from ..models import SessionLocal, File, Setting
 
 
+# noinspection PyTypeChecker
 class BaseEngine(ABC):
     num_options: int
     name: str
@@ -33,6 +33,7 @@ class BaseEngine(ABC):
     def get_assets(cls, *, type: str = None, by_id: int = None) -> list[File] | File | None:
         with SessionLocal() as db:
             if type:
+                # noinspection PyTypeChecker
                 return (
                     db.execute(
                         select(File).filter(
@@ -43,6 +44,7 @@ class BaseEngine(ABC):
                     .all()
                 )
             elif by_id:
+                # noinspection PyTypeChecker
                 return (
                     db.execute(
                         select(File).filter(
@@ -53,6 +55,7 @@ class BaseEngine(ABC):
                     .first()
                 )
             else:
+                # noinspection PyTypeChecker
                 return (
                     db.execute(select(File).filter(File.provider == cls.name))
                     .scalars()
@@ -69,6 +72,7 @@ class BaseEngine(ABC):
     @classmethod
     def remove_asset(cls, *, path: str):
         with SessionLocal() as db:
+            # noinspection PyTypeChecker
             db.execute(select(File).filter(File.path == path)).delete()
             db.commit()
 
@@ -77,6 +81,7 @@ class BaseEngine(ABC):
     def store_setting(cls, *, type: str = None, data: dict):
         with SessionLocal() as db:
             # check if setting exists
+            # noinspection PyTypeChecker
             setting = db.execute(
                 select(Setting).filter(
                     Setting.provider == cls.name, Setting.type == type
@@ -112,6 +117,7 @@ class BaseEngine(ABC):
             if not identifier and type:
                 identifier = type
             if identifier:
+                # noinspection PyTypeChecker
                 result = db.execute(
                     select(Setting).filter(
                         Setting.provider == cls.name, Setting.type == identifier
@@ -122,6 +128,7 @@ class BaseEngine(ABC):
                     return result.data
                 return None
             else:
+                # noinspection PyTypeChecker
                 return [
                     s.data
                     for s in db.execute(
@@ -145,12 +152,14 @@ class BaseEngine(ABC):
             if not identifier and type:
                 identifier = type
             if identifier:
+                # noinspection PyTypeChecker
                 db.execute(
                     select(Setting).filter(
                         Setting.provider == cls.name, Setting.type == identifier
                     )
                 ).delete()
             else:
+                # noinspection PyTypeChecker
                 db.execute(
                     select(Setting).filter(Setting.provider == cls.name)
                 ).delete()

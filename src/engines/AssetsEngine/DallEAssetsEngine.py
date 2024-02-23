@@ -1,7 +1,4 @@
-import base64
-import io
 import os
-import time
 from typing import Literal, TypedDict
 
 import gradio as gr
@@ -41,7 +38,7 @@ class DallEAssetsEngine(BaseAssetsEngine):
 
         super().__init__()
 
-    def get_assets(self, options: list[Spec]) -> list[mp.ImageClip]:
+    def generate(self, options: list[Spec]) -> list[mp.ImageClip]:
         max_width = self.ctx.width / 3 * 2
         clips = []
         for option in options:
@@ -49,7 +46,7 @@ class DallEAssetsEngine(BaseAssetsEngine):
             start = option["start"]
             end = option["end"]
             style = option["style"]
-            size = (
+            size: Literal["1024x1024", "1024x1792", "1792x1024"] = (
                 "1024x1024"
                 if self.aspect_ratio == "square"
                 else "1024x1792"
@@ -71,9 +68,9 @@ class DallEAssetsEngine(BaseAssetsEngine):
                     continue
                 else:
                     raise
-            img = requests.get(response.data[0].url)
+            img_bytes = requests.get(response.data[0].url)
             with open("temp.png", "wb") as f:
-                f.write(img.content)
+                f.write(img_bytes.content)
             img = mp.ImageClip("temp.png")
             os.remove("temp.png")
 

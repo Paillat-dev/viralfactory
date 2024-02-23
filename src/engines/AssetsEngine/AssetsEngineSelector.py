@@ -33,5 +33,5 @@ class AssetsEngineSelector:
             assets_opts = [
                 asset["args"] for asset in assets if asset["engine"] == engine.name
             ]
-            clips.extend(engine.get_assets(assets_opts))
+            clips.extend(engine.generate(assets_opts))
         self.ctx.index_3.extend(clips)

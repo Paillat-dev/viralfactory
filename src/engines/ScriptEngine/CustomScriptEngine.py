@@ -12,8 +12,8 @@ class CustomScriptEngine(BaseScriptEngine):
         self.script = options[0]
         super().__init__()
 
-    def generate(self, *args, **kwargs) -> str:
-        self.ctx.script = self.script.strip().copy()
+    def generate(self, *args, **kwargs):
+        self.ctx.script = self.script.strip()
 
     @classmethod
     def get_options(cls) -> list:

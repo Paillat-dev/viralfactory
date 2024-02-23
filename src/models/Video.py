@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import Optional
 
 from sqlalchemy import String, Column, JSON, Integer, DateTime
 from sqlalchemy.ext.mutable import MutableList

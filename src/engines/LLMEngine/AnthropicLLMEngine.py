@@ -34,8 +34,9 @@ class AnthropicLLMEngine(BaseLLMEngine):
     ) -> str | dict:
         prompt = f"""{anthropic.HUMAN_PROMPT} {system_prompt} {anthropic.HUMAN_PROMPT} {chat_prompt} {anthropic.AI_PROMPT}"""
         if json_mode:
-            # anthopic does not officially support JSON mode, but we can bias the output towards a JSON-like format
+            # anthropic does not officially support JSON mode, but we can bias the output towards a JSON-like format
             prompt += " {"
+        # noinspection PyArgumentList
         response: anthropic.types.Completion = self.client.completions.create(
             max_tokens_to_sample=max_tokens,
             prompt=prompt,

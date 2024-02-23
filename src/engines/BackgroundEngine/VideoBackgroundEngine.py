@@ -6,7 +6,6 @@ import time
 import gradio as gr
 import moviepy.editor as mp
 from moviepy.video.fx.crop import crop
-from moviepy.video.fx.resize import resize
 
 from . import BaseBackgroundEngine
 
@@ -60,7 +59,7 @@ class VideoBackgroundEngine(BaseBackgroundEngine):
         )
 
     @classmethod
-    def get_settings(cls) -> list:
+    def get_settings(cls):
         def add_file(fp: str, name: str, credits: str):
             if name == "":
                 raise ValueError("Name cannot be empty.")

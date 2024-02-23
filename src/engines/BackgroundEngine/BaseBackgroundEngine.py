@@ -1,6 +1,4 @@
-from abc import ABC, abstractmethod
-
-from moviepy.editor import VideoClip
+from abc import abstractmethod
 
 from ..BaseEngine import BaseEngine
 

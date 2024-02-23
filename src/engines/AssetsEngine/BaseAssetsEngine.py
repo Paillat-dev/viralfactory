@@ -1,7 +1,4 @@
-from abc import ABC, abstractmethod
-from typing import TypedDict
-
-from moviepy.editor import ImageClip, VideoFileClip
+from abc import abstractmethod
 
 from ..BaseEngine import BaseEngine
 
@@ -21,5 +18,5 @@ class BaseAssetsEngine(BaseEngine):
     spec_description: str
 
     @abstractmethod
-    def get_assets(self, options: list) -> list:
+    def generate(self, options: list) -> list:
         ...

@@ -4,8 +4,7 @@ import gradio as gr
 import torch
 from TTS.api import TTS
 
-from .BaseTTSEngine import BaseTTSEngine, Word
-from ...utils.prompting import get_prompt
+from .BaseTTSEngine import BaseTTSEngine
 
 
 class CoquiTTSEngine(BaseTTSEngine):
