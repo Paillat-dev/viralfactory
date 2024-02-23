@@ -57,7 +57,7 @@ gradio==4.19.0
 gradio_client==0.10.0
 greenlet==3.0.3
 grpcio==1.60.1
-gruut==2.2.3
+gruut==2.3.4
 gruut-ipa==0.13.0
 gruut-lang-de==2.0.0
 gruut-lang-en==2.0.0
