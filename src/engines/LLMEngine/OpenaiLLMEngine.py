@@ -1,3 +1,5 @@
+from abc import ABC, abstractmethod
+
 import gradio as gr
 import openai
 import orjson

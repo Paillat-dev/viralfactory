@@ -1,12 +1,10 @@
 import os
-import sys
-
 import gradio as gr
 import orjson
+import sys
 
-from src.chore import GenerationContext
 from src.engines import ENGINES, BaseEngine
-
+from src.chore import GenerationContext
 
 class GenerateUI:
     def __init__(self):
@@ -14,7 +12,6 @@ class GenerateUI:
                 font-size: 5rem !important
             }
         """
-
     def get_presets(self):
         with open("local/presets.json", "r") as f:
             return orjson.loads(f.read())
@@ -56,7 +53,6 @@ class GenerateUI:
     def get_settings_interface(self) -> gr.Blocks:
         with gr.Blocks() as interface:
             reload_ui = gr.Button("Reload UI", variant="primary")
-
             def reload():
                 self.ui.close()
                 sys.exit("Reload")
@@ -119,13 +115,12 @@ class GenerateUI:
                             value=None
                         )
                         preset_button = gr.Button("Load")
-
                         def load_preset(preset_name, *inputs) -> list[gr.update]:
                             with open("local/presets.json", "r") as f:
                                 presets = orjson.loads(f.read())
                             returnable = []
                             if preset_name in presets.keys():
-                                # If the preset exists
+                            # If the preset exists
                                 preset = presets[preset_name]
                                 for engine_type, engines in ENGINES.items():
                                     engines = engines["classes"]
@@ -133,8 +128,7 @@ class GenerateUI:
                                     for engine in engines:
                                         if engine.name in preset.get(engine_type, {}).keys():
                                             values[0].append(engine.name)
-                                            values.extend(
-                                                gr.update(value=value) for value in preset[engine_type][engine.name])
+                                            values.extend(gr.update(value=value) for value in preset[engine_type][engine.name])
                                         else:
                                             values.extend(gr.update() for _ in range(engine.num_options))
                                     returnable.extend(values)
@@ -159,8 +153,7 @@ class GenerateUI:
                                     presets[preset_name] = new_preset
                                     f.write(orjson.dumps(presets))
                             return [gr.update(value=presets.keys()), *returnable]
-                    preset_button.click(load_preset, inputs=[preset_dropdown, *inputs],
-                                        outputs=[preset_dropdown, *inputs])
+                    preset_button.click(load_preset, inputs=[preset_dropdown, *inputs], outputs=[preset_dropdown,*inputs])
                     output_gallery = gr.Markdown("aaa", render=False)
                     button.click(
                         self.run_generate_interface,
@@ -204,8 +197,8 @@ class GenerateUI:
                     options[engine_type].append(
                         engine(options=args[: engine.num_options])
                     )
-                    args = args[engine.num_options:]
+                    args = args[engine.num_options :]
                 else:
                     # we don't care about this, it's not the selected engine, we throw it away
-                    args = args[engine.num_options:]
+                    args = args[engine.num_options :]
         return options

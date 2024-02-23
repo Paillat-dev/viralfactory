@@ -1,3 +1,5 @@
+from typing import Optional
+
 from sqlalchemy import String, Column, JSON, Integer
 from sqlalchemy.ext.mutable import MutableDict
 

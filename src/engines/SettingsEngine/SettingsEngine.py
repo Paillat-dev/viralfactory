@@ -1,3 +1,5 @@
+from abc import ABC, abstractmethod
+
 import gradio as gr
 
 from ..BaseEngine import BaseEngine

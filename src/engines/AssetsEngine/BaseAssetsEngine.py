@@ -1,4 +1,7 @@
-from abc import abstractmethod
+from abc import ABC, abstractmethod
+from typing import TypedDict
+
+from moviepy.editor import ImageClip, VideoFileClip
 
 from ..BaseEngine import BaseEngine
 

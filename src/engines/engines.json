@@ -1,6 +1,6 @@
 {
-  "TTSEngine": [
-    "CoquiTTSEngine",
-    "ElevenLabsTTSEngine"
-  ]
+    "TTSEngine": [
+        "CoquiTTSEngine",
+        "ElevenLabsTTSEngine"
+    ]
 }

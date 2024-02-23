@@ -6,6 +6,7 @@ import time
 import gradio as gr
 import moviepy.editor as mp
 from moviepy.video.fx.crop import crop
+from moviepy.video.fx.resize import resize
 
 from . import BaseBackgroundEngine
 

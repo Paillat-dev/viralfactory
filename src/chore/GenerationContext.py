@@ -2,10 +2,12 @@ import os
 import time
 from datetime import datetime
 
+import gradio as gr
 import moviepy.editor as mp
 
 from .. import engines
 from ..models import Video, SessionLocal
+from ..utils.prompting import get_prompt
 
 
 class GenerationContext:

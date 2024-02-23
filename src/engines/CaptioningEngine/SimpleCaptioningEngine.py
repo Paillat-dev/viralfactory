@@ -1,4 +1,5 @@
 import gradio as gr
+from PIL import ImageFont
 from moviepy.editor import TextClip
 
 from . import BaseCaptioningEngine

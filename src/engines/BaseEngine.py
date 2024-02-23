@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+import gradio as gr
 import moviepy.editor as mp
 from sqlalchemy.future import select
 
