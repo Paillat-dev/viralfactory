@@ -54,7 +54,7 @@ google-auth-oauthlib==1.2.0
 Google-Images-Search==1.4.6
 googleapis-common-protos==1.62.0
 gradio==4.19.0
-gradio_client==0.10.0
+gradio_client==0.10.1
 greenlet==3.0.3
 grpcio==1.60.1
 gruut==2.2.3
