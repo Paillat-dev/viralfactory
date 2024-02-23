@@ -30,7 +30,7 @@ coqpit==0.0.17
 cycler==0.12.1
 cymem==2.0.8
 Cython==3.0.8
-dateparser==1.1.8
+dateparser==1.2.0
 decorator==4.4.2
 distro==1.9.0
 docopt==0.6.2
