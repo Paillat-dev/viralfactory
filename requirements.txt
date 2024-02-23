@@ -166,7 +166,7 @@ starlette==0.36.3
 SudachiDict-core==20240109
 SudachiPy==0.6.8
 sympy==1.12
-tensorboard==2.16.1
+tensorboard==2.16.2
 tensorboard-data-server==0.7.2
 termcolor==1.1.0
 tf-keras==2.15.0
