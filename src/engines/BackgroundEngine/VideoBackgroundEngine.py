@@ -39,7 +39,7 @@ class VideoBackgroundEngine(BaseBackgroundEngine):
             )
         ]
 
-    def get_background(self) -> mp.VideoClip:
+    def get_background(self):
         background = mp.VideoFileClip(f"{self.background_video}", audio=False)
         background_max_start = background.duration - self.ctx.duration
         if background_max_start < 0:

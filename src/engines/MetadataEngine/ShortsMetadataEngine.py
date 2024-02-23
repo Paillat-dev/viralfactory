@@ -10,6 +10,7 @@ class ShortsMetadataEngine(BaseMetadataEngine):
     num_options = 0
 
     def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
         ...
 
     def get_metadata(self):

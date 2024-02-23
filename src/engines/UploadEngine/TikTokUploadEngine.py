@@ -16,7 +16,7 @@ class TikTokUploadEngine(BaseUploadEngine):
 
     def upload(self):
         cookies = self.get_setting(type="cookies")["cookies"]
-        if cookies == None:
+        if cookies is None:
             gr.Warning(
                 "Skipping upload to TikTok because no cookies were provided. Please provide cookies in the settings."
             )

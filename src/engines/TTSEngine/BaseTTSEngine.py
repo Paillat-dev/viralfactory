@@ -22,17 +22,6 @@ class BaseTTSEngine(BaseEngine):
     def remove_punctuation(self, text: str) -> str:
         return text.translate(str.maketrans("", "", ".,!?;:"))
 
-    def fix_captions(self, script: str, captions: list[Word]) -> list[Word]:
-        script = script.split(" ")
-        new_captions = []
-        for i, word in enumerate(script):
-            original_word = self.remove_punctuation(word.lower())
-            stt_word = self.remove_punctuation(word.lower())
-            if stt_word in original_word:
-                captions[i]["text"] = word
-                new_captions.append(captions[i])
-            # elif there is a word more in the stt than in the original, we
-
     def time_with_whisper(self, path: str) -> list[Word]:
         """
         Transcribes the audio file at the given path using a pre-trained model and returns a list of words.

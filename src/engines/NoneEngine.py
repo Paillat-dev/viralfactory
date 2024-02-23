@@ -7,7 +7,7 @@ class NoneEngine(BaseEngine):
     description = "No engine selected"
 
     def __init__(self):
-        pass
+        super().__init__()
 
     @classmethod
     def get_options(cls):

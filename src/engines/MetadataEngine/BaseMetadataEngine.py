@@ -1,11 +1,11 @@
 from abc import abstractmethod
-from typing import TypedDict
 
-from .. import BaseEngine
+from ..BaseEngine import BaseEngine
 
 
 class BaseMetadataEngine(BaseEngine):
     def __init__(self, **kwargs) -> None:
+        super().__init__()
         ...
 
     @abstractmethod

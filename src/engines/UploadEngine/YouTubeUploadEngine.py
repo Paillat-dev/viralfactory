@@ -12,7 +12,8 @@ class YouTubeUploadEngine(BaseUploadEngine):
 
     num_options = 2
 
-    def __init__(self, options: list):
+    def __init__(self, options: list, **kwargs):
+        super().__init__(**kwargs)
         self.oauth_name = options[0]
         self.oauth = self.retrieve_setting(type="oauth_credentials")[self.oauth_name]
         self.credentials = self.retrieve_setting(type="youtube_client_secrets")[self.oauth["client_secret"]]

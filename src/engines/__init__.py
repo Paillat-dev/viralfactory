@@ -12,13 +12,7 @@ from . import UploadEngine
 from .BaseEngine import BaseEngine
 from .NoneEngine import NoneEngine
 
-
-class EngineDict(TypedDict):
-    classes: list[BaseEngine]
-    multiple: bool
-
-
-ENGINES: dict[str, EngineDict] = {
+ENGINES: dict[str, dict[str, bool | list[BaseEngine]]] = {
     "SettingsEngine": {
         "classes": [SettingsEngine.SettingsEngine],
         "multiple": False,

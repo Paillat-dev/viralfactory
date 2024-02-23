@@ -15,7 +15,7 @@ class ShowerThoughtsScriptEngine(BaseScriptEngine):
         self.n_sentences = options[0]
         super().__init__()
 
-    def generate(self) -> str:
+    def generate(self):
         sys_prompt, chat_prompt = get_prompt(
             "shower_thoughts",
             location=os.path.join(

@@ -28,6 +28,7 @@ class BaseEngine(ABC):
     def get_audio_duration(self, path: str) -> float:
         return mp.AudioFileClip(path).duration
 
+    # noinspection PyShadowingBuiltins
     @classmethod
     def get_assets(cls, *, type: str = None, by_id: int = None) -> list[File] | File | None:
         with SessionLocal() as db:
@@ -58,6 +59,7 @@ class BaseEngine(ABC):
                     .all()
                 )
 
+    # noinspection PyShadowingBuiltins
     @classmethod
     def add_asset(cls, *, path: str, metadata: dict, type: str = None):
         with SessionLocal() as db:
@@ -70,6 +72,7 @@ class BaseEngine(ABC):
             db.execute(select(File).filter(File.path == path)).delete()
             db.commit()
 
+    # noinspection PyShadowingBuiltins
     @classmethod
     def store_setting(cls, *, type: str = None, data: dict):
         with SessionLocal() as db:
@@ -92,6 +95,7 @@ class BaseEngine(ABC):
         """
         return cls.retrieve_setting(*args, **kwargs)
 
+    # noinspection PyShadowingBuiltins
     @classmethod
     def retrieve_setting(cls, *, identifier: str = None, type: str = None) -> dict | list[dict] | None:
         """
@@ -127,6 +131,7 @@ class BaseEngine(ABC):
                     .all()
                 ]
 
+    # noinspection PyShadowingBuiltins
     @classmethod
     def remove_setting(cls, *, identifier: str = None, type: str = None):
         """
