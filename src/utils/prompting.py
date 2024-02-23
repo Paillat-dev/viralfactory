@@ -1,6 +1,7 @@
-import yaml
 import os
 from typing import TypedDict
+
+import yaml
 
 
 class Prompt(TypedDict):
@@ -9,7 +10,7 @@ class Prompt(TypedDict):
 
 
 def get_prompt(
-    name, *, location: str = "src/chore/prompts", by_file_location: str = None
+        name, *, location: str = "src/chore/prompts", by_file_location: str = None
 ) -> tuple[str, str]:
     if by_file_location:
         path = os.path.join(

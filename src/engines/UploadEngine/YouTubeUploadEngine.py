@@ -1,10 +1,10 @@
 import gradio as gr
 import orjson
-
 from google_auth_oauthlib.flow import InstalledAppFlow
 
 from . import BaseUploadEngine
 from ...utils import youtube_uploading
+
 
 class YouTubeUploadEngine(BaseUploadEngine):
     name = "YouTube"
@@ -18,7 +18,7 @@ class YouTubeUploadEngine(BaseUploadEngine):
         self.credentials = self.retrieve_setting(type="youtube_client_secrets")[self.oauth["client_secret"]]
 
         self.hashtags = options[1]
-    
+
     @classmethod
     def __oauth(cls, credentials):
         flow = InstalledAppFlow.from_client_config(
@@ -45,10 +45,10 @@ class YouTubeUploadEngine(BaseUploadEngine):
         try:
             youtube_uploading.upload(self.oauth["credentials"], options)
         except Exception as e:
-            #this means we need to re-authenticate likely
+            # this means we need to re-authenticate likely
             # use self.__oauth to re-authenticate
             new_oauth = self.__oauth(self.credentials)
-            #also update the credentials in the settings
+            # also update the credentials in the settings
             current_oauths = self.retrieve_setting(type="oauth_credentials") or {}
             current_oauths[self.oauth_name] = {
                 "client_secret": self.oauth["client_secret"],
@@ -81,6 +81,7 @@ class YouTubeUploadEngine(BaseUploadEngine):
                     label="Client Secret File", file_types=["json"], type="binary"
                 )
                 submit_button = gr.Button("Save")
+
                 def save(binary, clien_secret_name):
                     current_client_secrets = cls.retrieve_setting(type="youtube_client_secrets") or {}
                     client_secret_json = orjson.loads(binary)
@@ -99,6 +100,7 @@ class YouTubeUploadEngine(BaseUploadEngine):
                 choosen_client_secret = gr.Dropdown(label="Login secret", choices=possible_client_secrets)
                 name = gr.Textbox(label="Name", max_lines=1)
                 login_button = gr.Button("Login", variant="primary")
+
                 def login(choosen_client_secret, name):
                     choosen_secret_data = cls.retrieve_setting(type="youtube_client_secrets")[choosen_client_secret]
                     new_oauth_entry = cls.__oauth(choosen_secret_data)
@@ -112,4 +114,5 @@ class YouTubeUploadEngine(BaseUploadEngine):
                         data=current_oauths,
                     )
                     gr.Info(f"{name} saved successfully !")
+
                 login_button.click(login, inputs=[choosen_client_secret, name])

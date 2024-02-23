@@ -1,7 +1,7 @@
-from . import Base
-from typing import Optional
 from sqlalchemy import String, Column, JSON, Integer
 from sqlalchemy.ext.mutable import MutableDict
+
+from . import Base
 
 
 class Setting(Base):

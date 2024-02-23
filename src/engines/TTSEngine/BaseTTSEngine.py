@@ -1,9 +1,9 @@
+from abc import abstractmethod
+from typing import TypedDict
+
 import moviepy.editor as mp
 import whisper_timestamped as wt
-
-from typing import TypedDict
 from torch.cuda import is_available
-from abc import ABC, abstractmethod
 
 from ..BaseEngine import BaseEngine
 

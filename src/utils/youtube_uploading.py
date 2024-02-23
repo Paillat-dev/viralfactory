@@ -1,9 +1,9 @@
-from http import client
-import httplib2
 import random
 import time
+from http import client
 
 import google.oauth2.credentials
+import httplib2
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
@@ -34,6 +34,7 @@ API_VERSION = "v3"
 
 VALID_PRIVACY_STATUSES = ("public", "private", "unlisted")
 
+
 def get_youtube(oauth_credentials: dict):
     oauth_credentials = google.oauth2.credentials.Credentials(
         token=oauth_credentials["token"],
@@ -44,6 +45,7 @@ def get_youtube(oauth_credentials: dict):
         scopes=oauth_credentials["scopes"],
     )
     return build(API_SERVICE_NAME, API_VERSION, credentials=oauth_credentials)
+
 
 def upload(oauth_credentials, options):
     youtube = get_youtube(oauth_credentials)
@@ -106,7 +108,7 @@ def resumable_upload(request):
             if retry > MAX_RETRIES:
                 exit("No longer attempting to retry.")
 
-            max_sleep = 2**retry
+            max_sleep = 2 ** retry
             sleep_seconds = random.random() * max_sleep
             print("Sleeping %f seconds and then retrying..." % sleep_seconds)
             time.sleep(sleep_seconds)

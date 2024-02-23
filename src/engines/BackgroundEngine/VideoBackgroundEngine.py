@@ -1,12 +1,12 @@
 import os
-import shutil
 import random
+import shutil
 import time
+
 import gradio as gr
 import moviepy.editor as mp
-
-from moviepy.video.fx.resize import resize
 from moviepy.video.fx.crop import crop
+
 from . import BaseBackgroundEngine
 
 

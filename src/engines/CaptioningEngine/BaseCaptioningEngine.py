@@ -1,7 +1,6 @@
-from abc import ABC, abstractmethod
-from ..BaseEngine import BaseEngine
+from abc import abstractmethod
 
-from moviepy.editor import TextClip
+from ..BaseEngine import BaseEngine
 
 
 class BaseCaptioningEngine(BaseEngine):

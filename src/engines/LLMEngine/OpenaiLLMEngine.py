@@ -1,8 +1,6 @@
-import openai
 import gradio as gr
+import openai
 import orjson
-
-from abc import ABC, abstractmethod
 
 from .BaseLLMEngine import BaseLLMEngine
 
@@ -22,15 +20,15 @@ class OpenaiLLMEngine(BaseLLMEngine):
         super().__init__()
 
     def generate(
-        self,
-        system_prompt: str,
-        chat_prompt: str,
-        max_tokens: int = 512,
-        temperature: float = 1.0,
-        json_mode: bool = False,
-        top_p: float = 1,
-        frequency_penalty: float = 0,
-        presence_penalty: float = 0,
+            self,
+            system_prompt: str,
+            chat_prompt: str,
+            max_tokens: int = 512,
+            temperature: float = 1.0,
+            json_mode: bool = False,
+            top_p: float = 1,
+            frequency_penalty: float = 0,
+            presence_penalty: float = 0,
     ) -> str | dict:
         response = openai.chat.completions.create(
             model=self.model,

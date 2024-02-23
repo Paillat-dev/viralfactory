@@ -1,15 +1,12 @@
+import os
+import os
+import shutil
+from typing import TypedDict
+
 import gradio as gr
 import moviepy.editor as mp
-import io
-import base64
-import time
-import requests
-import shutil
-import os
-
 from google_images_search import GoogleImagesSearch
 from moviepy.video.fx.resize import resize
-from typing import Literal, TypedDict
 
 from . import BaseAssetsEngine
 

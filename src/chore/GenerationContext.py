@@ -1,12 +1,10 @@
-import moviepy.editor as mp
-import time
 import os
-import gradio as gr
-
+import time
 from datetime import datetime
 
+import moviepy.editor as mp
+
 from .. import engines
-from ..utils.prompting import get_prompt
 from ..models import Video, SessionLocal
 
 
@@ -26,18 +24,18 @@ class GenerationContext:
             db.commit()
 
     def __init__(
-        self,
-        powerfulllmengine,
-        simplellmengine,
-        scriptengine,
-        ttsengine,
-        captioningengine,
-        assetsengine,
-        settingsengine,
-        backgroundengine,
-        metadataengine,
-        uploadengine,
-        progress,
+            self,
+            powerfulllmengine,
+            simplellmengine,
+            scriptengine,
+            ttsengine,
+            captioningengine,
+            assetsengine,
+            settingsengine,
+            backgroundengine,
+            metadataengine,
+            uploadengine,
+            progress,
     ) -> None:
         self.progress = progress
 

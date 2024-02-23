@@ -1,7 +1,7 @@
 import json
 
-from ...utils.prompting import get_prompt
 from ...chore import GenerationContext
+from ...utils.prompting import get_prompt
 
 
 class AssetsEngineSelector:

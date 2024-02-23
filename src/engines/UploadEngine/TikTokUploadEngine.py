@@ -1,5 +1,4 @@
 import gradio as gr
-
 from tiktok_uploader.upload import upload_video
 
 from .BaseUploadEngine import BaseUploadEngine

@@ -152,7 +152,7 @@ cython_debug/
 #.idea/
 
 output/
-local/*
+local/
 local/presets.json
 cookies.txt
 
