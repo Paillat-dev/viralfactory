@@ -12,13 +12,13 @@ from . import BaseBackgroundEngine
 
 
 class VideoBackgroundEngine(BaseBackgroundEngine):
-    name = "SImple Background Engine"
+    name = "Video Background Engine"
     description = "A basic background engine to set the background of the video from a local file."
     num_options = 1
 
-    def __init__(self, options: list[int]):
+    def __init__(self, options: list[str]):
         assets = self.get_assets(type="bcg_video")
-        self.background_video = assets[options[0]].path if len(assets) > 0 else ""
+        self.background_video = [asset.data["path"] for asset in assets if asset.data["name"] == options[0]][0]
         super().__init__()
 
     @classmethod
@@ -35,7 +35,7 @@ class VideoBackgroundEngine(BaseBackgroundEngine):
                 choices=choices,
                 label="Background Video",
                 value=choices[0] if len(assets) > 0 else "No videos available",
-                type="index",
+                type="value",
             )
         ]
 
