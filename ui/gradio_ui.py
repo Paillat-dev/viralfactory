@@ -1,4 +1,3 @@
-import os
 import gradio as gr
 import orjson
 import sys
@@ -6,12 +5,14 @@ import sys
 from src.engines import ENGINES, BaseEngine
 from src.chore import GenerationContext
 
+
 class GenerateUI:
     def __init__(self):
         self.css = """.generate_button {
                 font-size: 5rem !important
             }
         """
+
     def get_presets(self):
         with open("local/presets.json", "r") as f:
             return orjson.loads(f.read())
@@ -35,8 +36,8 @@ class GenerateUI:
         return ui
 
     def launch_ui(self):
-        self.ui = self.get_ui()
-        self.ui.launch()
+        ui = self.get_ui()
+        ui.launch()
 
     def get_interfaces(self) -> tuple[list[gr.Blocks], list[str]]:
         """
@@ -53,9 +54,9 @@ class GenerateUI:
     def get_settings_interface(self) -> gr.Blocks:
         with gr.Blocks() as interface:
             reload_ui = gr.Button("Reload UI", variant="primary")
+
             def reload():
-                self.ui.close()
-                sys.exit("Reload")
+                gr.Warning("Please restart the server to apply changes.")
 
             reload_ui.click(reload)
             for engine_type, engines in ENGINES.items():
@@ -202,3 +203,8 @@ class GenerateUI:
                     # we don't care about this, it's not the selected engine, we throw it away
                     args = args[engine.num_options :]
         return options
+
+
+def launch():
+    ui_generator = GenerateUI()
+    ui_generator.launch_ui()
