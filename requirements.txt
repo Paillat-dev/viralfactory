@@ -6,7 +6,7 @@ altair==5.2.0
 annotated-types==0.6.0
 anthropic==0.16.0
 anyascii==0.3.2
-anyio==4.2.0
+anyio==4.3.0
 async-timeout==4.0.3
 attrs==23.2.0
 audioread==3.0.1
