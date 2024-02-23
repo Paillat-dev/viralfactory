@@ -112,7 +112,7 @@ packaging==23.2
 pandas==1.5.3
 Pillow==9.5.0
 platformdirs==4.2.0
-pooch==1.8.0
+pooch==1.8.1
 preshed==3.0.9
 proglog==0.1.10
 protobuf==4.25.2
