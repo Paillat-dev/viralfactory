@@ -85,7 +85,7 @@ jsonschema-specifications==2023.12.1
 kiwisolver==1.4.5
 langcodes==3.3.0
 lazy_loader==0.3
-librosa==0.10.0
+librosa==0.10.1
 llvmlite==0.42.0
 Markdown==3.5.2
 markdown-it-py==3.0.0
