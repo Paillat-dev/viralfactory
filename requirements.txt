@@ -168,7 +168,7 @@ SudachiPy==0.6.8
 sympy==1.12
 tensorboard==2.16.1
 tensorboard-data-server==0.7.2
-termcolor==1.1.0
+termcolor==2.4.0
 tf-keras==2.15.0
 thinc==8.2.3
 threadpoolctl==3.3.0
