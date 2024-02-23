@@ -164,7 +164,7 @@ class GenerateUI:
                             value=None
                         )
                         preset_button = gr.Button("Load/Save", size="sm")
-                        gr.Markdown("Input a name to save a new preset, or select an existing one to load it.")
+                    gr.Markdown("Input a name to save a new preset, or select an existing one to load it.")
 
                     load_preset = self.get_preset_func()
                     preset_button.click(load_preset, inputs=[preset_dropdown, *inputs],
