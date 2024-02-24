@@ -1,3 +1,5 @@
+import os
+
 import gradio as gr
 import orjson
 
@@ -169,22 +171,34 @@ class GenerateUI:
                     load_preset = self.get_preset_func()
                     preset_button.click(load_preset, inputs=[preset_dropdown, *inputs],
                                         outputs=[preset_dropdown, *inputs])
-                    output_gallery = gr.Markdown("aaa", render=False)
+                    output_title = gr.Markdown(visible=True, render=False)
+                    output_description = gr.Markdown(visible=True, render=False)
+                    output_video = gr.Video(visible=True, render=False)
+                    open_folder = gr.Button("📁", size="sm", variant="secondary", render=False)
+                    output_path = gr.State(value=None)
                     button.click(
                         self.run_generate_interface,
                         inputs=inputs,
-                        outputs=output_gallery,
+                        outputs=[output_video, output_title, output_description, output_path, open_folder],
                     )
-            output_gallery.render()
+            with gr.Row():
+                with gr.Column():
+                    output_title.render()
+                    output_description.render()
+                    open_folder.render()
+                    open_folder.click(lambda x: os.system(f"open {os.path.abspath(x)}") if os.name == "posix" else os.system(f"explorer {os.abspath(x)}"), inputs=output_path)
+                with gr.Column():
+                    output_video.render()
+
         return interface
 
-    def run_generate_interface(self, progress=gr.Progress(), *args) -> gr.update:
+    def run_generate_interface(self, progress=gr.Progress(), *args) -> list[gr.update]:
         progress(0, desc="Loading engines... 🚀")
         options = self.repack_options(*args)
         arguments = {name.lower(): options[name] for name in ENGINES.keys()}
         ctx = GenerationContext(**arguments, progress=progress)
         ctx.process()  # Here we go ! 🚀
-        return gr.update(value=ctx.get_file_path("final.mp4"))
+        return [gr.update(value=ctx.get_file_path("final.mp4"), visible=True), gr.update(value=ctx.title, visible=True), gr.update(value=ctx.description, visible=True), gr.update(value=ctx.dir), gr.update(visible=True)]
 
     def repack_options(self, *args) -> dict[str, list[BaseEngine]]:
         """

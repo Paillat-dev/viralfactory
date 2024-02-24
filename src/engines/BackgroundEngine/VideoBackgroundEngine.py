@@ -17,7 +17,7 @@ class VideoBackgroundEngine(BaseBackgroundEngine):
 
     def __init__(self, options: list[str]):
         assets = self.get_assets(type="bcg_video")
-        self.background_video = [asset.data["path"] for asset in assets if asset.data["name"] == options[0]][0]
+        self.background_video = [asset for asset in assets if asset.data["name"] == options[0]][0]
         super().__init__()
 
     @classmethod
@@ -39,7 +39,7 @@ class VideoBackgroundEngine(BaseBackgroundEngine):
         ]
 
     def get_background(self):
-        background = mp.VideoFileClip(f"{self.background_video}", audio=False)
+        background = mp.VideoFileClip(f"{self.background_video.path}", audio=False)
         background_max_start = background.duration - self.ctx.duration
         if background_max_start < 0:
             raise ValueError(
@@ -48,6 +48,7 @@ class VideoBackgroundEngine(BaseBackgroundEngine):
         start = random.uniform(0, background_max_start)
         clip = background.subclip(start, start + self.ctx.duration)
         w, h = clip.size
+        self.ctx.credits += f"\n{self.background_video.data['credits']}"
         self.ctx.index_0.append(
             crop(
                 clip,

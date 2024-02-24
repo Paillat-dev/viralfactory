@@ -28,6 +28,7 @@ ENGINES: dict[str, dict[str, bool | list[BaseEngine]]] = {
         "classes": [
             ScriptEngine.ShowerThoughtsScriptEngine,
             ScriptEngine.CustomScriptEngine,
+            ScriptEngine.ScientificFactsScriptEngine,
         ],
         "multiple": False,
     },

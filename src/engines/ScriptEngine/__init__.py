@@ -1,3 +1,4 @@
 from .BaseScriptEngine import BaseScriptEngine
 from .CustomScriptEngine import CustomScriptEngine
 from .ShowerThoughtsScriptEngine import ShowerThoughtsScriptEngine
+from .ScientificFactsScriptEngine import ScientificFactsScriptEngine
