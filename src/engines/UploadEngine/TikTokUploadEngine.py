@@ -23,26 +23,27 @@ class TikTokUploadEngine(BaseUploadEngine):
             return
         title: str = self.ctx.title
         description: str = self.ctx.description
-        hastags = self.hashtags.strip().split(" ")
+        hashtags = self.hashtags.strip().split(" ")
 
         # extract any hashtags from the description / title and remove them from the description
         for word in title.split():
             if word.startswith("#"):
-                hastags.append(word)
+                hashtags.append(word)
                 title = title.replace(word, "")
         for word in description.split():
             if word.startswith("#"):
-                hastags.append(word)
+                hashtags.append(word)
                 description = description.replace(word, "")
 
         title = title.strip()
-        description = description.strip()
-        hastags_str = " ".join(hastags) + " " if hastags else ""
+        description = description.strip().replace("\n", "   ")  # Newlines are not supported by this uploader
+        hashtags_str = " ".join(hashtags) + " " if hashtags else ""
         failed = upload_video(
             filename=self.ctx.get_file_path("final.mp4"),
-            description=f"{title} {description} {hastags_str}",
+            description=f"{title} {description} {hashtags_str}",
             cookies_str=cookies,
-            browser="firefox",
+            browser="chrome",
+            comment=True, stitch=False, duet=False
         )
         for _ in failed:
             gr.Error(f"Failed to upload to TikTok")
