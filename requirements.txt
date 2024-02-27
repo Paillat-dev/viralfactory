@@ -2,7 +2,7 @@ anthropic==0.16.0
 google_api_python_client==2.48.0
 google_auth_oauthlib==1.2.0
 Google_Images_Search==1.4.6
-gradio==4.19.2
+gradio==4.19.0
 httplib2==0.22.0
 moviepy==1.0.3
 openai==1.12.0
