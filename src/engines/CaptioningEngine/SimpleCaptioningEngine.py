@@ -1,4 +1,6 @@
 import gradio as gr
+import os
+import shutil
 from moviepy.editor import TextClip
 
 from . import BaseCaptioningEngine
@@ -81,13 +83,21 @@ class SimpleCaptioningEngine(BaseCaptioningEngine):
         self.ctx.index_7.extend(clips)
 
     @classmethod
+    def get_settings(cls):
+        gr.Markdown(
+            "To add a custom font, simply install the font on your system, restart the server, and input the exact "
+            "file name (without the path) in the dropdown."
+        )
+
+    @classmethod
     def get_options(cls) -> list:
         with gr.Column() as font_options:
             with gr.Group():
                 font = gr.Dropdown(
                     label="Font",
                     choices=TextClip.list("font"),
-                    value="Comic-Sans-MS",
+                    value="Comic-Sans-MS-Bold",
+                    allow_custom_value=True,  # Allow custom font
                 )
                 font_size = gr.Number(
                     label="Font Size",

@@ -7,7 +7,6 @@ from ..chore import GenerationContext
 from ..models import SessionLocal, File, Setting
 
 
-# noinspection PyTypeChecker
 class BaseEngine(ABC):
     num_options: int
     name: str
@@ -15,7 +14,6 @@ class BaseEngine(ABC):
 
     def __init__(self):
         self.ctx: GenerationContext  # This is for type hinting only
-        pass
 
     @classmethod
     @abstractmethod

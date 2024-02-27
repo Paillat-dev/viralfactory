@@ -49,16 +49,18 @@ class GoogleAssetsEngine(BaseAssetsEngine):
                 "num": 1,
             }
             os.makedirs("temp", exist_ok=True)
-            self.google.search(
-                search_params=_search_params,
-                path_to_dir="./temp/",
-                custom_image_name="temp",
-            )
-            # we find the file called temp. extension
-            filename = [f for f in os.listdir("./temp/") if f.startswith("temp.")][0]
-            img = mp.ImageClip(f"./temp/{filename}")
-            # delete the temp folder
-            shutil.rmtree("temp")
+            try:
+                self.google.search(
+                    search_params=_search_params,
+                    path_to_dir="./temp/",
+                    custom_image_name="temp",
+                )
+                # we find the file called temp. extension
+                filename = [f for f in os.listdir("./temp/") if f.startswith("temp.")][0]
+                img = mp.ImageClip(f"./temp/{filename}")
+                # delete the temp folder
+            finally:
+                shutil.rmtree("temp")
 
             img: mp.ImageClip = img.set_duration(end - start)
             img: mp.ImageClip = img.set_start(start)

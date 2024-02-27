@@ -1,9 +1,9 @@
 from abc import abstractmethod
 
-from src.engines.BaseEngine import BaseEngine
+from ..BaseEngine import BaseEngine
 
 
-class BaseBackgroundEngine(BaseEngine):
+class BaseAudioBackgroundEngine(BaseEngine):
     @abstractmethod
     def get_background(self) -> None:
         ...

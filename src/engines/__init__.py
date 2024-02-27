@@ -7,6 +7,7 @@ from . import ScriptEngine
 from . import SettingsEngine
 from . import TTSEngine
 from . import UploadEngine
+from . import AudioBackgroundEngine
 from .BaseEngine import BaseEngine
 from .NoneEngine import NoneEngine
 
@@ -49,7 +50,11 @@ ENGINES: dict[str, dict[str, bool | list[BaseEngine]]] = {
         "multiple": True,
     },
     "BackgroundEngine": {
-        "classes": [BackgroundEngine.VideoBackgroundEngine, NoneEngine],
+        "classes": [NoneEngine, BackgroundEngine.VideoBackgroundEngine],
+        "multiple": False,
+    },
+    "AudioBackgroundEngine": {
+        "classes": [NoneEngine, AudioBackgroundEngine.MusicAudioBackgroundEngine],
         "multiple": False,
     },
     "MetadataEngine": {

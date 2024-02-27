@@ -186,13 +186,13 @@ class GenerateUI:
                     output_title.render()
                     output_description.render()
                     open_folder.render()
-                    open_folder.click(lambda x: os.system(f"open {os.path.abspath(x)}") if os.name == "posix" else os.system(f"explorer {os.abspath(x)}"), inputs=output_path)
+                    open_folder.click(lambda x: os.system(f"open {os.path.abspath(x)}") if os.name == "posix" else os.system(f"explorer {os.path.abspath(x)}"), inputs=output_path)
                 with gr.Column():
                     output_video.render()
 
         return interface
 
-    def run_generate_interface(self, progress=gr.Progress(), *args) -> list[gr.update]:
+    def run_generate_interface(self, progress=gr.Progress(track_tqdm=True), *args) -> list[gr.update]:
         progress(0, desc="Loading engines... 🚀")
         options = self.repack_options(*args)
         arguments = {name.lower(): options[name] for name in ENGINES.keys()}

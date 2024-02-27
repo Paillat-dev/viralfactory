@@ -49,7 +49,7 @@ class BaseTTSEngine(BaseEngine):
         """
         device = "cuda" if is_available() else "cpu"
         audio = wt.load_audio(path)
-        model = wt.load_model("small", device=device)
+        model = wt.load_model("large-v3", device=device)
 
         result = wt.transcribe(model=model, audio=audio)
         results = [word for chunk in result["segments"] for word in chunk["words"]]
