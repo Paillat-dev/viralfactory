@@ -22,7 +22,7 @@ certifi==2024.2.2
 cffi==1.16.0
 charset-normalizer==3.3.2
 click==8.1.7
-cloudpathlib==0.16.0
+cloudpathlib==0.18.1
 colorama==0.4.6
 confection==0.1.4
 contourpy==1.2.0
