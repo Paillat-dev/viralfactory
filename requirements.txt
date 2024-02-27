@@ -176,7 +176,7 @@ tiktok-uploader @ git+https://github.com/Paillat-dev/tiktok-uploader@bbb9ffd4002
 tiktoken==0.6.0
 tokenizers==0.15.2
 toml==0.10.2
-tomlkit==0.12.0
+tomlkit==0.12.4
 toolz==0.12.1
 torch==2.2.0+cu118
 torchaudio==2.2.0+cu118
