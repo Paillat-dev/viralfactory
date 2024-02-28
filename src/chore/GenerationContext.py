@@ -191,3 +191,8 @@ class GenerationContext:
         self.progress(0.99, "Storing in database...")
         self.store_in_db()
         self.progress(1, "Done!")
+
+        if os.name == 'nt':
+            os.system(f"start {self.dir}")
+        else:
+            os.system(f"open {self.dir}")
