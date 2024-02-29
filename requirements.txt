@@ -14,7 +14,6 @@ PyYAML==6.0.1
 Requests==2.31.0
 SQLAlchemy==2.0.27
 git+https://github.com/Paillat-dev/tiktok-uploader.git
-torch==2.2.0+cu118
 TTS==0.22.0
 TTS==0.22.0
 whisper_timestamped==1.14.4
