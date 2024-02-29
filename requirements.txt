@@ -17,3 +17,5 @@ git+https://github.com/Paillat-dev/tiktok-uploader.git
 TTS==0.22.0
 TTS==0.22.0
 whisper_timestamped==1.14.4
+Pillow==9.5.0
+
