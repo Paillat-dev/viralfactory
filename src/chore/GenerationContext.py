@@ -193,6 +193,6 @@ class GenerationContext:
         self.progress(1, "Done!")
 
         if os.name == 'nt':
-            os.system(f"start {self.dir}")
+            os.system(f"start {os.path.abspath(self.dir)}")
         else:
             os.system(f"open {self.dir}")

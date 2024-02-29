@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DiscordProjectSettings">
+    <option name="show" value="PROJECT_FILES" />
+    <option name="description" value="Viral Factory is a highly modular gradio app that automates the production of various forms of social media content." />
+    <option name="theme" value="material" />
+    <option name="button1Title" value="View code" />
+    <option name="button1Url" value="https://github.com/Paillat-dev/viralfactory" />
+    <option name="button2Title" value="" />
+    <option name="button2Url" value="" />
+  </component>
+</project>
