@@ -3,7 +3,7 @@
   <h3 align="center">Viral Factory</h3>
 
   <p align="center">
-    Viral Factory is a highly modular <a href="https://github.com/gradio-app/gradio">gradio</a> app that <strong>automates</strong>strong> the production of various forms of <strong>social media content</strong>. Thanks to it's complex engines system it allows you to customize it's process in detail.
+    Viral Factory is a highly modular <a href="https://github.com/gradio-app/gradio">gradio</a> app that <strong>automates</strong> the production of various forms of <strong>social media content</strong>. Thanks to it's complex engines system it allows you to customize it's process in detail.
     <br/>
     <br/>
     <a href="https://github.com/Paillat-dev/viralfactory/issues">Report Bug</a>
