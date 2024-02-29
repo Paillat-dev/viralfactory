@@ -1,9 +1,10 @@
 import os
-from typing import Literal, TypedDict
+from typing import Literal, TypedDict, List
 
 import gradio as gr
 import moviepy.editor as mp
 import openai
+from openai import OpenAI
 import requests
 from moviepy.video.fx.resize import resize
 
@@ -35,6 +36,10 @@ class DallEAssetsEngine(BaseAssetsEngine):
 
     def __init__(self, options: dict):
         self.aspect_ratio: Literal["portrait", "square", "landscape"] = options[0]
+        api_key = self.retrieve_setting(identifier="openai_api_key")
+        if not api_key:
+            raise ValueError("OpenAI API key is not set.")
+        self.client = OpenAI(api_key=api_key["api_key"])
 
         super().__init__()
 
@@ -54,7 +59,7 @@ class DallEAssetsEngine(BaseAssetsEngine):
                 else "1792x1024"
             )
             try:
-                response = openai.images.generate(
+                response = self.client.images.generate(
                     model="dall-e-3",
                     prompt=prompt,
                     size=size,
@@ -95,3 +100,21 @@ class DallEAssetsEngine(BaseAssetsEngine):
                 value="square",
             )
         ]
+    
+    @classmethod
+    def get_settings(cls):
+        current_api_key: dict | list[dict] | None = cls.retrieve_setting(identifier="openai_api_key")
+        current_api_key = current_api_key["api_key"] if current_api_key else ""
+        api_key_input = gr.Textbox(
+            label="OpenAI API Key",
+            type="password",
+            value=current_api_key,
+        )
+        save = gr.Button("Save")
+
+        def save_api_key(api_key: str):
+            cls.store_setting(identifier="openai_api_key", data={"api_key": api_key})
+            gr.Info("API key saved successfully.")
+            return gr.update(value=api_key)
+
+        save.click(save_api_key, inputs=[api_key_input])

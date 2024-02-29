@@ -57,13 +57,14 @@ class GenerateUI:
                         ...
                     returnable.extend(values)
             else:
-                raise ValueError("Preset not found")
-            return [gr.update(choices=list(current_presets.keys()), value=preset_name), *returnable]
+                raise gr.Error(f"Preset {preset_name} does not exist.")
+            gr.Info(f"Preset {preset_name} loaded successfully.")
+            return [gr.Dropdown(choices=list(current_presets.keys()), value=preset_name), *returnable]
         return load_preset
 
     def get_save_preset_func(self):
         def save_preset(preset_name, *selected_inputs) -> list[gr.update]:
-            with open("local/presets.json", "r") as f:
+            with open("local/presets.json", "rb") as f:
                 current_presets = orjson.loads(f.read())
             returnable = []
             poppable_inputs = list(selected_inputs)
@@ -85,17 +86,20 @@ class GenerateUI:
             with open("local/presets.json", "wb") as f:
                 current_presets[preset_name] = new_preset
                 f.write(orjson.dumps(current_presets))
-            return [gr.update(choices=list(current_presets.keys()), value=preset_name), *returnable]
+            gr.Info(f"Preset {preset_name} saved successfully.")
+            return [gr.Dropdown(choices=list(current_presets.keys()), value=preset_name), *returnable]
         return save_preset
 
     def get_delete_preset_func(self):
         def delete_preset(preset_name) -> list[gr.update]:
             with open("local/presets.json", "r") as f:
                 current_presets = orjson.loads(f.read())
+            if not current_presets.get(preset_name):
+                raise ValueError("You cannot delete a non-existing preset.")
             current_presets.pop(preset_name)
             with open("local/presets.json", "wb") as f:
                 f.write(orjson.dumps(current_presets))
-            return [gr.update(choices=list(current_presets.keys()), value=None)]
+            return gr.Dropdown(choices=list(current_presets.keys()), value=None)
         return delete_preset
     def get_ui(self):
         ui = gr.TabbedInterface(
@@ -180,9 +184,9 @@ class GenerateUI:
                     preset_dropdown = gr.Dropdown(
                         choices=list(presets.keys()),
                         show_label=False,
-                        label="dd",
+                        label="",
                         allow_custom_value=True,
-                        value=None,
+                        value="",
                     )
                     load_preset_button = gr.Button("📂", size="sm", variant="primary")
                     save_preset_button = gr.Button("💾", size="sm", variant="secondary")
@@ -195,8 +199,8 @@ class GenerateUI:
                                         outputs=[preset_dropdown, *inputs])
                     save_preset_button.click(save_preset, inputs=[preset_dropdown, *inputs],
                                         outputs=[preset_dropdown, *inputs])
-                    delete_preset_button.click(delete_preset, inputs=[preset_dropdown],
-                                        outputs=[preset_dropdown])
+                    delete_preset_button.click(delete_preset, inputs=preset_dropdown,
+                                        outputs=preset_dropdown)
                     output_title = gr.Markdown(visible=True, render=False)
                     output_description = gr.Markdown(visible=True, render=False)
                     output_video = gr.Video(visible=True, render=False)

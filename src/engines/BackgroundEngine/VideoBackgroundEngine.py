@@ -49,15 +49,15 @@ class VideoBackgroundEngine(BaseBackgroundEngine):
         clip = background.subclip(start, start + self.ctx.duration)
         w, h = clip.size
         self.ctx.credits += f"\n{self.background_video.data['credits']}"
-        self.ctx.index_0.append(
-            crop(
-                clip,
-                width=self.ctx.width,
-                height=self.ctx.height,
-                x_center=w / 2,
-                y_center=h / 2,
-            )
-        )
+        if w == h:
+            clip = clip.resize(width=self.ctx.width) if w > h else clip.resize(height=self.ctx.height)
+        elif w > h:
+            clip = clip.resize(width=self.ctx.width)
+            clip = crop(clip, width=self.ctx.width, height=self.ctx.height, x_center=w / 2, y_center=h / 2)
+        else:
+            clip = clip.resize(height=self.ctx.height)
+            clip = crop(clip, width=self.ctx.width, height=self.ctx.height, x_center=w / 2, y_center=h / 2)
+        self.ctx.index_0.append(clip)
 
     @classmethod
     def get_settings(cls):

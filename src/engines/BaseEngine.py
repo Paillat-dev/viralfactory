@@ -76,19 +76,21 @@ class BaseEngine(ABC):
 
     # noinspection PyShadowingBuiltins
     @classmethod
-    def store_setting(cls, *, type: str = None, data: dict):
+    def store_setting(cls, *, identifier: str = None, type: str = None, data: dict):
+        if not identifier and type:
+            identifier = type
         with SessionLocal() as db:
             # check if setting exists
             # noinspection PyTypeChecker
             setting = db.execute(
                 select(Setting).filter(
-                    Setting.provider == cls.name, Setting.type == type
+                    Setting.provider == cls.name, Setting.type == identifier
                 )
             ).scalar()
             if setting:
                 setting.data = data
             else:
-                db.add(Setting(provider=cls.name, type=type, data=data))
+                db.add(Setting(provider=cls.name, type=identifier, data=data))
             db.commit()
 
     @classmethod
