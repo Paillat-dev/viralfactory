@@ -15,6 +15,9 @@ class GenerateUI:
         """
 
     def get_presets(self):
+        if not os.path.exists("local/presets.json"):
+            with open("local/presets.json", "w") as f:
+                f.write(orjson.dumps({}))
         with open("local/presets.json", "r") as f:
             return orjson.loads(f.read())
 
