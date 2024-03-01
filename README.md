@@ -132,4 +132,4 @@ Distributed under the AGPL-3.0 license. See [LICENSE](/LICENSE) for more informa
 * [ShaanCoding](https://github.com/ShaanCoding/)
 * [Othneil Drew](https://github.com/othneildrew/Best-README-Template)
 * [ImgShields](https://shields.io/)
-* [RayVentura](https://github.com/RayVentura/ShortGPT)
+* [RayVentura/ShortGPT](https://github.com/RayVentura/ShortGPT)
