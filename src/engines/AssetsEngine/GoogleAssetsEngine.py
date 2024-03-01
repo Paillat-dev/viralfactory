@@ -59,6 +59,8 @@ class GoogleAssetsEngine(BaseAssetsEngine):
                 filename = [f for f in os.listdir("./temp/") if f.startswith("temp.")][0]
                 img = mp.ImageClip(f"./temp/{filename}")
                 # delete the temp folder
+            except Exception as e:
+                print(e)
             finally:
                 shutil.rmtree("temp")
 
