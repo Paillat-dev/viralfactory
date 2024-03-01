@@ -93,6 +93,7 @@ You can launch the webapp with:
 ```bash
 .\venv\Scripts\activate # Windows
 source venv/bin/activate # Linux & MacOS
+python main.py
 ```
 
 Watch the video below to learn more on how to use.
