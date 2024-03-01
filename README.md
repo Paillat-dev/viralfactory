@@ -81,6 +81,8 @@ Once the above requirements are installed, reboot your computer. Then, open a te
 git clone https://github.com/Paillat-dev/viralfactory
 cd viralfactory
 py -3.10 -m venv venv
+.\venv\Scripts\activate # Windows
+source venv/bin/activate # Linux & MacOS
 pip install -r requirement.txt
 ```
 This might take some time, you should not worry about it seeming stuck.
@@ -90,7 +92,7 @@ This might take some time, you should not worry about it seeming stuck.
 You can launch the webapp with:
 ```bash
 .\venv\Scripts\activate # Windows
-source venv/bin/activate # MacOS (unsure) & Linux
+source venv/bin/activate # Linux & MacOS
 ```
 
 Watch the video below to learn more on how to use.
