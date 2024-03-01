@@ -1,6 +1,6 @@
 <br/>
 <p align="center">
-  <h1 align="center">Viral Factory <img src="https://img.shields.io/badge/Beta-45bf17"></h1>
+  <h1 align="center">Viral Factory <picture><img src="https://img.shields.io/badge/Beta-45bf17"></picture></h1>
 
   <p align="center">
     Viral Factory is a highly modular <a href="https://github.com/gradio-app/gradio">gradio</a> app that <strong>automates</strong> the production of various forms of <strong>social media content</strong>. Thanks to it's complex engines system it allows you to customize it's process in detail.
@@ -12,7 +12,15 @@
   </p>
 </p>
 
-![Contributors](https://img.shields.io/github/contributors/Paillat-dev/viralfactory?color=dark-green) ![Issues](https://img.shields.io/github/issues/Paillat-dev/viralfactory) ![License](https://img.shields.io/github/license/Paillat-dev/viralfactory) 
+<picture>
+  <img src="https://img.shields.io/github/contributors/Paillat-dev/viralfactory?color=dark-green">
+</picture>
+<picture>
+  <img src="https://img.shields.io/github/issues/Paillat-dev/viralfactory">
+</picture>
+<picture>
+  <img src="https://img.shields.io/github/license/Paillat-dev/viralfactory">
+</picture>
 
 ## Table Of Contents
 
