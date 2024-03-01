@@ -6,6 +6,7 @@ import time
 import gradio as gr
 import moviepy.editor as mp
 from moviepy.video.fx.crop import crop
+from moviepy.video.fx.resize import resize
 
 from . import BaseBackgroundEngine
 
@@ -47,15 +48,12 @@ class VideoBackgroundEngine(BaseBackgroundEngine):
             )
         start = random.uniform(0, background_max_start)
         clip = background.subclip(start, start + self.ctx.duration)
-        w, h = clip.size
         self.ctx.credits += f"\n{self.background_video.data['credits']}"
-        if w == h:
-            clip = clip.resize(width=self.ctx.width) if w > h else clip.resize(height=self.ctx.height)
-        elif w > h:
-            clip = clip.resize(width=self.ctx.width)
+        clip = resize(clip, width=self.ctx.width, height=self.ctx.height)
+        w, h = clip.size
+        if w > h:
             clip = crop(clip, width=self.ctx.width, height=self.ctx.height, x_center=w / 2, y_center=h / 2)
         else:
-            clip = clip.resize(height=self.ctx.height)
             clip = crop(clip, width=self.ctx.width, height=self.ctx.height, x_center=w / 2, y_center=h / 2)
         self.ctx.index_0.append(clip)
 
