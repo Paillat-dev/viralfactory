@@ -124,10 +124,11 @@ Distributed under the AGPL-3.0 license. See [LICENSE](/LICENSE) for more informa
 
 ## Authors
 
-* **Paillat-dev** - ** - [Paillat-dev](https://github.com/Paillat-dev/) - *Main author*
+* **Paillat-dev** - [Paillat-dev](https://paillat.dev/) - *Main author*
 
 ## Acknowledgements
 
 * [ShaanCoding](https://github.com/ShaanCoding/)
 * [Othneil Drew](https://github.com/othneildrew/Best-README-Template)
 * [ImgShields](https://shields.io/)
+* [RayVentura](https://github.com/RayVentura/ShortGPT)
