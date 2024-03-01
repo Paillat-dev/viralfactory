@@ -98,7 +98,7 @@ python main.py
 
 Watch the video below to learn more on how to use.
 
-*coming soon*
+[![Watch the video](https://img.youtube.com/vi/9jQa1LjbPJI/maxresdefault.jpg)](https://youtu.be/9jQa1LjbPJI)
 
 ## Roadmap
 
