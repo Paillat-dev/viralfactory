@@ -99,9 +99,11 @@ class CoquiTTSEngine(BaseTTSEngine):
         self.to_force_duration = options[2]
         self.duration = options[3]
 
-        os.environ["COQUI_TOS_AGREED"] = "1"
-
-        self.tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2")
+        os.environ["COQUI_TOS_AGREED"] = options[4]
+        try:
+            self.tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2")
+        except:
+            raise Exception("An error occured when loading thr TTS model. Make sure that you have agreed to the TOS in the TTSEngine tab.")
         device = "cuda" if torch.cuda.is_available() else "cpu"
         self.tts.to(device)
 
@@ -159,4 +161,11 @@ class CoquiTTSEngine(BaseTTSEngine):
 
         options.append(duration_checkbox)
         options.append(duration)
+
+        options.append(gr.Checkbox(
+            label="I agree to the Coqui public mode license",
+            info="You must agree to the Coqui TTS terms of service to use this engine: https://coqui.ai/cpml",
+            value=False,
+            show_label=True,
+        ))
         return options
