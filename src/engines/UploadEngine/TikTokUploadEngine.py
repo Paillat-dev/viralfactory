@@ -25,7 +25,9 @@ class TikTokUploadEngine(BaseUploadEngine):
         description: str = self.ctx.description
         hashtags = self.hashtags.strip().split(" ")
 
-        # extract any hashtags from the description / title and remove them from the description
+        title = title.strip()
+        description = description.strip()
+        #we get all the hastags from title and description and add them to the list of hashtags, while removing them from the title and description
         for word in title.split():
             if word.startswith("#"):
                 hashtags.append(word)
@@ -35,12 +37,10 @@ class TikTokUploadEngine(BaseUploadEngine):
                 hashtags.append(word)
                 description = description.replace(word, "")
 
-        title = title.strip()
-        description = description.strip()
         hashtags_str = " ".join(hashtags) + " " if hashtags else ""
         failed = upload_video(
             filename=self.ctx.get_file_path("final.mp4"),
-            description=f"{title}\n{description} {hashtags_str}",
+            description=f"{title} {hashtags_str}\n{description}",
             cookies_str=cookies,
             browser="chrome",
             comment=True, stitch=False, duet=False

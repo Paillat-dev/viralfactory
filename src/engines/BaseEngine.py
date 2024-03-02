@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-import moviepy.editor as mp
+import moviepy as mp
 from sqlalchemy.future import select
 
 from ..chore import GenerationContext

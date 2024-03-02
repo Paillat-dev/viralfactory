@@ -3,10 +3,10 @@ import shutil
 from typing import TypedDict
 
 import gradio as gr
-import moviepy.editor as mp
-from google_images_search import GoogleImagesSearch
-from moviepy.video.fx.resize import resize
+import moviepy as mp
+import moviepy.video.fx as vfx
 
+from google_images_search import GoogleImagesSearch
 from . import BaseAssetsEngine
 
 
@@ -38,7 +38,7 @@ class GoogleAssetsEngine(BaseAssetsEngine):
         super().__init__()
 
     def generate(self, options: list[Spec]) -> list[mp.ImageClip]:
-        max_width = self.ctx.width / 3 * 2
+        max_width = int(self.ctx.width / 3 * 2)
         clips = []
         for option in options:
             query = option["query"]
@@ -61,13 +61,11 @@ class GoogleAssetsEngine(BaseAssetsEngine):
                 # delete the temp folder
             except Exception as e:
                 print(e)
+                continue
             finally:
                 shutil.rmtree("temp")
 
-            img: mp.ImageClip = img.set_duration(end - start)
-            img: mp.ImageClip = img.set_start(start)
-            img: mp.ImageClip = resize(img, width=max_width)
-            img: mp.ImageClip = img.set_position(("center", "top"))
+            img = img.with_duration(end - start).with_start(start).with_effects([vfx.Resize(width=max_width)]).with_position(("center", "top"))
             clips.append(img)
         return clips
 

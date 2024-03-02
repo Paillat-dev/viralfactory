@@ -7,7 +7,7 @@ from ...utils.prompting import get_prompt
 
 
 class ScientificFactsScriptEngine(BaseScriptEngine):
-    name = "Scientific facts Thoughts"
+    name = "Scientific facts"
     description = "Generate a scientific facts script."
     num_options = 1
 

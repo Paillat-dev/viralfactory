@@ -19,8 +19,8 @@ class CustomScriptEngine(BaseScriptEngine):
     def get_options(cls) -> list:
         return [
             gr.Textbox(
-                label="Prompt",
-                placeholder="Enter your prompt here",
+                label="Script",
+                placeholder="Enter your script here",
                 value="",
             )
         ]

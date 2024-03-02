@@ -2,11 +2,11 @@ import os
 from typing import Literal, TypedDict, List
 
 import gradio as gr
-import moviepy.editor as mp
+import moviepy as mp
+import moviepy.video.fx as vfx
 import openai
 from openai import OpenAI
 import requests
-from moviepy.video.fx.resize import resize
 
 from . import BaseAssetsEngine
 
@@ -79,15 +79,11 @@ class DallEAssetsEngine(BaseAssetsEngine):
             img = mp.ImageClip("temp.png")
             os.remove("temp.png")
 
-            img: mp.ImageClip = img.set_duration(end - start)
-            img: mp.ImageClip = img.set_start(start)
-            img: mp.ImageClip = resize(img, width=max_width)
-            if self.aspect_ratio == "portrait":
-                img: mp.ImageClip = img.set_position(("center", "top"))
-            elif self.aspect_ratio == "landscape":
-                img: mp.ImageClip = img.set_position(("center", "top"))
-            elif self.aspect_ratio == "square":
-                img: mp.ImageClip = img.set_position(("center", "top"))
+            img: mp.ImageClip = img.with_duration(end - start)
+            img: mp.ImageClip = img.with_start(start)
+            img: mp.ImageClip = img.with_effects([vfx.Resize(width=max_width)])
+            position = img.with_position(("center", "top"))
+            img: mp.ImageClip = img.with_position(position)
             clips.append(img)
         return clips
 

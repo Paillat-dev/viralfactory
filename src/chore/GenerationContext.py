@@ -3,7 +3,7 @@ import time
 from datetime import datetime
 
 import gradio
-import moviepy.editor as mp
+import moviepy as mp
 
 from .. import engines
 from ..models import Video, SessionLocal
@@ -171,10 +171,10 @@ class GenerationContext:
             *self.index_8,
             *self.index_9,
         ]
-        clip = mp.CompositeVideoClip(clips, size=(self.width, self.height))
         audio = mp.CompositeAudioClip(self.audio)
-        clip.set_duration(self.duration)
-        clip: mp.CompositeVideoClip = clip.set_audio(audio)
+        clip = mp.CompositeVideoClip(clips, size=(self.width, self.height)).with_duration(self.duration).with_audio(
+            audio
+        )
         clip.write_videofile(self.get_file_path("final.mp4"), fps=60, threads=4, codec="h264_nvenc")
 
         self.progress(0.8, "Generating metadata...")
@@ -192,7 +192,5 @@ class GenerationContext:
         self.store_in_db()
         self.progress(1, "Done!")
 
-        if os.name == 'nt':
-            os.system(f"start {os.path.abspath(self.dir)}")
-        else:
-            os.system(f"open {self.dir}")
+        command = "start" if os.name == 'nt' else "open"
+        os.system(f"{command} {os.path.abspath(self.dir)}")

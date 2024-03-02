@@ -1,9 +1,36 @@
 import gradio as gr
 import os
-import shutil
-from moviepy.editor import TextClip
+import platform
+import moviepy as mp
 
 from . import BaseCaptioningEngine
+
+def get_available_fonts():
+    #on windows, the fonts are in the C:\Windows\Fonts and C:\Users\Username\AppData\Local\Microsoft\Windows\Fonts
+    #on linux, the fonts are in the /usr/share/fonts directory
+    #on mac, the fonts are in the /Library/Fonts, /System/Library/Fonts, and ~/Library/Fonts directories
+    if platform.system() == "Windows":
+        font_dirs = [
+            "C:\\Windows\\Fonts",
+            "C:\\Users\\{}\\AppData\\Local\\Microsoft\\Windows\\Fonts".format(os.getlogin()),
+        ]
+    elif platform.system() == "Linux":
+        font_dirs = ["/usr/share/fonts"]
+    elif platform.system() == "Darwin":
+        font_dirs = [
+            "/Library/Fonts",
+            "/System/Library/Fonts",
+            "{}/Library/Fonts".format(os.path.expanduser("~")),
+        ]
+    else:
+        font_dirs = []
+    fonts = []
+    for font_dir in font_dirs:
+        for root, dirs, files in os.walk(font_dir):
+            for file in files:
+                if file.endswith(".ttf") or file.endswith(".otf"):
+                    fonts.append(file)
+    return list(set(fonts))
 
 
 class SimpleCaptioningEngine(BaseCaptioningEngine):
@@ -20,21 +47,22 @@ class SimpleCaptioningEngine(BaseCaptioningEngine):
 
         super().__init__()
 
-    def build_caption_object(self, text: str, start: float, end: float) -> TextClip:
+    def build_caption_object(self, text: str, start: float, end: float) -> mp.TextClip:
         return (
-            TextClip(
-                text,
-                fontsize=self.font_size,
+            mp.TextClip(
+                text=text,
+                font_size=self.font_size,
                 color=self.font_color,
                 font=self.font,
                 stroke_color=self.stroke_color,
                 stroke_width=self.stroke_width,
                 method="caption",
-                size=(self.ctx.width / 3 * 2, None),
+                size=(int(self.ctx.width / 3 * 2), None),
+                text_align="center",
             )
-            .set_position(("center", 0.65), relative=True)
-            .set_start(start)
-            .set_duration(end - start)
+            .with_position(("center", 0.65), relative=True)
+            .with_start(start)
+            .with_duration(end - start)
         )
 
     def ends_with_punctuation(self, text: str) -> bool:
@@ -95,7 +123,7 @@ class SimpleCaptioningEngine(BaseCaptioningEngine):
             with gr.Group():
                 font = gr.Dropdown(
                     label="Font",
-                    choices=TextClip.list("font"),
+                    choices=get_available_fonts(),
                     value="Comic-Sans-MS-Bold",
                     allow_custom_value=True,  # Allow custom font
                 )

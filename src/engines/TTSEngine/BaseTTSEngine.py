@@ -1,7 +1,7 @@
 from abc import abstractmethod
 from typing import TypedDict
 
-import moviepy.editor as mp
+import moviepy as mp
 import whisper_timestamped as wt
 from torch.cuda import is_available
 

@@ -4,9 +4,8 @@ import shutil
 import time
 
 import gradio as gr
-import moviepy.editor as mp
-from moviepy.audio.fx.audio_fadein import audio_fadein
-from moviepy.audio.fx.audio_fadeout import audio_fadeout
+import moviepy as mp
+import moviepy.audio.fx as afx
 
 from . import BaseAudioBackgroundEngine
 
@@ -43,18 +42,18 @@ class MusicAudioBackgroundEngine(BaseAudioBackgroundEngine):
         background = mp.AudioFileClip(f"{self.background_audio.path}")
         self.ctx.credits += f"\n{self.background_audio.data['credits']}"
         # we add fade in and fade out to the audio
-        background: mp.AudioFileClip = background.fx(audio_fadein, 1).fx(audio_fadeout, 1)
+        background = background.with_effects([afx.AudioFadeIn(1), afx.AudioFadeOut(1)])
         # loop the audio to match the duration of the video
         audio_clips = []
         while sum([clip.duration for clip in audio_clips]) < self.ctx.duration:
             audio_clips.append(background)
         # now we cut the audio to match the duration of the video exactly
-        audio: mp.AudioFileClip = mp.concatenate_audioclips(audio_clips)
-        audio: mp.AudioFileClip = audio.subclip(0, self.ctx.duration)
+        audio = mp.concatenate_audioclips(audio_clips)
+        audio = audio.with_subclip(0, self.ctx.duration)
         # finally we add a new fade OUT only to the audio
-        audio: mp.AudioFileClip = audio.fx(audio_fadeout, 1)
+        audio = audio.with_effects([afx.AudioFadeOut(1)])
         # change volume to 0.5
-        audio: mp.AudioFileClip = audio.volumex(0.5)
+        audio: mp.AudioFileClip = audio.with_multiply_volume(0.5)
         self.ctx.audio.append(audio)
 
     @classmethod

@@ -89,7 +89,7 @@ class CoquiTTSEngine(BaseTTSEngine):
         "ko",  # Korean
         "hi",  # Hindi
     ]
-    num_options = 4
+    num_options = 5
 
     def __init__(self, options: list):
         super().__init__()
@@ -99,7 +99,7 @@ class CoquiTTSEngine(BaseTTSEngine):
         self.to_force_duration = options[2]
         self.duration = options[3]
 
-        os.environ["COQUI_TOS_AGREED"] = options[4]
+        os.environ["COQUI_TOS_AGREED"] = str(options[4])
         try:
             self.tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2")
         except:

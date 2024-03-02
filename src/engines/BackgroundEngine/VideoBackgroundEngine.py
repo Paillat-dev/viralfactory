@@ -4,9 +4,8 @@ import shutil
 import time
 
 import gradio as gr
-import moviepy.editor as mp
-from moviepy.video.fx.crop import crop
-from moviepy.video.fx.resize import resize
+import moviepy as mp
+import moviepy.video.fx as vfx
 
 from . import BaseBackgroundEngine
 
@@ -47,14 +46,16 @@ class VideoBackgroundEngine(BaseBackgroundEngine):
                 "The background video is shorter than the video to be generated."
             )
         start = random.uniform(0, background_max_start)
-        clip = background.subclip(start, start + self.ctx.duration)
+        clip = background.with_subclip(start, start + self.ctx.duration)
         self.ctx.credits += f"\n{self.background_video.data['credits']}"
-        clip = resize(clip, width=self.ctx.width, height=self.ctx.height)
         w, h = clip.size
-        if w > h:
-            clip = crop(clip, width=self.ctx.width, height=self.ctx.height, x_center=w / 2, y_center=h / 2)
+        resolution: float = w / h
+        canvas_resolution: float = self.ctx.width / self.ctx.height
+        if resolution > canvas_resolution:
+            clip = clip.with_effects([vfx.Resize(height=self.ctx.height)])
         else:
-            clip = crop(clip, width=self.ctx.width, height=self.ctx.height, x_center=w / 2, y_center=h / 2)
+            clip = clip.with_effects([vfx.Resize(width=self.ctx.width)])
+        clip = clip.with_position(("center", "center"))
         self.ctx.index_0.append(clip)
 
     @classmethod
