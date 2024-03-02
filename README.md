@@ -70,7 +70,6 @@ Currently, an Nvidia gpu with at least around 10 GB of vram is required for this
 You will need as well to have the following software installed (click on them to install):
 - [CUDA 11.8](https://developer.nvidia.com/cuda-11-8-0-download-archive)
 - [ffmpeg](https://ffmpeg.org/download.html)
-- [imagemagick](https://imagemagick.org/script/download.php)
 - [git](https://git-scm.com/downloads)
 - [Python 3.10](https://www.python.org/downloads/release/python-31011/)
 
