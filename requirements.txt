@@ -17,4 +17,4 @@ git+https://github.com/Paillat-dev/tiktok-uploader.git
 torch==2.2.0
 TTS==0.22.0
 TTS==0.22.0
-whisper_timestamped==1.14.4
+whisper_timestamped==1.15.3
