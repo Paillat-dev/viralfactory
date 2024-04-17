@@ -1,0 +1,30 @@
+[project]
+name = "ViralFactory"
+version = "0.0.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Paillat", email = "me@paillat.dev"},
+]
+dependencies = [
+    "anthropic==0.25.3",
+    "google-api-python-client==2.48.0",
+    "google-auth-oauthlib==1.2.0",
+    "gradio==4.19.2",
+    "numpy==1.25.2",
+    "openai==1.13.3",
+    "orjson==3.9.15",
+    "python-dotenv==1.0.1",
+    "PyYAML==6.0.1",
+    "Requests==2.31.0",
+    "SQLAlchemy==2.0.28",
+    "torch==2.2.0",
+    "whisper-timestamped==1.14.4",
+
+]
+requires-python = "==3.10.*"
+readme = "README.md"
+license = {text = "AGPL-3.0"}
+
+
+[tool.pdm]
+distribution = false

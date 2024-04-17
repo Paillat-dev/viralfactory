@@ -229,4 +229,7 @@ local/presets.json
 cookies.txt
 
 # moviepy temp files
-finalTEMP_MPY*.* 
+*TEMP_MPY*.*
+
+# pdm
+.pdm-python
