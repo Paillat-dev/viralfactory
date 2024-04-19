@@ -1,16 +1,13 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    "config:recommended"
   ],
   "labels": [
     "📌 dependencies"
   ],
   "commitMessagePrefix": "⬆️",
   "commitMessageAction": "Upgrade",
-  "major": {
-    "automerge": false
-  },
   "packageRules": [
     {
       "updateTypes": [
