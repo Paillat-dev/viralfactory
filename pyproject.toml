@@ -17,7 +17,7 @@ dependencies = [
     "Requests==2.31.0",
     "SQLAlchemy==2.0.29",
     "torch==2.2.0",
-    "typer<0.10.0", # not directly required but resolution takes ages without this
+    "typer<0.12.4", # not directly required but resolution takes ages without this
     "whisper-timestamped==1.14.4",
     "moviepy @ git+https://github.com/OsaAjani/moviepy.git",
     "tiktok-uploader @ git+https://github.com/Paillat-dev/tiktok-uploader.git",
