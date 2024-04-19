@@ -23,5 +23,6 @@
       "commitMessagePrefix": "⬇️",
       "commitMessageAction": "Downgrade"
     }
-  ]
+  ],
+  "dependencyDashboard": true
 }
