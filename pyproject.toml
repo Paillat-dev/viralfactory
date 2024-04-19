@@ -15,7 +15,7 @@ dependencies = [
     "python-dotenv==1.0.1",
     "PyYAML==6.0.1",
     "Requests==2.31.0",
-    "SQLAlchemy==2.0.28",
+    "SQLAlchemy==2.0.29",
     "torch==2.2.0",
     "typer<0.10.0", # not directly required but resolution takes ages without this
     "whisper-timestamped==1.14.4",
