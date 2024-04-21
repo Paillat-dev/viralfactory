@@ -14,20 +14,18 @@ class TikTokUploadEngine(BaseUploadEngine):
         self.hashtags = options[0]
         super().__init__()
 
-    def upload(self):
+    def upload(self, title: str, description: str, path: str):
         cookies = self.get_setting(type="cookies")["cookies"]
         if cookies is None:
             gr.Warning(
                 "Skipping upload to TikTok because no cookies were provided. Please provide cookies in the settings."
             )
             return
-        title: str = self.ctx.title
-        description: str = self.ctx.description
         hashtags = self.hashtags.strip().split(" ")
 
         title = title.strip()
         description = description.strip()
-        #we get all the hastags from title and description and add them to the list of hashtags, while removing them from the title and description
+        # we get all the hastags from title and description and add them to the list of hashtags, while removing them from the title and description
         for word in title.split():
             if word.startswith("#"):
                 hashtags.append(word)
@@ -39,11 +37,13 @@ class TikTokUploadEngine(BaseUploadEngine):
 
         hashtags_str = " ".join(hashtags) + " " if hashtags else ""
         failed = upload_video(
-            filename=self.ctx.get_file_path("final.mp4"),
+            filename=path,
             description=f"{title} {hashtags_str}\n{description}",
             cookies_str=cookies,
             browser="chrome",
-            comment=True, stitch=False, duet=False
+            comment=True,
+            stitch=False,
+            duet=False,
         )
         for _ in failed:
             gr.Error(f"Failed to upload to TikTok")
