@@ -1,17 +1,22 @@
-from . import AssetsEngine
+from . import Pipelines
+from . import AIImageEngine
+from . import StockImageEngine
 from . import BackgroundEngine
 from . import CaptioningEngine
 from . import LLMEngine
-from . import MetadataEngine
-from . import ScriptEngine
 from . import SettingsEngine
 from . import TTSEngine
 from . import UploadEngine
 from . import AudioBackgroundEngine
+from . import TranscriptionEngine
 from .BaseEngine import BaseEngine
 from .NoneEngine import NoneEngine
 
 ENGINES: dict[str, dict[str, bool | list[BaseEngine]]] = {
+    "Pipeline": {
+        "classes": [Pipelines.ScriptedVideoPipeline],
+        "multiple": False,
+    },
     "SettingsEngine": {
         "classes": [SettingsEngine.SettingsEngine],
         "multiple": False,
@@ -25,29 +30,28 @@ ENGINES: dict[str, dict[str, bool | list[BaseEngine]]] = {
         "classes": [LLMEngine.OpenaiLLMEngine, LLMEngine.AnthropicLLMEngine],
         "multiple": False,
     },
-    "ScriptEngine": {
-        "classes": [
-            ScriptEngine.ShowerThoughtsScriptEngine,
-            ScriptEngine.CustomScriptEngine,
-            ScriptEngine.ScientificFactsScriptEngine,
-        ],
-        "multiple": False,
-    },
     "TTSEngine": {
         "classes": [TTSEngine.CoquiTTSEngine],
+        "multiple": False,
+    },
+    "TranscriptionEngine": {
+        "classes": [TranscriptionEngine.WhisperTranscriptionEngine],
         "multiple": False,
     },
     "CaptioningEngine": {
         "classes": [CaptioningEngine.SimpleCaptioningEngine, NoneEngine],
         "multiple": False,
     },
-    "AssetsEngine": {
+    "AIImageEngine": {
         "classes": [
-            AssetsEngine.DallEAssetsEngine,
-            AssetsEngine.GoogleAssetsEngine,
-            NoneEngine,
+            AIImageEngine.DallEAIImageEngine,
+            AIImageEngine.A1111AIImageEngine,
         ],
-        "multiple": True,
+        "multiple": False,
+    },
+    "StockImageEngine": {
+        "classes": [StockImageEngine.GoogleStockImageEngine],
+        "multiple": False,
     },
     "BackgroundEngine": {
         "classes": [NoneEngine, BackgroundEngine.VideoBackgroundEngine],
@@ -57,12 +61,12 @@ ENGINES: dict[str, dict[str, bool | list[BaseEngine]]] = {
         "classes": [NoneEngine, AudioBackgroundEngine.MusicAudioBackgroundEngine],
         "multiple": False,
     },
-    "MetadataEngine": {
-        "classes": [MetadataEngine.ShortsMetadataEngine],
-        "multiple": False,
-    },
     "UploadEngine": {
-        "classes": [UploadEngine.TikTokUploadEngine, UploadEngine.YouTubeUploadEngine, NoneEngine],
+        "classes": [
+            UploadEngine.TikTokUploadEngine,
+            UploadEngine.YouTubeUploadEngine,
+            NoneEngine,
+        ],
         "multiple": True,
     },
 }

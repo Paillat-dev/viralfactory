@@ -7,7 +7,7 @@ import moviepy as mp
 import moviepy.video.fx as vfx
 
 from google_images_search import GoogleImagesSearch
-from . import BaseAssetsEngine
+from .BaseStockImageEngine import BaseStockImageEngine
 
 
 class Spec(TypedDict):
@@ -16,18 +16,9 @@ class Spec(TypedDict):
     end: float
 
 
-class GoogleAssetsEngine(BaseAssetsEngine):
+class GoogleStockImageEngine(BaseStockImageEngine):
     name = "Google"
     description = "Search for images using the Google Images API."
-    spec_name = "google"
-    spec_description = (
-        "Use the Google Images API to search for images based on a query."
-    )
-    specification = {
-        "query": "A short and concise query to search for images. Do not include any details, just a simple query. [str]",
-        "start": "The starting time of the video clip. [float]",
-        "end": "The ending time of the video clip. [float]",
-    }
 
     num_options = 0
 
@@ -37,37 +28,40 @@ class GoogleAssetsEngine(BaseAssetsEngine):
         self.google = GoogleImagesSearch(api_key, project_cx)
         super().__init__()
 
-    def generate(self, options: list[Spec]) -> list[mp.ImageClip]:
+    def get(self, query: str, start: float, end: float) -> mp.ImageClip:
         max_width = int(self.ctx.width / 3 * 2)
-        clips = []
-        for option in options:
-            query = option["query"]
-            start = option["start"]
-            end = option["end"]
-            _search_params = {
-                "q": query,
-                "num": 1,
-            }
-            os.makedirs("temp", exist_ok=True)
-            try:
-                self.google.search(
-                    search_params=_search_params,
-                    path_to_dir="./temp/",
-                    custom_image_name="temp",
-                )
-                # we find the file called temp. extension
-                filename = [f for f in os.listdir("./temp/") if f.startswith("temp.")][0]
-                img = mp.ImageClip(f"./temp/{filename}")
-                # delete the temp folder
-            except Exception as e:
-                print(e)
-                continue
-            finally:
-                shutil.rmtree("temp")
+        _search_params = {
+            "q": query,
+            "num": 1,
+        }
+        os.makedirs("temp", exist_ok=True)
+        try:
+            self.google.search(
+                search_params=_search_params,
+                path_to_dir="./temp/",
+                custom_image_name="temp",
+            )
+            # we find the file called temp. extension
+            filename = [f for f in os.listdir("./temp/") if f.startswith("temp.")][0]
+            img = mp.ImageClip(f"./temp/{filename}")
+            # delete the temp folder
+        except Exception as e:
+            gr.Warning(f"Failed to get image: {e}")
+            return (
+                mp.ColorClip((self.ctx.width, self.ctx.height), color=(0, 0, 0))
+                .with_duration(end - start)
+                .with_start(start)
+            )
+        finally:
+            shutil.rmtree("temp")
 
-            img = img.with_duration(end - start).with_start(start).with_effects([vfx.Resize(width=max_width)]).with_position(("center", "top"))
-            clips.append(img)
-        return clips
+        img = (
+            img.with_duration(end - start)
+            .with_start(start)
+            .with_effects([vfx.Resize(width=max_width)])
+            .with_position(("center", "top"))
+        )
+        return img
 
     @classmethod
     def get_options(cls):

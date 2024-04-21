@@ -1,6 +1,7 @@
-from abc import ABC, abstractmethod
-
 import moviepy as mp
+import os
+
+from abc import ABC, abstractmethod
 from sqlalchemy.future import select
 
 from ..chore import GenerationContext
@@ -17,8 +18,7 @@ class BaseEngine(ABC):
 
     @classmethod
     @abstractmethod
-    def get_options(cls):
-        ...
+    def get_options(cls): ...
 
     def get_video_duration(self, path: str) -> float:
         return mp.VideoFileClip(path).duration
@@ -28,7 +28,9 @@ class BaseEngine(ABC):
 
     # noinspection PyShadowingBuiltins
     @classmethod
-    def get_assets(cls, *, type: str = None, by_id: int = None) -> list[File] | File | None:
+    def get_assets(
+        cls, *, type: str = None, by_id: int = None
+    ) -> list[File] | File | None:
         with SessionLocal() as db:
             if type:
                 # noinspection PyTypeChecker
@@ -45,9 +47,7 @@ class BaseEngine(ABC):
                 # noinspection PyTypeChecker
                 return (
                     db.execute(
-                        select(File).filter(
-                            File.id == by_id, File.provider == cls.name
-                        )
+                        select(File).filter(File.id == by_id, File.provider == cls.name)
                     )
                     .scalars()
                     .first()
@@ -102,7 +102,9 @@ class BaseEngine(ABC):
 
     # noinspection PyShadowingBuiltins
     @classmethod
-    def retrieve_setting(cls, *, identifier: str = None, type: str = None) -> dict | list[dict] | None:
+    def retrieve_setting(
+        cls, *, identifier: str = None, type: str = None
+    ) -> dict | list[dict] | None:
         """
         Retrieve a setting from the database based on the provided identifier or type.
 
@@ -166,5 +168,12 @@ class BaseEngine(ABC):
             db.commit()
 
     @classmethod
-    def get_settings(cls):
-        ...
+    def get_settings(cls): ...
+
+    @classmethod
+    def get_dir(cls, file):
+        return os.path.dirname(os.path.realpath(file))
+
+    @classmethod
+    def get_file_name(cls, file):
+        return os.path.splitext(os.path.basename(file))[0]
