@@ -1,9 +1,15 @@
+import logging
 from ui import launch
-from dotenv import load_dotenv
 from src.models import init_db
+from dotenv import load_dotenv
 
-load_dotenv()
 
-if __name__ == "__main__":
+def main():
+    load_dotenv()
+    logging.basicConfig(level=logging.INFO)
     init_db()
     launch()
+
+
+if __name__ == "__main__":
+    main()
