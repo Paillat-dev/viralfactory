@@ -17,7 +17,9 @@ class VideoBackgroundEngine(BaseBackgroundEngine):
 
     def __init__(self, options: list[str]):
         assets = self.get_assets(type="bcg_video")
-        self.background_video = [asset for asset in assets if asset.data["name"] == options[0]][0]
+        self.background_video = [
+            asset for asset in assets if asset.data["name"] == options[0]
+        ][0]
         super().__init__()
 
     @classmethod
@@ -56,7 +58,7 @@ class VideoBackgroundEngine(BaseBackgroundEngine):
         else:
             clip = clip.with_effects([vfx.Resize(width=self.ctx.width)])
         clip = clip.with_position(("center", "center"))
-        self.ctx.index_0.append(clip)
+        return clip
 
     @classmethod
     def get_settings(cls):

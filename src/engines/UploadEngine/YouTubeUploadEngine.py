@@ -16,7 +16,9 @@ class YouTubeUploadEngine(BaseUploadEngine):
         super().__init__(**kwargs)
         self.oauth_name = options[0]
         self.oauth = self.retrieve_setting(type="oauth_credentials")[self.oauth_name]
-        self.credentials = self.retrieve_setting(type="youtube_client_secrets")[self.oauth["client_secret"]]
+        self.credentials = self.retrieve_setting(type="youtube_client_secrets")[
+            self.oauth["client_secret"]
+        ]
 
         self.hashtags = options[1]
 
@@ -35,11 +37,11 @@ class YouTubeUploadEngine(BaseUploadEngine):
             result = orjson.loads(result)
         return result
 
-    def upload(self):
+    def upload(self, title: str, description: str, path: str):
         options = {
-            "file": self.ctx.get_file_path("final.mp4"),
-            "title": self.ctx.title + " | " + self.hashtags,
-            "description": self.ctx.description,
+            "file": path,
+            "title": title + " | " + self.hashtags,
+            "description": description,
             "privacyStatus": "private",
             "category": 28,
         }
@@ -53,7 +55,7 @@ class YouTubeUploadEngine(BaseUploadEngine):
             current_oauths = self.retrieve_setting(type="oauth_credentials") or {}
             current_oauths[self.oauth_name] = {
                 "client_secret": self.oauth["client_secret"],
-                "credentials": new_oauth
+                "credentials": new_oauth,
             }
             self.store_setting(
                 type="oauth_credentials",
@@ -68,7 +70,9 @@ class YouTubeUploadEngine(BaseUploadEngine):
         choices = list(choices.keys())
         return [
             gr.Dropdown(
-                choices=choices, label="Choose Channel", value=choices[0] if choices else "No channels available !"
+                choices=choices,
+                label="Choose Channel",
+                value=choices[0] if choices else "No channels available !",
             ),
             gr.Textbox(label="Hashtags", value="#shorts", max_lines=1),
         ]
@@ -84,7 +88,9 @@ class YouTubeUploadEngine(BaseUploadEngine):
                 submit_button = gr.Button("Save")
 
                 def save(binary, clien_secret_name):
-                    current_client_secrets = cls.retrieve_setting(type="youtube_client_secrets") or {}
+                    current_client_secrets = (
+                        cls.retrieve_setting(type="youtube_client_secrets") or {}
+                    )
                     client_secret_json = orjson.loads(binary)
                     current_client_secrets[clien_secret_name] = client_secret_json
                     cls.store_setting(
@@ -93,22 +99,32 @@ class YouTubeUploadEngine(BaseUploadEngine):
                     )
                     gr.Info(f"{clien_secret_name} saved successfully !")
 
-                submit_button.click(save, inputs=[client_secret_file, clien_secret_name])
+                submit_button.click(
+                    save, inputs=[client_secret_file, clien_secret_name]
+                )
 
             with gr.Column() as ytb_oauth:
-                possible_client_secrets = cls.retrieve_setting(type="youtube_client_secrets") or {}
+                possible_client_secrets = (
+                    cls.retrieve_setting(type="youtube_client_secrets") or {}
+                )
                 possible_client_secrets = list(possible_client_secrets.keys())
-                choosen_client_secret = gr.Dropdown(label="Login secret", choices=possible_client_secrets)
+                choosen_client_secret = gr.Dropdown(
+                    label="Login secret", choices=possible_client_secrets
+                )
                 name = gr.Textbox(label="Name", max_lines=1)
                 login_button = gr.Button("Login", variant="primary")
 
                 def login(choosen_client_secret, name):
-                    choosen_secret_data = cls.retrieve_setting(type="youtube_client_secrets")[choosen_client_secret]
+                    choosen_secret_data = cls.retrieve_setting(
+                        type="youtube_client_secrets"
+                    )[choosen_client_secret]
                     new_oauth_entry = cls.__oauth(choosen_secret_data)
-                    current_oauths = cls.retrieve_setting(type="oauth_credentials") or {}
+                    current_oauths = (
+                        cls.retrieve_setting(type="oauth_credentials") or {}
+                    )
                     current_oauths[name] = {
                         "client_secret": choosen_client_secret,
-                        "credentials": new_oauth_entry
+                        "credentials": new_oauth_entry,
                     }
                     cls.store_setting(
                         type="oauth_credentials",

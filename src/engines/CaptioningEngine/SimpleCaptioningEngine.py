@@ -5,14 +5,17 @@ import moviepy as mp
 
 from . import BaseCaptioningEngine
 
+
 def get_available_fonts():
-    #on windows, the fonts are in the C:\Windows\Fonts and C:\Users\Username\AppData\Local\Microsoft\Windows\Fonts
-    #on linux, the fonts are in the /usr/share/fonts directory
-    #on mac, the fonts are in the /Library/Fonts, /System/Library/Fonts, and ~/Library/Fonts directories
+    # on windows, the fonts are in the C:\Windows\Fonts and C:\Users\Username\AppData\Local\Microsoft\Windows\Fonts
+    # on linux, the fonts are in the /usr/share/fonts directory
+    # on mac, the fonts are in the /Library/Fonts, /System/Library/Fonts, and ~/Library/Fonts directories
     if platform.system() == "Windows":
         font_dirs = [
             "C:\\Windows\\Fonts",
-            "C:\\Users\\{}\\AppData\\Local\\Microsoft\\Windows\\Fonts".format(os.getlogin()),
+            "C:\\Users\\{}\\AppData\\Local\\Microsoft\\Windows\\Fonts".format(
+                os.getlogin()
+            ),
         ]
     elif platform.system() == "Linux":
         font_dirs = ["/usr/share/fonts"]
@@ -69,14 +72,11 @@ class SimpleCaptioningEngine(BaseCaptioningEngine):
         punctuations = (".", "?", "!", ",", ":", ";")
         return text.strip().endswith(tuple(punctuations))
 
-    def get_captions(self):
+    def get_captions(self, words: list[dict[str, str]] = None) -> list[mp.TextClip]:
         # 3 words per 1000 px, we do the math
         max_words = int(self.ctx.width / 1000 * 3)
 
         clips = []
-        words = (
-            self.ctx.timed_script.copy()
-        )  # List of dicts with "start", "end", and "text"
         current_line = ""
         current_start = words[0]["start"]
         current_end = words[0]["end"]
@@ -107,8 +107,7 @@ class SimpleCaptioningEngine(BaseCaptioningEngine):
                     current_line.strip(), current_start, words[-1]["end"]
                 )
             )
-
-        self.ctx.index_7.extend(clips)
+        return clips
 
     @classmethod
     def get_settings(cls):

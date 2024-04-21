@@ -5,5 +5,4 @@ from ..BaseEngine import BaseEngine
 
 class BaseAudioBackgroundEngine(BaseEngine):
     @abstractmethod
-    def get_background(self) -> None:
-        ...
+    def get_background(self) -> None: ...

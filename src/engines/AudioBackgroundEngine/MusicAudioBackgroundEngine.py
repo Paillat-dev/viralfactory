@@ -12,12 +12,16 @@ from . import BaseAudioBackgroundEngine
 
 class MusicAudioBackgroundEngine(BaseAudioBackgroundEngine):
     name = "Music Audio Background Engine"
-    description = "A basic background engine to set the background audio to a music track."
+    description = (
+        "A basic background engine to set the background audio to a music track."
+    )
     num_options = 1
 
     def __init__(self, options: list[str]):
         assets = self.get_assets(type="bcg_music")
-        self.background_audio = [asset for asset in assets if asset.data["name"] == options[0]][0]
+        self.background_audio = [
+            asset for asset in assets if asset.data["name"] == options[0]
+        ][0]
         super().__init__()
 
     @classmethod
@@ -54,7 +58,7 @@ class MusicAudioBackgroundEngine(BaseAudioBackgroundEngine):
         audio = audio.with_effects([afx.AudioFadeOut(1)])
         # change volume to 0.5
         audio: mp.AudioFileClip = audio.with_multiply_volume(0.5)
-        self.ctx.audio.append(audio)
+        return audio
 
     @classmethod
     def get_settings(cls):

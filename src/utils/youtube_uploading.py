@@ -108,7 +108,7 @@ def resumable_upload(request):
             if retry > MAX_RETRIES:
                 exit("No longer attempting to retry.")
 
-            max_sleep = 2 ** retry
+            max_sleep = 2**retry
             sleep_seconds = random.random() * max_sleep
             print("Sleeping %f seconds and then retrying..." % sleep_seconds)
             time.sleep(sleep_seconds)
