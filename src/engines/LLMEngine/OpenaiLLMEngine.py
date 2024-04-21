@@ -1,5 +1,6 @@
 import gradio as gr
 import openai
+import logging
 from openai import OpenAI
 import orjson
 
@@ -8,6 +9,7 @@ from .BaseLLMEngine import BaseLLMEngine
 OPENAI_POSSIBLE_MODELS = [  # Theese shall be the openai models supporting force_json
     "gpt-3.5-turbo-0125",
     "gpt-4-turbo-preview",
+    "gpt-4-turbo",
 ]
 
 
@@ -25,16 +27,19 @@ class OpenaiLLMEngine(BaseLLMEngine):
         super().__init__()
 
     def generate(
-            self,
-            system_prompt: str,
-            chat_prompt: str,
-            max_tokens: int = 512,
-            temperature: float = 1.0,
-            json_mode: bool = False,
-            top_p: float = 1,
-            frequency_penalty: float = 0,
-            presence_penalty: float = 0,
+        self,
+        system_prompt: str,
+        chat_prompt: str,
+        max_tokens: int = 512,
+        temperature: float = 1.0,
+        json_mode: bool = False,
+        top_p: float = 1,
+        frequency_penalty: float = 0,
+        presence_penalty: float = 0,
     ) -> str | dict:
+        logging.info(
+            f"Generating with OpenAI model {self.model} and system prompt: \n{system_prompt} and chat prompt: \n{chat_prompt[0:100]}..."
+        )
         response = self.client.chat.completions.create(
             model=self.model,
             messages=[
@@ -46,9 +51,9 @@ class OpenaiLLMEngine(BaseLLMEngine):
             top_p=top_p,
             frequency_penalty=frequency_penalty,
             presence_penalty=presence_penalty,
-            response_format={"type": "json_object"}
-            if json_mode
-            else openai._types.NOT_GIVEN,
+            response_format=(
+                {"type": "json_object"} if json_mode else openai._types.NOT_GIVEN
+            ),
         )
         return (
             response.choices[0].message.content
