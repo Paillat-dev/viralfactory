@@ -24,6 +24,7 @@ dependencies = [
     "TTS==0.22.0",
     "Google-Images-Search @ git+https://github.com/Paillat-dev/Google-Images-Search",
     "yt-dlp[default]>=2023.11.16",
+    "fix-busted-json==0.0.17",
 ]
 
 requires-python = "==3.10.*"
