@@ -76,8 +76,11 @@ class ScriptedVideoPipeline(BasePipeline):
         chat = chat.replace("{assets_instructions}", str(self.assets_instructions))
         chat = chat.replace("{video_transcript}", str(ctx.timed_script))
         assets: list[dict[str, str | float]] = ctx.powerfulllmengine.generate(
-            system_prompt=system, chat_prompt=chat, temperature=1, max_tokens=4096,
-            json_mode=True
+            system_prompt=system,
+            chat_prompt=chat,
+            temperature=1,
+            max_tokens=4096,
+            json_mode=True,
         )["assets"]
         for asset in assets:
             if asset["type"] == "stock":
