@@ -59,7 +59,7 @@ class GoogleStockImageEngine(BaseStockImageEngine):
             img.with_duration(end - start)
             .with_start(start)
             .with_effects([vfx.Resize(width=max_width)])
-            .with_position(("center", "top"))
+            .with_position(("center", "center"))
         )
         return img
 
