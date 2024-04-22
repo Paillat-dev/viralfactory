@@ -24,7 +24,6 @@ class GenerationContext:
     def __init__(
         self,
         pipeline,
-        settingsengine,
         simplellmengine,
         powerfulllmengine,
         ttsengine,
@@ -74,9 +73,6 @@ class GenerationContext:
             stockimageengine[0]
         )
         self.stockimageengine.ctx = self
-
-        self.settingsengine: engines.SettingsEngine.SettingsEngine = settingsengine[0]
-        self.settingsengine.ctx = self
 
         self.backgroundengine: engines.BackgroundEngine.BaseBackgroundEngine = (
             backgroundengine[0]

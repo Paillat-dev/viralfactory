@@ -61,9 +61,7 @@ class AnthropicLLMEngine(BaseLLMEngine):
                     returnable = fix_busted_json.repair_json(content)
                     returnable = orjson.loads(returnable)
                     return returnable
-                except ( # noqa wait for library to imlement pep https://peps.python.org/pep-0352/ (Required Superclass for Exceptions
-                    Exception
-                ) as e:
+                except fix_busted_json.JsonFixError as e:
                     tries += 1
             else:
                 return content
