@@ -5,7 +5,7 @@
 groups = ["default", "lint", "win"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:5214f8b1ad1f534b1a93bc890edfae3a33388fc5a5449263760e4a6bb8d0d2c6"
+content_hash = "sha256:53e72473806d63d066d4ebbba022fb95252612d10fdd73ccb2a8e754a4a91423"
 
 [[package]]
 name = "absl-py"
@@ -702,13 +702,13 @@ files = [
 
 [[package]]
 name = "fix-busted-json"
-version = "0.0.17"
+version = "0.0.18"
 requires_python = ">=3.6"
 summary = "Fixes broken JSON string objects"
 groups = ["default"]
 files = [
-    {file = "fix-busted-json-0.0.17.tar.gz", hash = "sha256:64d3f11896b51812238174f55e001311e02eca3d3be3618724c42d72d894d60d"},
-    {file = "fix_busted_json-0.0.17-py3-none-any.whl", hash = "sha256:1011fb26d664fb280b63d0f9a402a9b88bc1bfb82c7d74425b6b30325e32797b"},
+    {file = "fix-busted-json-0.0.18.tar.gz", hash = "sha256:93c5dab7cae3b5d0b055f2c7043f9fe727a88a80d0be753c5f2c20bb9b69672f"},
+    {file = "fix_busted_json-0.0.18-py3-none-any.whl", hash = "sha256:fdce0e02c9a810b3aa28e1c3c32c24b21b44e89f6315ec25d2b963bd52a6ef03"},
 ]
 
 [[package]]
@@ -3320,7 +3320,7 @@ version = "2.2.0"
 summary = "An audio package for PyTorch"
 groups = ["default"]
 dependencies = [
-    "torch==2.2.0+cu118",
+    "torch==2.2.0",
 ]
 files = [
     {file = "torchaudio-2.2.0+cu118-cp310-cp310-linux_x86_64.whl", hash = "sha256:c932803b158f8ad66bcf13eff4f1fc3f7c9e6e02c13fb6eda42c0e5fcea99588"},
