@@ -4,7 +4,6 @@ from . import StockImageEngine
 from . import BackgroundEngine
 from . import CaptioningEngine
 from . import LLMEngine
-from . import SettingsEngine
 from . import TTSEngine
 from . import UploadEngine
 from . import AudioBackgroundEngine
@@ -16,11 +15,6 @@ ENGINES: dict[str, dict[str, bool | list[BaseEngine]]] = {
     "Pipeline": {
         "classes": [Pipelines.ScriptedVideoPipeline],
         "multiple": False,
-    },
-    "SettingsEngine": {
-        "classes": [SettingsEngine.SettingsEngine],
-        "multiple": False,
-        "show_dropdown": False,
     },
     "SimpleLLMEngine": {
         "classes": [LLMEngine.OpenaiLLMEngine, LLMEngine.AnthropicLLMEngine],

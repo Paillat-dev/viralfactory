@@ -117,6 +117,4 @@ class GenerationContext:
         return os.path.join(self.dir, name)
 
     def process(self):
-        # ⚠️ IMPORTANT NOTE: All methods called here are expected to be defined as abstract methods in the base
-        # classes, if not there is an issue with the engine implementation.
         self.pipeline.launch(self)
