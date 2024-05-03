@@ -1,7 +1,7 @@
 [project]
 name = "ViralFactory"
 version = "0.0.0"
-description = "Default template for PDM package"
+description = "A tool to create viral content"
 authors = [
     {name = "Paillat", email = "me@paillat.dev"},
 ]
