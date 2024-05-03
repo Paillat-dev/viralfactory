@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 
 
 def main():
+    copyright()
+    credits()
     load_dotenv()
     logging.basicConfig(level=logging.INFO)
     init_db()
