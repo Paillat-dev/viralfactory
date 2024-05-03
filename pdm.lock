@@ -5,7 +5,7 @@
 groups = ["default", "lint", "win"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:b138620e49a248efc207b3a8536ef7d193ff4a5ed380944c1d81aa3edf31239b"
+content_hash = "sha256:d25416d698b5d90fd3423ecbf195bf91425c7032598d4fc0684994d7e6765db2"
 
 [[package]]
 name = "absl-py"
@@ -109,7 +109,7 @@ files = [
 
 [[package]]
 name = "anthropic"
-version = "0.25.6"
+version = "0.25.7"
 requires_python = ">=3.7"
 summary = "The official Python library for the anthropic API"
 groups = ["default"]
@@ -123,8 +123,8 @@ dependencies = [
     "typing-extensions<5,>=4.7",
 ]
 files = [
-    {file = "anthropic-0.25.6-py3-none-any.whl", hash = "sha256:c4736402953c99b643ac452306ff0d33bdd2368a793d5c61fdcecd3331a0a103"},
-    {file = "anthropic-0.25.6.tar.gz", hash = "sha256:4c93ed9bd8fd5774992314b66de7e90fdefb39fbf6fd641d31d7e6046145122b"},
+    {file = "anthropic-0.25.7-py3-none-any.whl", hash = "sha256:419a276eb20cfb7ddaac03c7e28e4e12df3ace71bcf33071a68c9a03c0dfcbdd"},
+    {file = "anthropic-0.25.7.tar.gz", hash = "sha256:e7de4c8ba8e7e8248ad7f05ed9176634780b95b67c678d23915d8964c8a26f4e"},
 ]
 
 [[package]]
