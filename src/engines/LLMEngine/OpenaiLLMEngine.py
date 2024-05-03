@@ -67,7 +67,6 @@ class OpenaiLLMEngine(BaseLLMEngine):
             gr.Dropdown(
                 label="Model",
                 choices=OPENAI_POSSIBLE_MODELS,
-                max_choices=1,
                 value=OPENAI_POSSIBLE_MODELS[0],
             )
         ]

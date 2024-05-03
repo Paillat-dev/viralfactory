@@ -134,13 +134,11 @@ class CoquiTTSEngine(BaseTTSEngine):
             gr.Dropdown(
                 label="Voice",
                 choices=cls.voices,
-                max_choices=1,
                 value="Damien Black",
             ),
             gr.Dropdown(
                 label="Language",
                 choices=cls.languages,
-                max_choices=1,
                 value=cls.languages[0],
             ),
         ]

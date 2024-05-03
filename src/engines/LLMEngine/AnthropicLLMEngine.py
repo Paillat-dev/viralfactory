@@ -72,7 +72,6 @@ class AnthropicLLMEngine(BaseLLMEngine):
             gr.Dropdown(
                 label="Model",
                 choices=ANTHROPIC_POSSIBLE_MODELS,
-                max_choices=1,
                 value=ANTHROPIC_POSSIBLE_MODELS[0],
             )
         ]
