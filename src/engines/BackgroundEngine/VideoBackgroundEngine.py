@@ -42,11 +42,10 @@ class VideoBackgroundEngine(BaseBackgroundEngine):
 
     def get_background(self):
         background = mp.VideoFileClip(f"{self.background_video.path}", audio=False)
+        if background.duration < self.ctx.duration:
+            num = int(self.ctx.duration / background.duration) + 1
+            background = mp.concatenate_videoclips([background for _ in range(num)])
         background_max_start = background.duration - self.ctx.duration
-        if background_max_start < 0:
-            raise ValueError(
-                "The background video is shorter than the video to be generated."
-            )
         start = random.uniform(0, background_max_start)
         clip = background.with_subclip(start, start + self.ctx.duration)
         self.ctx.credits += f"\n{self.background_video.data['credits']}"
@@ -58,6 +57,7 @@ class VideoBackgroundEngine(BaseBackgroundEngine):
         else:
             clip = clip.with_effects([vfx.Resize(width=self.ctx.width)])
         clip = clip.with_position(("center", "center"))
+        clip: mp.VideoClip = clip.without_audio()
         return clip
 
     @classmethod
