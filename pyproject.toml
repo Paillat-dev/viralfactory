@@ -16,7 +16,7 @@ dependencies = [
     "PyYAML==6.0.1",
     "Requests==2.31.0",
     "SQLAlchemy==2.0.29",
-    "torch==2.2.0",
+    "torch==2.3.0",
     "typer<0.10.0", # not directly required but resolution takes ages without this
     "whisper-timestamped==1.14.4",
     "moviepy @ git+https://github.com/OsaAjani/moviepy.git",
