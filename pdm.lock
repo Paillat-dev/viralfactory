@@ -5,7 +5,7 @@
 groups = ["default", "lint", "win"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:b4f5d198719bb2f8a97838cc4f1b769cd84f67f1d1843038375e25514f0b1bfa"
+content_hash = "sha256:e1170c795b612e2d50ef6587edc132a4ea39d6aa1e2f4626600f59e46af63fa9"
 
 [[package]]
 name = "absl-py"
@@ -1953,7 +1953,7 @@ files = [
 
 [[package]]
 name = "openai"
-version = "1.28.1"
+version = "1.29.0"
 requires_python = ">=3.7.1"
 summary = "The official Python library for the openai API"
 groups = ["default"]
@@ -1967,8 +1967,8 @@ dependencies = [
     "typing-extensions<5,>=4.7",
 ]
 files = [
-    {file = "openai-1.28.1-py3-none-any.whl", hash = "sha256:943e0d0d587b9a62f99bd3acbaf479ae5362986e5fff013f57b5b7bde85cce93"},
-    {file = "openai-1.28.1.tar.gz", hash = "sha256:8a3adbba16882434768d76fd3129fcc9b40ace98f8d55a6ddacfc05c4096ac30"},
+    {file = "openai-1.29.0-py3-none-any.whl", hash = "sha256:c61cd12376c84362d406341f9e2f9a9d6b81c082b133b44484dc0f43954496b1"},
+    {file = "openai-1.29.0.tar.gz", hash = "sha256:d5a769f485610cff8bae14343fa45a8b1d346be3d541fa5b28ccd040dbc8baf8"},
 ]
 
 [[package]]
