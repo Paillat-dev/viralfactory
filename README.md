@@ -72,6 +72,7 @@ You will need as well to have the following software installed (click on them to
 - [ffmpeg](https://ffmpeg.org/download.html)
 - [git](https://git-scm.com/downloads)
 - [Python 3.10](https://www.python.org/downloads/release/python-31011/)
+- [PDM](https://pdm-project.org/en/latest/)
 
 ### Installation
 
@@ -79,10 +80,9 @@ Once the above requirements are installed, reboot your computer. Then, open a te
 ```bash
 git clone https://github.com/Paillat-dev/viralfactory
 cd viralfactory
-py -3.10 -m venv venv
-.\venv\Scripts\activate # Windows
-source venv/bin/activate # Linux & MacOS
-pip install -r requirement.txt
+pdm install
+# or for development
+pdm install --dev
 ```
 This might take some time, you should not worry about it seeming stuck.
 
@@ -90,9 +90,7 @@ This might take some time, you should not worry about it seeming stuck.
 
 You can launch the webapp with:
 ```bash
-.\venv\Scripts\activate # Windows
-source venv/bin/activate # Linux & MacOS
-python main.py
+pdm run start
 ```
 
 Watch the video below to learn more on how to use.
@@ -114,7 +112,7 @@ Contributions are what make the open source community such an amazing place to b
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m '✨feat(Engines.LLMEngine) Add mistral local engine'`)
+3. Commit your Changes (`git commit -m '✨feat(Engines.LLMEngine) Add ollama local engine'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
