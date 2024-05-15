@@ -5,7 +5,7 @@
 groups = ["default", "lint", "win"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:da694d75966de3336e1e96f2159e0c78a518cd77b6fba4b74a37dc76f7a580e8"
+content_hash = "sha256:df4b108515fce768c1e9a020699eed8af7452cb4509cbc7869a33e454e9899e7"
 
 [[package]]
 name = "absl-py"
@@ -4008,7 +4008,7 @@ files = [
 
 [[package]]
 name = "whisper-timestamped"
-version = "1.14.4"
+version = "1.15.4"
 requires_python = ">=3.7"
 summary = "Multi-lingual Automatic Speech Recognition (ASR) based on Whisper models, with accurate word timestamps, access to language detection confidence, several options for Voice Activity Detection (VAD), and more."
 groups = ["default"]
@@ -4018,8 +4018,8 @@ dependencies = [
     "openai-whisper",
 ]
 files = [
-    {file = "whisper-timestamped-1.14.4.tar.gz", hash = "sha256:65eb165afdf6cf8d960652dfff53ea192b77dcf1a6b61f91236be54a31050b29"},
-    {file = "whisper_timestamped-1.14.4-py3-none-any.whl", hash = "sha256:eb922cc5168b80c2e59a1990fe3c441bb306a45c6bd8bcdbc67028933dbfb877"},
+    {file = "whisper_timestamped-1.15.4-py3-none-any.whl", hash = "sha256:92eae29ba30b57d82281b27751bfe17c6e1b2efa240977c904d48317df3a2bcb"},
+    {file = "whisper_timestamped-1.15.4.tar.gz", hash = "sha256:6de51e42becce3a39477dabbfa76b6d44105ab370892877bcdb0f51ed7420b3d"},
 ]
 
 [[package]]

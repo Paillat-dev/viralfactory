@@ -16,7 +16,7 @@ dependencies = [
     "PyYAML==6.0.1",
     "Requests==2.31.0",
     "SQLAlchemy==2.0.29",
-    "whisper-timestamped==1.14.4",
+    "whisper-timestamped==1.15.4",
     "moviepy @ git+https://github.com/OsaAjani/moviepy.git",
     "tiktok-uploader @ git+https://github.com/Paillat-dev/tiktok-uploader.git",
     "TTS==0.22.0",
