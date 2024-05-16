@@ -187,7 +187,10 @@ class GenerateUI:
                             engine_rows = []
                             for i, engine in enumerate(engines):
                                 with gr.Column(visible=(i == 0)) as engine_row:
-                                    gr.Markdown(value=f"## {engine.name}")
+                                    gr.Markdown(
+                                        value=f"""## {engine.name}
+{engine.description}"""
+                                    )
                                     engine_rows.append(engine_row)
                                     options = engine.get_options()
                                     inputs.extend(options)
