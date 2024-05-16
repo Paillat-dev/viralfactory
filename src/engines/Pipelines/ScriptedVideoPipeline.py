@@ -45,7 +45,11 @@ class ScriptedVideoPipeline(BasePipeline):
         )["chapters"]
         ctx.script = ""
 
-        for chapter in chapters:
+        text_audio = []
+
+        ctx.duration = 0
+
+        for i, chapter in enumerate(chapters):
             ctx.progress(0.2, f"Generating chapter: {chapter['title']}...")
             system = prompts["writer"]["system"]
             chat = prompts["writer"]["chat"]
@@ -54,87 +58,96 @@ class ScriptedVideoPipeline(BasePipeline):
                 .replace("{chapter_title}", chapter["title"])
                 .replace("{chapter_instructions}", chapter["explanation"])
             )
-            ctx.script += ctx.powerfulllmengine.generate(
+            script = ctx.powerfulllmengine.generate(
                 system_prompt=system,
                 chat_prompt=chat,
                 temperature=1,
                 max_tokens=4096,
                 json_mode=True,
             )["chapter"]
+            ctx.script += script
             ctx.script += "\n"
 
-        ctx.progress(0.3, "Synthesizing voice...")
-        ctx.duration = ctx.ttsengine.synthesize(
-            ctx.script, ctx.get_file_path("tts.wav")
-        )
-        ctx.audio.append(mp.AudioFileClip(ctx.get_file_path("tts.wav")))
-        ctx.progress(0.4, "Transcribing audio...")
-        ctx.timed_script = ctx.transcriptionengine.transcribe(
-            ctx.get_file_path("tts.wav"), fast=False, words=True
-        )
+            ctx.progress(0.3, "Synthesizing voice...")
+            duration = ctx.ttsengine.synthesize(
+                script, ctx.get_file_path(f"tts_{i}.wav")
+            )
+            audioclip = mp.AudioFileClip(ctx.get_file_path(f"tts_{i}.wav"))
+            audioclip = audioclip.with_start(ctx.duration)
+            text_audio.append(audioclip)
+            ctx.progress(0.2, f"Transcribing chapter: {chapter['title']}...")
+            timed_script = ctx.transcriptionengine.transcribe(
+                ctx.get_file_path(f"tts_{i}.wav"), fast=False, words=True
+            )
 
-        sentence_split_script = []
-        current_sentence = None
+            sentence_split_script = []
+            current_sentence = None
 
-        for word in ctx.timed_script.copy():
-            if current_sentence is None:
-                # Initialize the first sentence
-                current_sentence = {
-                    "text": word["text"],
-                    "end": word["end"],
-                    "start": word["start"],
-                }
-            elif word["text"].endswith((".", "!", "?")):
-                # Add the word to the current sentence and finalize it
-                current_sentence["text"] += f" {word['text']}"
-                current_sentence["end"] = word["end"]
+            for word in timed_script.copy():
+                if current_sentence is None:
+                    # Initialize the first sentence
+                    current_sentence = {
+                        "text": word["text"],
+                        "end": word["end"],
+                        "start": word["start"],
+                    }
+                elif word["text"].endswith((".", "!", "?")):
+                    # Add the word to the current sentence and finalize it
+                    current_sentence["text"] += f" {word['text']}"
+                    current_sentence["end"] = word["end"]
+                    sentence_split_script.append(current_sentence)
+                    current_sentence = None  # Prepare to start a new sentence
+                else:
+                    # Continue adding words to the current sentence
+                    current_sentence["text"] += f" {word['text']}"
+                    current_sentence["end"] = word["end"]
+
+            # If the last sentence didn't end with a punctuation mark
+            if current_sentence is not None:
                 sentence_split_script.append(current_sentence)
-                current_sentence = None  # Prepare to start a new sentence
-            else:
-                # Continue adding words to the current sentence
-                current_sentence["text"] += f" {word['text']}"
-                current_sentence["end"] = word["end"]
 
-        # If the last sentence didn't end with a punctuation mark
-        if current_sentence is not None:
-            sentence_split_script.append(current_sentence)
-
-        ctx.progress(0.5, "Generating images...")
-        system = prompts["imager"]["system"]
-        chat = prompts["imager"]["chat"]
-        chat = chat.replace("{user_instructions}", str(self.user_instructions))
-        chat = chat.replace("{assets_instructions}", str(self.assets_instructions))
-        chat = chat.replace("{video_transcript}", str(sentence_split_script))
-        assets: list[dict[str, str | float]] = ctx.powerfulllmengine.generate(
-            system_prompt=system,
-            chat_prompt=chat,
-            temperature=1,
-            max_tokens=4096,
-            json_mode=True,
-        )["assets"]
-        for i, asset in enumerate(assets):
-            if asset["type"] == "stock":
-                ctx.progress(0.5, f"Getting stock image {i + 1}...")
-                ctx.index_4.append(
-                    ctx.stockimageengine.get(
-                        asset["query"], asset["start"], asset["end"]
+            ctx.progress(0.2, f"Generating video for chapter: {chapter['title']}...")
+            system = prompts["imager"]["system"]
+            chat = prompts["imager"]["chat"]
+            chat = chat.replace("{user_instructions}", str(self.user_instructions))
+            chat = chat.replace("{assets_instructions}", str(self.assets_instructions))
+            chat = chat.replace("{video_transcript}", str(sentence_split_script))
+            assets: list[dict[str, str | float]] = ctx.powerfulllmengine.generate(
+                system_prompt=system,
+                chat_prompt=chat,
+                temperature=1,
+                max_tokens=4096,
+                json_mode=True,
+            )["assets"]
+            for i, asset in enumerate(assets):
+                if asset["type"] == "stock":
+                    ctx.progress(0.5, f"Getting stock image {i + 1}...")
+                    ctx.index_4.append(
+                        ctx.stockimageengine.get(
+                            asset["query"],
+                            asset["start"] + ctx.duration,
+                            asset["end"] + ctx.duration,
+                        )
                     )
-                )
-            elif asset["type"] == "ai":
-                ctx.progress(0.5, f"Generating AI image {i + 1}...")
-                ctx.index_5.append(
-                    ctx.aiimageengine.generate(
-                        asset["prompt"], asset["start"], asset["end"]
+                elif asset["type"] == "ai":
+                    ctx.progress(0.5, f"Generating AI image {i + 1}...")
+                    ctx.index_5.append(
+                        ctx.aiimageengine.generate(
+                            asset["prompt"],
+                            asset["start"] + ctx.duration,
+                            asset["end"] + ctx.duration,
+                        )
                     )
-                )
 
+            ctx.duration += duration + 0.5
+        ctx.audio.extend(text_audio)
         if not isinstance(ctx.audiobackgroundengine, engines.NoneEngine):
             ctx.progress(0.6, "Generating audio background...")
             ctx.audio.append(ctx.audiobackgroundengine.get_background())
 
         if not isinstance(ctx.backgroundengine, engines.NoneEngine):
             ctx.progress(0.65, "Generating background...")
-            ctx.audio.append(ctx.backgroundengine.get_background())
+            ctx.index_0.append(ctx.backgroundengine.get_background())
 
         ctx.progress(0.7, "Rendering video...")
         clips = [
@@ -230,11 +243,13 @@ class ScriptedVideoPipeline(BasePipeline):
                 lines=4,
                 max_lines=6,
                 label="Video instructions",
+                info="Explain what the video should be about, how many chapters, and any specific instructions.",
             ),
             gr.Textbox(
                 lines=4,
                 max_lines=6,
                 label="Assets only instructions",
+                info="Explain how the assets should be used in the video. When, how many, and of what type (stock images, AI or both)",
             ),
             ratio,
             width,
