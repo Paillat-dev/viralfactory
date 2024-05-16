@@ -116,6 +116,26 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+## Star history
+<picture>
+  <source
+    media="(prefers-color-scheme: dark)"
+    srcset="
+      https://api.star-history.com/svg?repos=Paillat-dev/viralfactory&type=Date&theme=dark
+    "
+  />
+  <source
+    media="(prefers-color-scheme: light)"
+    srcset="
+      https://api.star-history.com/svg?repos=Paillat-dev/viralfactory&type=Date
+    "
+  />
+  <img
+    alt="Star History Chart"
+    src="https://api.star-history.com/svg?repos=Paillat-dev/viralfactory&type=Date"
+  />
+</picture>
+
 ## License
 
 Distributed under the AGPL-3.0 license. See [LICENSE](/LICENSE) for more information
