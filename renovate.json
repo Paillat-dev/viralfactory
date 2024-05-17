@@ -24,5 +24,6 @@
       "commitMessageAction": "Downgrade"
     }
   ],
-  "dependencyDashboard": true
+  "dependencyDashboard": true,
+  "baseBranches": ["dev"]
 }
