@@ -39,7 +39,10 @@ class ScriptedVideoPipeline(BasePipeline):
     def get_assets_concurrent(self, assets: list[dict[str, str]]) -> list[mp.VideoClip]:
         results = []
         with ThreadPoolExecutor() as executor:
-            futures = [executor.submit(self.get_asset, asset, i) for i, asset in enumerate(assets)]
+            futures = [
+                executor.submit(self.get_asset, asset, i)
+                for i, asset in enumerate(assets)
+            ]
             for future in as_completed(futures):
                 try:
                     results.append(future.result())

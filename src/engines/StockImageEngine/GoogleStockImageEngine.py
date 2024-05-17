@@ -42,7 +42,9 @@ class GoogleStockImageEngine(BaseStockImageEngine):
                 custom_image_name="temp",
             )
             # we find the file called temp. extension
-            filename = [f for f in os.listdir(f"./temp{i}/") if f.startswith("temp.")][0]
+            filename = [f for f in os.listdir(f"./temp{i}/") if f.startswith("temp.")][
+                0
+            ]
             img = mp.ImageClip(f"./temp{i}/{filename}")
             # delete the temp folder
         except Exception as e:

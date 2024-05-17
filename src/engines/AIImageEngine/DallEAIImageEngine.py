@@ -33,7 +33,7 @@ class DallEAIImageEngine(BaseAIImageEngine):
 
         super().__init__()
 
-    def generate(self, prompt: str, start: float, end: float, i = "") -> mp.ImageClip:
+    def generate(self, prompt: str, start: float, end: float, i="") -> mp.ImageClip:
         max_width = self.ctx.width / 3 * 2
         size: Literal["1024x1024", "1024x1792", "1792x1024"] = (
             "1024x1024"

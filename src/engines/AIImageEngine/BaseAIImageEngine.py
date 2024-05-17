@@ -11,7 +11,7 @@ class BaseAIImageEngine(BaseEngine):
     """
 
     @abstractmethod
-    def generate(self, prompt: str, start: float, end: float, i = "") -> mp.ImageClip:
+    def generate(self, prompt: str, start: float, end: float, i="") -> mp.ImageClip:
         """
         Ge
         """

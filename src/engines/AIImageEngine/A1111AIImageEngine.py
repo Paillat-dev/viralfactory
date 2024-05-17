@@ -32,7 +32,7 @@ class A1111AIImageEngine(BaseAIImageEngine):
 
         super().__init__()
 
-    def generate(self, prompt: str, start: float, end: float, i= "") -> mp.ImageClip:
+    def generate(self, prompt: str, start: float, end: float, i="") -> mp.ImageClip:
         max_width = self.ctx.width / 3 * 2
         try:
             url = self.base_url + "/sdapi/v1/txt2img"

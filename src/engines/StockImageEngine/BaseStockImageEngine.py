@@ -11,7 +11,7 @@ class BaseStockImageEngine(BaseEngine):
     """
 
     @abstractmethod
-    def get(self, query: str, start: float, end: float, i = "") -> mp.ImageClip:
+    def get(self, query: str, start: float, end: float, i="") -> mp.ImageClip:
         """
         Get a stock image based on a query.
 
