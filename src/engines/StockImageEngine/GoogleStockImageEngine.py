@@ -28,22 +28,22 @@ class GoogleStockImageEngine(BaseStockImageEngine):
         self.google = GoogleImagesSearch(api_key, project_cx)
         super().__init__()
 
-    def get(self, query: str, start: float, end: float) -> mp.ImageClip:
+    def get(self, query: str, start: float, end: float, i="") -> mp.ImageClip:
         max_width = int(self.ctx.width / 3 * 2)
         _search_params = {
             "q": query,
             "num": 1,
         }
-        os.makedirs("temp", exist_ok=True)
+        os.makedirs(f"temp{i}", exist_ok=True)
         try:
             self.google.search(
                 search_params=_search_params,
-                path_to_dir="./temp/",
+                path_to_dir=f"./temp{i}/",
                 custom_image_name="temp",
             )
             # we find the file called temp. extension
-            filename = [f for f in os.listdir("./temp/") if f.startswith("temp.")][0]
-            img = mp.ImageClip(f"./temp/{filename}")
+            filename = [f for f in os.listdir(f"./temp{i}/") if f.startswith("temp.")][0]
+            img = mp.ImageClip(f"./temp{i}/{filename}")
             # delete the temp folder
         except Exception as e:
             gr.Warning(f"Failed to get image: {e}")
@@ -53,7 +53,7 @@ class GoogleStockImageEngine(BaseStockImageEngine):
                 .with_start(start)
             )
         finally:
-            shutil.rmtree("temp")
+            shutil.rmtree(f"temp{i}")
 
         img = (
             img.with_duration(end - start)

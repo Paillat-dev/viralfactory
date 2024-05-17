@@ -32,7 +32,7 @@ class A1111AIImageEngine(BaseAIImageEngine):
 
         super().__init__()
 
-    def generate(self, prompt: str, start: float, end: float) -> mp.ImageClip:
+    def generate(self, prompt: str, start: float, end: float, i= "") -> mp.ImageClip:
         max_width = self.ctx.width / 3 * 2
         try:
             url = self.base_url + "/sdapi/v1/txt2img"
@@ -43,8 +43,8 @@ class A1111AIImageEngine(BaseAIImageEngine):
             }
             response = requests.post(url, json=payload)
             response.raise_for_status()
-
-            with open("temp.png", "wb") as f:
+            fname = f"temp{i}.png"
+            with open(fname, "wb") as f:
                 f.write(base64.b64decode(response.json()["images"][0]))
         except Exception as e:
             gr.Warning(f"Failed to get image: {e}")
@@ -53,8 +53,8 @@ class A1111AIImageEngine(BaseAIImageEngine):
                 .with_duration(end - start)
                 .with_start(start)
             )
-        img = mp.ImageClip("temp.png")
-        os.remove("temp.png")
+        img = mp.ImageClip(fname)
+        os.remove(fname)
 
         position = ("center", "center")
         img = (

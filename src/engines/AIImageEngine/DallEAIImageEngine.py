@@ -33,7 +33,7 @@ class DallEAIImageEngine(BaseAIImageEngine):
 
         super().__init__()
 
-    def generate(self, prompt: str, start: float, end: float) -> mp.ImageClip:
+    def generate(self, prompt: str, start: float, end: float, i = "") -> mp.ImageClip:
         max_width = self.ctx.width / 3 * 2
         size: Literal["1024x1024", "1024x1792", "1792x1024"] = (
             "1024x1024"
@@ -61,10 +61,11 @@ class DallEAIImageEngine(BaseAIImageEngine):
             else:
                 raise
         img_bytes = requests.get(response.data[0].url)
-        with open("temp.png", "wb") as f:
+        fname = f"temp{i}.png"
+        with open(fname, "wb") as f:
             f.write(img_bytes.content)
-        img = mp.ImageClip("temp.png")
-        os.remove("temp.png")
+        img = mp.ImageClip(fname)
+        os.remove(fname)
 
         position = ("center", "center")
         img = (
