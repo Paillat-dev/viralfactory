@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 def main():
     copyright()
     credits()
+    print("Viral Factory by Paillat-dev - paill.at - AGPLv3 License")
     load_dotenv()
     logging.basicConfig(level=logging.INFO)
     init_db()
