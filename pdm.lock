@@ -3324,10 +3324,10 @@ files = [
 
 [[package]]
 name = "tiktok-uploader"
-version = "1.0.15"
+version = "1.0.16"
 requires_python = ">=3.0"
 git = "https://github.com/Paillat-dev/tiktok-uploader.git"
-revision = "37eaff43337e3a3acf444442c03e267b50db229d"
+revision = "7b7c7b0c9d990ebc3d772e8f6607f41cc023110e"
 summary = "An automatic TikTok video uploader w/ CLI. Uploads videos automatically using an automated browser and your cookies for authentication."
 groups = ["default"]
 dependencies = [
@@ -3458,7 +3458,7 @@ files = [
 
 [[package]]
 name = "torch"
-version = "2.3.0+cu118"
+version = "2.3.0"
 requires_python = ">=3.8.0"
 summary = "Tensors and Dynamic neural networks in Python with strong GPU acceleration"
 groups = ["default"]
