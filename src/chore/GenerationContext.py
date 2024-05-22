@@ -8,6 +8,7 @@ from ..models import Video, SessionLocal
 
 class GenerationContext:
     def store_in_db(self):
+        return
         with SessionLocal() as db:
             db.add(
                 Video(
