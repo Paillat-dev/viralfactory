@@ -26,7 +26,8 @@ class AnthropicLLMEngine(BaseLLMEngine):
     def generate(
         self,
         system_prompt: str,
-        chat_prompt: str,
+        chat_prompt: str = "",
+        messages: list = [],
         max_tokens: int = 1024,
         temperature: float = 1.0,
         json_mode: bool = False,
@@ -36,9 +37,11 @@ class AnthropicLLMEngine(BaseLLMEngine):
     ) -> str | dict:
         tries = 0
         while tries < 2:
-            messages = [
-                {"role": "user", "content": chat_prompt},
-            ]
+            if chat_prompt:
+                messages = [
+                    {"role": "user", "content": chat_prompt},
+                    *messages,
+                ]
             if json_mode:
                 # anthropic does not officially support JSON mode, but we can bias the output towards a JSON-like format
                 messages.append({"role": "assistant", "content": "{"})
@@ -47,7 +50,7 @@ class AnthropicLLMEngine(BaseLLMEngine):
                 messages=messages,
                 model=self.model,
                 top_p=top_p,
-                temperature=temperature,
+                temperature=temperature if temperature <= 1.0 else 1.0,
                 system=system_prompt,
             )
 
@@ -93,3 +96,11 @@ class AnthropicLLMEngine(BaseLLMEngine):
             return gr.update(value=api_key)
 
         save.click(save_api_key, inputs=[api_key_input])
+
+    @property
+    def supports_vision(self) -> bool:
+        return (
+            True
+            if self.model in ["claude-3-opus-20240229", "claude-3-sonnet-20240229"]
+            else False
+        )

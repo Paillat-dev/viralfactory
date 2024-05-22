@@ -4,11 +4,14 @@ from ..BaseEngine import BaseEngine
 
 
 class BaseLLMEngine(BaseEngine):
+    supports_vision = False
+
     @abstractmethod
     def generate(
         self,
         system_prompt: str,
-        chat_prompt: str,
+        chat_prompt: str = "",
+        messages: list[dict] = [],
         max_tokens: int = 512,
         temperature: float = 1.0,
         json_mode: bool = False,
