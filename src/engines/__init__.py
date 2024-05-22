@@ -13,7 +13,7 @@ from .NoneEngine import NoneEngine
 
 ENGINES: dict[str, dict[str, bool | list[BaseEngine]]] = {
     "Pipeline": {
-        "classes": [Pipelines.ScriptedVideoPipeline],
+        "classes": [Pipelines.ScriptedVideoPipeline, Pipelines.MemeExplainerPipeline],
         "multiple": False,
     },
     "SimpleLLMEngine": {

@@ -27,8 +27,6 @@ class ScriptedShortPipeline(BasePipeline):
 
         ctx.progress(0.1, "Loading settings...")
         ctx.setup_dir()
-        if not isinstance(ctx.settingsengine, engines.NoneEngine):
-            ctx.settingsengine.load()
 
         ctx.progress(0.2, "Generating script...")
         system, chat = self.script_prompt["system"], self.script_prompt["chat"]

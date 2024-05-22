@@ -4,3 +4,4 @@ from .BasePipeline import BasePipeline
 
 # from .BestofShortPipeline import BestofShortPipeline
 from .ScriptedVideoPipeline import ScriptedVideoPipeline
+from .MemeExplainerPipeline import MemeExplainerPipeline

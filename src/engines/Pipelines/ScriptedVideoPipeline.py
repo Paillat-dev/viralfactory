@@ -182,7 +182,7 @@ class ScriptedVideoPipeline(BasePipeline):
             .with_audio(audio)
         )
         clip.write_videofile(
-            ctx.get_file_path("final.mp4"), fps=60, threads=16, codec="av1_nvenc"
+            ctx.get_file_path("final.mp4"), fps=60, threads=16, codec="hevc_nvenc"
         )
         system = prompts["description"]["system"]
         chat = prompts["description"]["chat"]
