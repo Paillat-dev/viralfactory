@@ -14,7 +14,7 @@ dependencies = [
     "orjson==3.10.3",
     "python-dotenv==1.0.1",
     "PyYAML==6.0.1",
-    "Requests==2.31.0",
+    "Requests==2.32.3",
     "SQLAlchemy==2.0.29",
     "whisper-timestamped>=1.15.4",
     "moviepy @ git+https://github.com/OsaAjani/moviepy.git",
