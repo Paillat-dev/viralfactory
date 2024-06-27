@@ -7,7 +7,7 @@ authors = [
 ]
 dependencies = [
     "anthropic>=0.25.9",
-    "google-api-python-client==2.48.0",
+    "google-api-python-client==2.135.0",
     "google-auth-oauthlib==1.2.0",
     "gradio>=4.31.3",
     "openai>=1.30.1",
