@@ -20,7 +20,7 @@ dependencies = [
     "moviepy @ git+https://github.com/OsaAjani/moviepy.git",
     "tiktok-uploader @ git+https://github.com/Paillat-dev/tiktok-uploader.git",
     "Google-Images-Search @ git+https://github.com/Paillat-dev/Google-Images-Search",
-    "yt-dlp[default]==2023.11.pdm16",
+    "yt-dlp[default]==2023.11.16",
     "fix-busted-json==0.0.18",
     "TTS==0.22.0",
 ]
