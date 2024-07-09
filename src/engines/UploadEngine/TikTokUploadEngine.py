@@ -14,7 +14,9 @@ class TikTokUploadEngine(BaseUploadEngine):
         self.hashtags = options[0]
         super().__init__()
 
-    def upload(self, title: str, description: str, path: str):
+    def upload(
+        self, title: str, description: str, path: str, hashtags_end: bool = True
+    ):
         cookies = self.get_setting(type="cookies")["cookies"]
         if cookies is None:
             gr.Warning(
@@ -36,9 +38,15 @@ class TikTokUploadEngine(BaseUploadEngine):
                 description = description.replace(word, "")
 
         hashtags_str = " ".join(hashtags) + " " if hashtags else ""
+        final_description = (
+            f"{title} {description} {hashtags_str}"
+            if hashtags_end
+            else f"{title} {hashtags_str} {description}"
+        )
+        final_description = final_description.strip()
         failed = upload_video(
             filename=path,
-            description=f"{title} {hashtags_str}\n{description}",
+            description=final_description,
             cookies_str=cookies,
             browser="chrome",
             comment=True,
