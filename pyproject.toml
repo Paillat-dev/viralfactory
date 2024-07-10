@@ -6,24 +6,24 @@ authors = [
     {name = "Paillat", email = "me@paillat.dev"},
 ]
 dependencies = [
-    "anthropic>=0.25.9",
+    "anthropic==0.25.9",
     "google-api-python-client==2.48.0",
     "google-auth-oauthlib==1.2.0",
-    "gradio>=4.31.3",
-    "openai>=1.30.1",
+    "gradio==4.31.3",
+    "openai==1.30.1",
     "orjson==3.10.3",
     "python-dotenv==1.0.1",
     "PyYAML==6.0.1",
     "SQLAlchemy==2.0.29",
-    "whisper-timestamped>=1.15.4",
+    "whisper-timestamped==1.15.4",
     "moviepy @ git+https://github.com/OsaAjani/moviepy.git",
     "tiktok-uploader @ git+https://github.com/Paillat-dev/tiktok-uploader.git",
     "yt-dlp[default]==2023.11.16",
     "fix-busted-json==0.0.18",
-    "Google-Images-Search>=1.4.7",
-    "requests>=2.32.3",
+    "Google-Images-Search==1.4.7",
+    "requests==2.32.3",
     "windows-curses==2.3.2; platform_system  == 'Windows'",
-    "coqui-tts>=0.24.1",
+    "coqui-tts==0.24.1",
 ]
 
 requires-python = "==3.10.*"
@@ -32,8 +32,8 @@ license = {text = "AGPL-3.0"}
 
 
 [tool.pdm.resolution.overrides]
-numpy = "==1.25.0"
-typer = "<1.0,>=0.12.0"
+#numpy = "==1.25.0"
+#typer = "<1.0,>=0.12.0"
 
 [tool.pdm]
 distribution = false
