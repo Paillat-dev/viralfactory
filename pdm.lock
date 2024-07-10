@@ -5,7 +5,7 @@
 groups = ["default", "lint"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.2"
-content_hash = "sha256:f862f4c804678cfa36a1c09efabeb52fe7313d331b1e89e2eba4ae2a009abcf0"
+content_hash = "sha256:2959a42f06a85753e2652de07b0b46522d2bfb4603d5f594527f3e49a1a149a1"
 
 [[package]]
 name = "absl-py"
@@ -3895,13 +3895,13 @@ files = [
 
 [[package]]
 name = "windows-curses"
-version = "2.3.2"
+version = "2.3.3"
 summary = "Support for the standard curses module on Windows"
 groups = ["default"]
 marker = "platform_system == \"Windows\""
 files = [
-    {file = "windows_curses-2.3.2-cp310-cp310-win32.whl", hash = "sha256:0286d35c9a2589731af3cf2b1251635a400f4b61aef2b9c081f6c98e7887a170"},
-    {file = "windows_curses-2.3.2-cp310-cp310-win_amd64.whl", hash = "sha256:b5e68520c7e92dff72914e4126cadb5b8eb3b6c968d955de6d35ff42306da8c0"},
+    {file = "windows_curses-2.3.3-cp310-cp310-win32.whl", hash = "sha256:859011e77d7d9d9eaabb4fe081760cec966454bdea18a9f3a98e6d10e802fb61"},
+    {file = "windows_curses-2.3.3-cp310-cp310-win_amd64.whl", hash = "sha256:cb0eaf41b90c0b7e33269a6cf34900d8b0d7f3fcf2c1f9dd8191bac11955b711"},
 ]
 
 [[package]]

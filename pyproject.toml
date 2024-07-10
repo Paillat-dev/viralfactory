@@ -22,7 +22,7 @@ dependencies = [
     "fix-busted-json==0.0.18",
     "Google-Images-Search==1.4.7",
     "requests==2.32.3",
-    "windows-curses==2.3.2; platform_system  == 'Windows'",
+    "windows-curses==2.3.3; platform_system  == 'Windows'",
     "coqui-tts==0.24.1",
 ]
 
