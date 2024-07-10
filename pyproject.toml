@@ -14,15 +14,15 @@ dependencies = [
     "orjson==3.10.3",
     "python-dotenv==1.0.1",
     "PyYAML==6.0.1",
-    "Requests==2.31.0",
     "SQLAlchemy==2.0.29",
     "whisper-timestamped>=1.15.4",
     "moviepy @ git+https://github.com/OsaAjani/moviepy.git",
     "tiktok-uploader @ git+https://github.com/Paillat-dev/tiktok-uploader.git",
-    "Google-Images-Search @ git+https://github.com/Paillat-dev/Google-Images-Search",
     "yt-dlp[default]==2023.11.16",
     "fix-busted-json==0.0.18",
     "TTS==0.22.0",
+    "Google-Images-Search>=1.4.7",
+    "requests>=2.32.3",
 ]
 
 requires-python = "==3.10.*"
@@ -60,7 +60,7 @@ exclude_packages = ["torch", "torchvision", "torchaudio"]
 name = "pytorch"
 url = "https://download.pytorch.org/whl/cu118"
 include_packages = ["torch", "torchvision", "torchaudio"]
-exclude_packages = []
+exclude_packages = ["*"]
 
 [tool.pdm.scripts]
 start = "python main.py"

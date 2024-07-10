@@ -2,10 +2,10 @@
 # It is not intended for manual editing.
 
 [metadata]
-groups = ["default", "lint"]
+groups = ["default", "lint", "win"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:94bf21a9e9b42ccfacae01c46bf791d9200cc8da6919d843eee1ed4c441505a7"
+content_hash = "sha256:aea7e43e35b9583a5790fd30ed8d124157eeb1a557d194a5fa7c7562fcd218e9"
 
 [[package]]
 name = "absl-py"
@@ -109,7 +109,7 @@ files = [
 
 [[package]]
 name = "anthropic"
-version = "0.30.1"
+version = "0.31.0"
 requires_python = ">=3.7"
 summary = "The official Python library for the anthropic API"
 groups = ["default"]
@@ -124,8 +124,8 @@ dependencies = [
     "typing-extensions<5,>=4.7",
 ]
 files = [
-    {file = "anthropic-0.30.1-py3-none-any.whl", hash = "sha256:a58a8c3865a3df21e3b10e5fbd1a54b84cb01386f3e9fea9c65334b3cb306c6f"},
-    {file = "anthropic-0.30.1.tar.gz", hash = "sha256:e082aa2601834a8a374f8bb45bca68493d892b2a03a1c44cfcc38465550c9b8b"},
+    {file = "anthropic-0.31.0-py3-none-any.whl", hash = "sha256:77f7a428e1723b79a571c2427ae885d9257c68f700726dff7ce684c3972d6598"},
+    {file = "anthropic-0.31.0.tar.gz", hash = "sha256:14f8f65231859a65ec9aacbbea070e412c8bd41a5d3f36793dac4292c3c78d3a"},
 ]
 
 [[package]]
@@ -934,14 +934,12 @@ files = [
 
 [[package]]
 name = "google-images-search"
-version = "1.4.6"
-git = "https://github.com/Paillat-dev/Google-Images-Search"
-revision = "1eebf0f94b9565b91aa2e070eb7c9fd78420ec8c"
+version = "1.4.7"
 summary = "Search for image using Google Custom Search API and resize & crop the image afterwords"
 groups = ["default"]
 dependencies = [
     "Pillow>=8.1.1",
-    "click<8.2,>=7.0",
+    "click<=8.2,>=7.0",
     "colorama~=0.4",
     "google-api-python-client~=2.48.0",
     "pyfiglet~=0.8",
@@ -949,6 +947,9 @@ dependencies = [
     "requests~=2.21",
     "six~=1.12",
     "termcolor~=1.1",
+]
+files = [
+    {file = "Google_Images_Search-1.4.7-py2.py3-none-any.whl", hash = "sha256:3135c4f34245cecc4a119821ab031ce9bb75ec4f63f8f61f41fd5995e0a2fb6d"},
 ]
 
 [[package]]
@@ -2104,7 +2105,7 @@ files = [
 
 [[package]]
 name = "openai"
-version = "1.35.10"
+version = "1.35.13"
 requires_python = ">=3.7.1"
 summary = "The official Python library for the openai API"
 groups = ["default"]
@@ -2118,8 +2119,8 @@ dependencies = [
     "typing-extensions<5,>=4.7",
 ]
 files = [
-    {file = "openai-1.35.10-py3-none-any.whl", hash = "sha256:962cb5c23224b5cbd16078308dabab97a08b0a5ad736a4fdb3dc2ffc44ac974f"},
-    {file = "openai-1.35.10.tar.gz", hash = "sha256:85966949f4f960f3e4b239a659f9fd64d3a97ecc43c44dc0a044b5c7f11cccc6"},
+    {file = "openai-1.35.13-py3-none-any.whl", hash = "sha256:36ec3e93e0d1f243f69be85c89b9221a471c3e450dfd9df16c9829e3cdf63e60"},
+    {file = "openai-1.35.13.tar.gz", hash = "sha256:c684f3945608baf7d2dcc0ef3ee6f3e27e4c66f21076df0b47be45d57e6ae6e4"},
 ]
 
 [[package]]
@@ -2717,8 +2718,8 @@ files = [
 
 [[package]]
 name = "requests"
-version = "2.31.0"
-requires_python = ">=3.7"
+version = "2.32.3"
+requires_python = ">=3.8"
 summary = "Python HTTP for Humans."
 groups = ["default"]
 dependencies = [
@@ -2728,8 +2729,8 @@ dependencies = [
     "urllib3<3,>=1.21.1",
 ]
 files = [
-    {file = "requests-2.31.0-py3-none-any.whl", hash = "sha256:58cd2187c01e70e6e26505bca751777aa9f2ee0b7f4300988b709f44e013003f"},
-    {file = "requests-2.31.0.tar.gz", hash = "sha256:942c5a758f98d790eaed1a29cb6eefc7ffb0d1cf7af05c3d2791656dbd6ad1e1"},
+    {file = "requests-2.32.3-py3-none-any.whl", hash = "sha256:70761cfe03c773ceb22aa2f671b4757976145175cdfca038c02654d061d6dcc6"},
+    {file = "requests-2.32.3.tar.gz", hash = "sha256:55365417734eb18255590a9ff9eb97e9e1da868d4ccd6402399eaf68af20a760"},
 ]
 
 [[package]]
@@ -2983,13 +2984,13 @@ files = [
 
 [[package]]
 name = "setuptools"
-version = "70.2.0"
+version = "70.3.0"
 requires_python = ">=3.8"
 summary = "Easily download, build, install, upgrade, and uninstall Python packages"
 groups = ["default"]
 files = [
-    {file = "setuptools-70.2.0-py3-none-any.whl", hash = "sha256:b8b8060bb426838fbe942479c90296ce976249451118ef566a5a0b7d8b78fb05"},
-    {file = "setuptools-70.2.0.tar.gz", hash = "sha256:bd63e505105011b25c3c11f753f7e3b8465ea739efddaccef8f0efac2137bac1"},
+    {file = "setuptools-70.3.0-py3-none-any.whl", hash = "sha256:fe384da74336c398e0d956d1cae0669bc02eed936cdb1d49b57de1990dc11ffc"},
+    {file = "setuptools-70.3.0.tar.gz", hash = "sha256:f171bab1dfbc86b132997f26a119f6056a57950d058587841a0082e8830f9dc5"},
 ]
 
 [[package]]
@@ -4082,6 +4083,16 @@ dependencies = [
 files = [
     {file = "whisper_timestamped-1.15.4-py3-none-any.whl", hash = "sha256:92eae29ba30b57d82281b27751bfe17c6e1b2efa240977c904d48317df3a2bcb"},
     {file = "whisper_timestamped-1.15.4.tar.gz", hash = "sha256:6de51e42becce3a39477dabbfa76b6d44105ab370892877bcdb0f51ed7420b3d"},
+]
+
+[[package]]
+name = "windows-curses"
+version = "2.3.2"
+summary = "Support for the standard curses module on Windows"
+groups = ["win"]
+files = [
+    {file = "windows_curses-2.3.2-cp310-cp310-win32.whl", hash = "sha256:0286d35c9a2589731af3cf2b1251635a400f4b61aef2b9c081f6c98e7887a170"},
+    {file = "windows_curses-2.3.2-cp310-cp310-win_amd64.whl", hash = "sha256:b5e68520c7e92dff72914e4126cadb5b8eb3b6c968d955de6d35ff42306da8c0"},
 ]
 
 [[package]]
