@@ -1,5 +1,6 @@
 import base64
 import os
+import shutil
 
 import gradio as gr
 import moviepy as mp
@@ -18,11 +19,14 @@ class MemeExplainerPipeline(BasePipeline):
     description = (
         "A pipeline that generates a long form video based on a script instruction."
     )
-    num_options = 2
+    num_options = 4
 
     def __init__(self, options: list) -> None:
         self.url = BASE_URL + options[0]
-        self.character = options[1]
+        self.sub = options[0]
+        self.meme_path = options[1]
+        self.character = options[2]
+        self.duration = options[3]
         super().__init__()
 
     def launch(self, ctx: GenerationContext) -> None:
@@ -33,22 +37,33 @@ class MemeExplainerPipeline(BasePipeline):
         ctx.width = 1080
         ctx.height = 1920
 
-        system = get_prompts("MemeExplainer", by_file_location=__file__)["explainer"]["system"]
+        system = get_prompts("MemeExplainer", by_file_location=__file__)["explainer"][
+            "system"
+        ]
         ctx.progress(0.2, "Getting meme...")
-        with requests.get(self.url) as response:
-            meme = response.json()
-            ctx.title = meme["title"]
-            ctx.credits = f"Source: {meme['postLink']}"
-            url = meme["url"]
-            ext = url.split(".")[-1]
-            with requests.get(url) as response:
-                with open(ctx.get_file_path("meme." + ext), "wb") as f:
-                    f.write(response.content)
-        with open(ctx.get_file_path("meme." + ext), "rb") as f:
-            meme_b64 = base64.b64encode(f.read()).decode("utf-8")
+        if self.meme_path:
+            # copy the meme to the directory
+            ext = self.meme_path.split(".")[-1]
+            with open(self.meme_path, "rb") as f:
+                meme_b64 = base64.b64encode(f.read()).decode("utf-8")
+            shutil.copy(self.meme_path, ctx.get_file_path("meme." + ext))
+        else:
+            with requests.get(self.url) as response:
+                response.raise_for_status()
+                meme = response.json()
+                ctx.title = meme["title"]
+                ctx.credits = f"Source: r/{self.sub}"
+                url = meme["url"]
+                ext = url.split(".")[-1]
+                with requests.get(url) as response:
+                    response.raise_for_status()
+                    with open(ctx.get_file_path("meme." + ext), "wb") as f:
+                        f.write(response.content)
+            with open(ctx.get_file_path("meme." + ext), "rb") as f:
+                meme_b64 = base64.b64encode(f.read()).decode("utf-8")
         meme_clip = mp.ImageClip(ctx.get_file_path("meme." + ext))
         meme_clip: mp.ImageClip = meme_clip.resized(width=ctx.width)
-        meme_clip: mp.ImageClip = meme_clip.with_duration(6)
+        meme_clip: mp.ImageClip = meme_clip.with_duration(self.duration)
         meme_clip: mp.ImageClip = meme_clip.with_position(("center", "center"))
         ctx.duration = 6
         ctx.index_8.append(meme_clip)
@@ -133,11 +148,27 @@ class MemeExplainerPipeline(BasePipeline):
                 info="Reddit sub where to take the meme from",
                 value="ExplainTheJoke",
             ),
+            gr.Image(
+                label="Meme",
+                #                info="Upload a meme to explain instead of scraping one from Reddit",
+                type="filepath",
+                sources=["upload", "clipboard"],
+            ),
             gr.Textbox(
                 lines=1,
                 max_lines=4,
                 label="Character",
                 info="Describe the behaviour and tone of the AI when explaining the meme",
-                value="You should ehave like an English Aristocrat from the 19th century. You should stay serious, but keep your vocabulary simple and clear so that everyone can understand it without a degree in English literature lol.",
+                value="You should behave like an English Aristocrat from the 19th century. You should stay serious, "
+                "but keep your vocabulary simple and clear so that everyone can understand it without a degree "
+                "in English literature lol.",
+            ),
+            gr.Number(
+                label="Duration",
+                info="Duration of the video in seconds",
+                value=6,
+                minimum=1,
+                maximum=60,
+                step=1,
             ),
         ]
