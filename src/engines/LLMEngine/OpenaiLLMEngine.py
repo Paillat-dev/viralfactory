@@ -9,7 +9,7 @@ from .BaseLLMEngine import BaseLLMEngine
 OPENAI_POSSIBLE_MODELS = [  # Theese shall be the openai models supporting force_json
     "gpt-3.5-turbo-0125",
     "gpt-4-turbo",
-    "gpt-4o"
+    "gpt-4o",
 ]
 
 
@@ -109,4 +109,8 @@ class OpenaiLLMEngine(BaseLLMEngine):
 
     @property
     def supports_vision(self) -> bool:
-        return True if self.model in ["gpt-4-turbo-preview", "gpt-4-turbo", "gpt-4o"] else False
+        return (
+            True
+            if self.model in ["gpt-4-turbo-preview", "gpt-4-turbo", "gpt-4o"]
+            else False
+        )
