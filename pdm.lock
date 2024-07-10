@@ -2,10 +2,10 @@
 # It is not intended for manual editing.
 
 [metadata]
-groups = ["default", "lint", "win"]
+groups = ["default", "lint"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:aea7e43e35b9583a5790fd30ed8d124157eeb1a557d194a5fa7c7562fcd218e9"
+content_hash = "sha256:7d215f30e0476f0877daf5a94f0e69b867308538e34af0a816ea66190174b66c"
 
 [[package]]
 name = "absl-py"
@@ -202,16 +202,6 @@ files = [
 ]
 
 [[package]]
-name = "bangla"
-version = "0.0.2"
-summary = "Bangla is a package for Bangla language users with various functionalities including Bangla date and Bangla numeric conversation."
-groups = ["default"]
-files = [
-    {file = "bangla-0.0.2-py2.py3-none-any.whl", hash = "sha256:60c52bb4614894de4a91ee997bf950d03545d1fb9b01196577ce04ed4fa00ff8"},
-    {file = "bangla-0.0.2.tar.gz", hash = "sha256:17c8fd501321660077d5ab6a79b746bba71f9e4939ef78ac0d9a75d7bd715da8"},
-]
-
-[[package]]
 name = "black"
 version = "24.4.2"
 requires_python = ">=3.8"
@@ -236,17 +226,6 @@ files = [
 ]
 
 [[package]]
-name = "blinker"
-version = "1.8.2"
-requires_python = ">=3.8"
-summary = "Fast, simple object-to-object and broadcast signaling"
-groups = ["default"]
-files = [
-    {file = "blinker-1.8.2-py3-none-any.whl", hash = "sha256:1779309f71bf239144b9399d06ae925637cf6634cf6bd131104184531bf67c01"},
-    {file = "blinker-1.8.2.tar.gz", hash = "sha256:8f77b09d3bf7c795e969e9486f39c2c5e9c39d4ee07424be2bc594ece9642d83"},
-]
-
-[[package]]
 name = "blis"
 version = "0.7.11"
 summary = "The Blis BLAS-like linear algebra library, as a self-contained C-extension."
@@ -261,25 +240,6 @@ files = [
     {file = "blis-0.7.11-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ee493683e3043650d4413d531e79e580d28a3c7bdd184f1b9cfa565497bda1e7"},
     {file = "blis-0.7.11-cp310-cp310-win_amd64.whl", hash = "sha256:a73945a9d635eea528bccfdfcaa59dd35bd5f82a4a40d5ca31f08f507f3a6f81"},
     {file = "blis-0.7.11.tar.gz", hash = "sha256:cec6d48f75f7ac328ae1b6fbb372dde8c8a57c89559172277f66e01ff08d4d42"},
-]
-
-[[package]]
-name = "bnnumerizer"
-version = "0.0.2"
-summary = "Bangla Number text to String Converter"
-groups = ["default"]
-files = [
-    {file = "bnnumerizer-0.0.2.tar.gz", hash = "sha256:41df6fd0b7b51aa4ec4776b6643cedebee5fd11e335d7d56d4a20c08515e5f0d"},
-]
-
-[[package]]
-name = "bnunicodenormalizer"
-version = "0.1.7"
-summary = "Bangla Unicode Normalization Toolkit"
-groups = ["default"]
-files = [
-    {file = "bnunicodenormalizer-0.1.7-py3-none-any.whl", hash = "sha256:42b6a9720bca52c02a944a0876770e86694eb081a096f3c644ccd8add40f7cee"},
-    {file = "bnunicodenormalizer-0.1.7.tar.gz", hash = "sha256:86a3489cc81c73d2afb4e265bd2d0d8bc52fc8a2374e210c899e0260940bc091"},
 ]
 
 [[package]]
@@ -516,6 +476,63 @@ groups = ["default"]
 files = [
     {file = "coqpit-0.0.17-py3-none-any.whl", hash = "sha256:68d253214eabb30526775442227d772cbb7b297ece6b65be59c29eab00d476b9"},
     {file = "coqpit-0.0.17.tar.gz", hash = "sha256:dc129c2a741f8feec35c16d0b603afafdf66064822638b4e4fd7a02a7ce05011"},
+]
+
+[[package]]
+name = "coqui-tts"
+version = "0.24.1"
+requires_python = "<3.13,>=3.9"
+summary = "Deep learning for Text to Speech."
+groups = ["default"]
+dependencies = [
+    "anyascii>=0.3.0",
+    "coqpit>=0.0.16",
+    "coqui-tts-trainer>=0.1",
+    "cython>=0.29.30",
+    "einops>=0.6.0",
+    "encodec>=0.1.1",
+    "fsspec[http]>=2023.6.0",
+    "gruut[de,es,fr]==2.2.3",
+    "inflect>=5.6.0",
+    "librosa>=0.10.1",
+    "matplotlib>=3.7.0",
+    "num2words",
+    "numpy>=1.24.3",
+    "packaging>=23.1",
+    "pysbd>=0.3.4",
+    "pyyaml>=6.0",
+    "scipy>=1.11.2",
+    "soundfile>=0.12.0",
+    "spacy[ja]>=3",
+    "torch>=2.1",
+    "torchaudio",
+    "tqdm>=4.64.1",
+    "transformers<4.41.0,>=4.33.0",
+    "umap-learn>=0.5.1",
+]
+files = [
+    {file = "coqui_tts-0.24.1-cp310-cp310-manylinux1_x86_64.whl", hash = "sha256:7feb9502f03e6c3c0b5e47c0f6166335ff03aac55dece61497233168bf8ea750"},
+    {file = "coqui_tts-0.24.1.tar.gz", hash = "sha256:a6a1251bf2ffb9be8efc8fbecd54331579a1d80255aa7e18b31bd9f002e4abc5"},
+]
+
+[[package]]
+name = "coqui-tts-trainer"
+version = "0.1.4"
+requires_python = "<3.13,>=3.9"
+summary = "General purpose model trainer for PyTorch that is more flexible than it should be, by 🐸Coqui."
+groups = ["default"]
+dependencies = [
+    "coqpit>=0.0.17",
+    "fsspec>=2023.6.0",
+    "numpy>=1.24.3; python_version < \"3.12\"",
+    "psutil>=5",
+    "soundfile>=0.12.0",
+    "tensorboard>=2.17.0",
+    "torch>=2.0",
+]
+files = [
+    {file = "coqui_tts_trainer-0.1.4-py3-none-any.whl", hash = "sha256:0ad189c3acd8889abd84f50de01155d89c256e02412bf592636961ca39a68711"},
+    {file = "coqui_tts_trainer-0.1.4.tar.gz", hash = "sha256:e95e621c4089b9ee7553c548bce8ca34deecdf35cff4a79fe84a12afe1e00e73"},
 ]
 
 [[package]]
@@ -763,24 +780,6 @@ files = [
 ]
 
 [[package]]
-name = "flask"
-version = "3.0.3"
-requires_python = ">=3.8"
-summary = "A simple framework for building complex web applications."
-groups = ["default"]
-dependencies = [
-    "Jinja2>=3.1.2",
-    "Werkzeug>=3.0.0",
-    "blinker>=1.6.2",
-    "click>=8.1.3",
-    "itsdangerous>=2.1.2",
-]
-files = [
-    {file = "flask-3.0.3-py3-none-any.whl", hash = "sha256:34e815dfaa43340d1d15a5c3a02b8476004037eb4840b34910c6e21679d288f3"},
-    {file = "flask-3.0.3.tar.gz", hash = "sha256:ceb27b0af3823ea2737928a4d99d125a06175b8512c445cbd9a9ce200ef76842"},
-]
-
-[[package]]
 name = "fonttools"
 version = "4.53.1"
 requires_python = ">=3.8"
@@ -837,18 +836,19 @@ files = [
 ]
 
 [[package]]
-name = "g2pkk"
-version = "0.1.2"
-requires_python = ">=3.6"
-summary = "g2pkk: g2p module for Korean(cross platform)"
+name = "fsspec"
+version = "2024.6.1"
+extras = ["http"]
+requires_python = ">=3.8"
+summary = "File-system specification"
 groups = ["default"]
 dependencies = [
-    "jamo",
-    "nltk",
+    "aiohttp!=4.0.0a0,!=4.0.0a1",
+    "fsspec==2024.6.1",
 ]
 files = [
-    {file = "g2pkk-0.1.2-py3-none-any.whl", hash = "sha256:f1d551f35d3b9065f75749c724e65b28731fdc3262e5e9657cb57e3f7b5dcac3"},
-    {file = "g2pkk-0.1.2.tar.gz", hash = "sha256:61aad5d41b67d71dd29b8570fc90d2c89cb76493170101d92492649521b447e4"},
+    {file = "fsspec-2024.6.1-py3-none-any.whl", hash = "sha256:3cb443f8bcd2efb31295a5b9fdb02aee81d8452c80d28f97a6d0959e6cee101e"},
+    {file = "fsspec-2024.6.1.tar.gz", hash = "sha256:fad7d7e209dd4c1208e3bbfda706620e0da5142bebbd9c384afb95b07e798e49"},
 ]
 
 [[package]]
@@ -1160,16 +1160,6 @@ files = [
 ]
 
 [[package]]
-name = "hangul-romanize"
-version = "0.1.0"
-summary = "Rominize Hangul strings."
-groups = ["default"]
-files = [
-    {file = "hangul-romanize-0.1.0.tar.gz", hash = "sha256:fae69ba181af6e75a86460fd7f57a6b304cd5f1973d8c425ed8602fee2c9276c"},
-    {file = "hangul_romanize-0.1.0-py3-none-any.whl", hash = "sha256:7b8ba54b624ca3b17b2c9394b971cd595c4240a31cc0fc6bc1c3e971eca8c4d5"},
-]
-
-[[package]]
 name = "httpcore"
 version = "1.0.5"
 requires_python = ">=3.8"
@@ -1335,36 +1325,6 @@ files = [
     {file = "intel_openmp-2021.4.0-py2.py3-none-manylinux1_x86_64.whl", hash = "sha256:e2240ab8d01472fed04f3544a878cda5da16c26232b7ea1b59132dbfb48b186e"},
     {file = "intel_openmp-2021.4.0-py2.py3-none-win32.whl", hash = "sha256:6e863d8fd3d7e8ef389d52cf97a50fe2afe1a19247e8c0d168ce021546f96fc9"},
     {file = "intel_openmp-2021.4.0-py2.py3-none-win_amd64.whl", hash = "sha256:eef4c8bcc8acefd7f5cd3b9384dbf73d59e2c99fc56545712ded913f43c4a94f"},
-]
-
-[[package]]
-name = "itsdangerous"
-version = "2.2.0"
-requires_python = ">=3.8"
-summary = "Safely pass data to untrusted environments and back."
-groups = ["default"]
-files = [
-    {file = "itsdangerous-2.2.0-py3-none-any.whl", hash = "sha256:c6242fc49e35958c8b15141343aa660db5fc54d4f13a1db01a3f5891b98700ef"},
-    {file = "itsdangerous-2.2.0.tar.gz", hash = "sha256:e0050c0b7da1eea53ffaf149c0cfbb5c6e2e2b69c4bef22c81fa6eb73e5f6173"},
-]
-
-[[package]]
-name = "jamo"
-version = "0.4.1"
-summary = "A Hangul syllable and jamo analyzer."
-groups = ["default"]
-files = [
-    {file = "jamo-0.4.1-py3-none-any.whl", hash = "sha256:d4b94fd23324c606ed2fbc4037c603e2c3a7ae9390c05d3473aea1ccb6b1c3fb"},
-    {file = "jamo-0.4.1.tar.gz", hash = "sha256:ea65cf9d35338d0e0af48d75ff426d8a369b0ebde6f07051c3ac37256f56d025"},
-]
-
-[[package]]
-name = "jieba"
-version = "0.42.1"
-summary = "Chinese Words Segmentation Utilities"
-groups = ["default"]
-files = [
-    {file = "jieba-0.42.1.tar.gz", hash = "sha256:055ca12f62674fafed09427f176506079bc135638a14e23e25be909131928db2"},
 ]
 
 [[package]]
@@ -1866,23 +1826,6 @@ files = [
 ]
 
 [[package]]
-name = "nltk"
-version = "3.8.1"
-requires_python = ">=3.7"
-summary = "Natural Language Toolkit"
-groups = ["default"]
-dependencies = [
-    "click",
-    "joblib",
-    "regex>=2021.8.3",
-    "tqdm",
-]
-files = [
-    {file = "nltk-3.8.1-py3-none-any.whl", hash = "sha256:fd5c9109f976fa86bcadba8f91e47f5e9293bd034474752e92a520f81c93dda5"},
-    {file = "nltk-3.8.1.zip", hash = "sha256:1834da3d0682cba4f2cede2f9aad6b0fafb6461ba451db0efb6f9c39798d64d3"},
-]
-
-[[package]]
 name = "num2words"
 version = "0.5.13"
 summary = "Modules to convert numbers to words. Easily extensible."
@@ -1916,26 +1859,22 @@ files = [
 
 [[package]]
 name = "numpy"
-version = "2.0.0"
+version = "1.25.0"
 requires_python = ">=3.9"
 summary = "Fundamental package for array computing in Python"
 groups = ["default"]
 files = [
-    {file = "numpy-2.0.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:04494f6ec467ccb5369d1808570ae55f6ed9b5809d7f035059000a37b8d7e86f"},
-    {file = "numpy-2.0.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:2635dbd200c2d6faf2ef9a0d04f0ecc6b13b3cad54f7c67c61155138835515d2"},
-    {file = "numpy-2.0.0-cp310-cp310-macosx_14_0_arm64.whl", hash = "sha256:0a43f0974d501842866cc83471bdb0116ba0dffdbaac33ec05e6afed5b615238"},
-    {file = "numpy-2.0.0-cp310-cp310-macosx_14_0_x86_64.whl", hash = "sha256:8d83bb187fb647643bd56e1ae43f273c7f4dbcdf94550d7938cfc32566756514"},
-    {file = "numpy-2.0.0-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:79e843d186c8fb1b102bef3e2bc35ef81160ffef3194646a7fdd6a73c6b97196"},
-    {file = "numpy-2.0.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6d7696c615765091cc5093f76fd1fa069870304beaccfd58b5dcc69e55ef49c1"},
-    {file = "numpy-2.0.0-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:b4c76e3d4c56f145d41b7b6751255feefae92edbc9a61e1758a98204200f30fc"},
-    {file = "numpy-2.0.0-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:acd3a644e4807e73b4e1867b769fbf1ce8c5d80e7caaef0d90dcdc640dfc9787"},
-    {file = "numpy-2.0.0-cp310-cp310-win32.whl", hash = "sha256:cee6cc0584f71adefe2c908856ccc98702baf95ff80092e4ca46061538a2ba98"},
-    {file = "numpy-2.0.0-cp310-cp310-win_amd64.whl", hash = "sha256:ed08d2703b5972ec736451b818c2eb9da80d66c3e84aed1deeb0c345fefe461b"},
-    {file = "numpy-2.0.0-pp39-pypy39_pp73-macosx_10_9_x86_64.whl", hash = "sha256:9416a5c2e92ace094e9f0082c5fd473502c91651fb896bc17690d6fc475128d6"},
-    {file = "numpy-2.0.0-pp39-pypy39_pp73-macosx_14_0_x86_64.whl", hash = "sha256:17067d097ed036636fa79f6a869ac26df7db1ba22039d962422506640314933a"},
-    {file = "numpy-2.0.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:38ecb5b0582cd125f67a629072fed6f83562d9dd04d7e03256c9829bdec027ad"},
-    {file = "numpy-2.0.0-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:cef04d068f5fb0518a77857953193b6bb94809a806bd0a14983a8f12ada060c9"},
-    {file = "numpy-2.0.0.tar.gz", hash = "sha256:cf5d1c9e6837f8af9f92b6bd3e86d513cdc11f60fd62185cc49ec7d1aba34864"},
+    {file = "numpy-1.25.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:8aa130c3042052d656751df5e81f6d61edff3e289b5994edcf77f54118a8d9f4"},
+    {file = "numpy-1.25.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:9e3f2b96e3b63c978bc29daaa3700c028fe3f049ea3031b58aa33fe2a5809d24"},
+    {file = "numpy-1.25.0-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:d6b267f349a99d3908b56645eebf340cb58f01bd1e773b4eea1a905b3f0e4208"},
+    {file = "numpy-1.25.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:4aedd08f15d3045a4e9c648f1e04daca2ab1044256959f1f95aafeeb3d794c16"},
+    {file = "numpy-1.25.0-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:6d183b5c58513f74225c376643234c369468e02947b47942eacbb23c1671f25d"},
+    {file = "numpy-1.25.0-cp310-cp310-win32.whl", hash = "sha256:d76a84998c51b8b68b40448ddd02bd1081bb33abcdc28beee6cd284fe11036c6"},
+    {file = "numpy-1.25.0-cp310-cp310-win_amd64.whl", hash = "sha256:c0dc071017bc00abb7d7201bac06fa80333c6314477b3d10b52b58fa6a6e38f6"},
+    {file = "numpy-1.25.0-pp39-pypy39_pp73-macosx_10_9_x86_64.whl", hash = "sha256:5b1b90860bf7d8a8c313b372d4f27343a54f415b20fb69dd601b7efe1029c91e"},
+    {file = "numpy-1.25.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:85cdae87d8c136fd4da4dad1e48064d700f63e923d5af6c8c782ac0df8044542"},
+    {file = "numpy-1.25.0-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:cc3fda2b36482891db1060f00f881c77f9423eead4c3579629940a3e12095fe8"},
+    {file = "numpy-1.25.0.tar.gz", hash = "sha256:f1accae9a28dc3cda46a91de86acf69de0d1b5f4edd44a9b0c3ceb8036dfff19"},
 ]
 
 [[package]]
@@ -2547,17 +2486,6 @@ summary = "A cross-platform clipboard module for Python. (Only handles plain tex
 groups = ["default"]
 files = [
     {file = "pyperclip-1.9.0.tar.gz", hash = "sha256:b7de0142ddc81bfc5c7507eea19da920b92252b548b96186caf94a5e2527d310"},
-]
-
-[[package]]
-name = "pypinyin"
-version = "0.51.0"
-requires_python = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*, <4"
-summary = "汉字拼音转换模块/工具."
-groups = ["default"]
-files = [
-    {file = "pypinyin-0.51.0-py2.py3-none-any.whl", hash = "sha256:ae8878f08fee15d0c5c11053a737e68a4158c22c63dc632b4de060af5c95bf84"},
-    {file = "pypinyin-0.51.0.tar.gz", hash = "sha256:cede34fc35a79ef6c799f161e2c280e7b6755ee072fb741cae5ce2a60c4ae0c5"},
 ]
 
 [[package]]
@@ -3491,7 +3419,7 @@ files = [
 
 [[package]]
 name = "torch"
-version = "2.3.1"
+version = "2.3.1+cu118"
 requires_python = ">=3.8.0"
 summary = "Tensors and Dynamic neural networks in Python with strong GPU acceleration"
 groups = ["default"]
@@ -3549,34 +3477,15 @@ files = [
 ]
 
 [[package]]
-name = "trainer"
-version = "0.0.36"
-requires_python = ">=3.6.0, <3.12"
-summary = "General purpose model trainer for PyTorch that is more flexible than it should be, by 🐸Coqui."
-groups = ["default"]
-dependencies = [
-    "coqpit",
-    "fsspec",
-    "psutil",
-    "soundfile",
-    "tensorboard",
-    "torch>=1.7",
-]
-files = [
-    {file = "trainer-0.0.36-py3-none-any.whl", hash = "sha256:d986702c6d6d988e74a4f8da0f9c11a8c7d89274a11436957e91217a19b487a6"},
-    {file = "trainer-0.0.36.tar.gz", hash = "sha256:3afff4d1ce70f828d32ba698331768bca5be1cc21a60c2b8acd8fa117eb95c5a"},
-]
-
-[[package]]
 name = "transformers"
-version = "4.42.3"
+version = "4.40.2"
 requires_python = ">=3.8.0"
 summary = "State-of-the-art Machine Learning for JAX, PyTorch and TensorFlow"
 groups = ["default"]
 dependencies = [
     "filelock",
-    "huggingface-hub<1.0,>=0.23.2",
-    "numpy<2.0,>=1.17",
+    "huggingface-hub<1.0,>=0.19.3",
+    "numpy>=1.17",
     "packaging>=20.0",
     "pyyaml>=5.1",
     "regex!=2019.12.17",
@@ -3586,8 +3495,8 @@ dependencies = [
     "tqdm>=4.27",
 ]
 files = [
-    {file = "transformers-4.42.3-py3-none-any.whl", hash = "sha256:a61a0df9609b7d69229d941b2fd857c841ba3043d6da503d0da1a4b133f65b92"},
-    {file = "transformers-4.42.3.tar.gz", hash = "sha256:7539873ff45809145265cbc94ea4619d2713c41ceaa277b692d8b0be3430f7eb"},
+    {file = "transformers-4.40.2-py3-none-any.whl", hash = "sha256:71cb94301ec211a2e1d4b8c8d18dcfaa902dfa00a089dceca167a8aa265d6f2d"},
+    {file = "transformers-4.40.2.tar.gz", hash = "sha256:657b6054a2097671398d976ad46e60836e7e15f9ea9551631a96e33cb9240649"},
 ]
 
 [[package]]
@@ -3637,58 +3546,6 @@ dependencies = [
 ]
 files = [
     {file = "triton-2.3.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3c84595cbe5e546b1b290d2a58b1494df5a2ef066dd890655e5b8a8a92205c33"},
-]
-
-[[package]]
-name = "tts"
-version = "0.22.0"
-requires_python = ">=3.9.0, <3.12"
-summary = "Deep learning for Text to Speech by Coqui."
-groups = ["default"]
-dependencies = [
-    "aiohttp>=3.8.1",
-    "anyascii>=0.3.0",
-    "bangla",
-    "bnnumerizer",
-    "bnunicodenormalizer",
-    "coqpit>=0.0.16",
-    "cython>=0.29.30",
-    "einops>=0.6.0",
-    "encodec>=0.1.1",
-    "flask>=2.0.1",
-    "fsspec>=2023.6.0",
-    "g2pkk>=0.1.1",
-    "gruut[de,es,fr]==2.2.3",
-    "hangul-romanize",
-    "inflect>=5.6.0",
-    "jamo",
-    "jieba",
-    "librosa>=0.10.0",
-    "matplotlib>=3.7.0",
-    "nltk",
-    "num2words",
-    "numba>=0.57.0; python_version >= \"3.9\"",
-    "numpy==1.22.0; python_version <= \"3.10\"",
-    "packaging>=23.1",
-    "pandas<2.0,>=1.4",
-    "pypinyin",
-    "pysbd>=0.3.4",
-    "pyyaml>=6.0",
-    "scikit-learn>=1.3.0",
-    "scipy>=1.11.2",
-    "soundfile>=0.12.0",
-    "spacy[ja]>=3",
-    "torch>=2.1",
-    "torchaudio",
-    "tqdm>=4.64.1",
-    "trainer>=0.0.32",
-    "transformers>=4.33.0",
-    "umap-learn>=0.5.1",
-    "unidecode>=1.3.2",
-]
-files = [
-    {file = "TTS-0.22.0-cp310-cp310-manylinux1_x86_64.whl", hash = "sha256:6dce2e3a9434bd4d3815b51f4080ccdddd82466cf40fc0e0a70eff14b7cc1d3f"},
-    {file = "TTS-0.22.0.tar.gz", hash = "sha256:b91119da7ff2ae7b3dae7328edf9af4db3b48c40eb4ce15d11ed8f5ee9bd7086"},
 ]
 
 [[package]]
@@ -3812,17 +3669,6 @@ dependencies = [
 files = [
     {file = "umap-learn-0.5.6.tar.gz", hash = "sha256:5b3917a862c23ba0fc83bfcd67a7b719dec85b3d9c01fdc7d894cce455df4e03"},
     {file = "umap_learn-0.5.6-py3-none-any.whl", hash = "sha256:881cc0c2ee845b790bf0455aa1664f9f68b838d9d0fe12a1291b85c5a559c913"},
-]
-
-[[package]]
-name = "unidecode"
-version = "1.3.8"
-requires_python = ">=3.5"
-summary = "ASCII transliterations of Unicode text"
-groups = ["default"]
-files = [
-    {file = "Unidecode-1.3.8-py3-none-any.whl", hash = "sha256:d130a61ce6696f8148a3bd8fe779c99adeb4b870584eeb9526584e9aa091fd39"},
-    {file = "Unidecode-1.3.8.tar.gz", hash = "sha256:cfdb349d46ed3873ece4586b96aa75258726e2fa8ec21d6f00a591d98806c2f4"},
 ]
 
 [[package]]
@@ -4089,7 +3935,8 @@ files = [
 name = "windows-curses"
 version = "2.3.2"
 summary = "Support for the standard curses module on Windows"
-groups = ["win"]
+groups = ["default"]
+marker = "platform_system == \"Windows\""
 files = [
     {file = "windows_curses-2.3.2-cp310-cp310-win32.whl", hash = "sha256:0286d35c9a2589731af3cf2b1251635a400f4b61aef2b9c081f6c98e7887a170"},
     {file = "windows_curses-2.3.2-cp310-cp310-win_amd64.whl", hash = "sha256:b5e68520c7e92dff72914e4126cadb5b8eb3b6c968d955de6d35ff42306da8c0"},

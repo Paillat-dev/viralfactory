@@ -20,9 +20,10 @@ dependencies = [
     "tiktok-uploader @ git+https://github.com/Paillat-dev/tiktok-uploader.git",
     "yt-dlp[default]==2023.11.16",
     "fix-busted-json==0.0.18",
-    "TTS==0.22.0",
     "Google-Images-Search>=1.4.7",
     "requests>=2.32.3",
+    "windows-curses==2.3.2; platform_system  == 'Windows'",
+    "coqui-tts>=0.24.1",
 ]
 
 requires-python = "==3.10.*"
@@ -31,7 +32,7 @@ license = {text = "AGPL-3.0"}
 
 
 [tool.pdm.resolution.overrides]
-numpy = ">=1.25.0"
+numpy = "==1.25.0"
 typer = "<1.0,>=0.12.0"
 
 [tool.pdm]
@@ -42,10 +43,6 @@ lint = [
     "black"
 ]
 
-[project.optional-dependencies]
-win = [
-    "windows-curses==2.3.2"
-]
 
 [tool.pdm.resolution]
 respect-source-order = true
