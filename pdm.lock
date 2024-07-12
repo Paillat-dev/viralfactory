@@ -5,7 +5,7 @@
 groups = ["default", "lint"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.2"
-content_hash = "sha256:25aa730c9edddbe5fa5462f47362e2167c52a8e2a633031b31923f4fe8a551fd"
+content_hash = "sha256:a460650c474e07488d31f76e90e034f15cbc67293d27208da5b6b39420835a46"
 
 [[package]]
 name = "absl-py"
@@ -919,7 +919,7 @@ files = [
 
 [[package]]
 name = "google-auth-oauthlib"
-version = "1.2.0"
+version = "1.2.1"
 requires_python = ">=3.6"
 summary = "Google Authentication Library"
 groups = ["default"]
@@ -928,8 +928,8 @@ dependencies = [
     "requests-oauthlib>=0.7.0",
 ]
 files = [
-    {file = "google-auth-oauthlib-1.2.0.tar.gz", hash = "sha256:292d2d3783349f2b0734a0a0207b1e1e322ac193c2c09d8f7c613fb7cc501ea8"},
-    {file = "google_auth_oauthlib-1.2.0-py2.py3-none-any.whl", hash = "sha256:297c1ce4cb13a99b5834c74a1fe03252e1e499716718b190f56bcb9c4abc4faf"},
+    {file = "google_auth_oauthlib-1.2.1-py2.py3-none-any.whl", hash = "sha256:2d58a27262d55aa1b87678c3ba7142a080098cbc2024f903c62355deb235d91f"},
+    {file = "google_auth_oauthlib-1.2.1.tar.gz", hash = "sha256:afd0cad092a2eaa53cd8e8298557d6de1034c6cb4a740500b5357b648af97263"},
 ]
 
 [[package]]
