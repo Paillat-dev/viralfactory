@@ -9,7 +9,7 @@ dependencies = [
     "anthropic==0.31.2",
     "google-api-python-client==2.48.0",
     "google-auth-oauthlib==1.2.1",
-    "gradio==4.38.1",
+    "gradio==4.40.0",
     "openai==1.39.0",
     "orjson==3.10.6",
     "python-dotenv==1.0.1",
