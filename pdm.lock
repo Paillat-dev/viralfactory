@@ -5,7 +5,7 @@
 groups = ["default", "lint"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:9d30834eaa30dd57414bdcc8d00ac04a31ffba692f0a587f3f96000c3c9ad4cf"
+content_hash = "sha256:a6df58e2e88dd135839265511aa0549e1bba9944b74fb8d2a71785786d7ddfd6"
 
 [[metadata.targets]]
 requires_python = "==3.10.*"
@@ -95,7 +95,7 @@ files = [
 
 [[package]]
 name = "anthropic"
-version = "0.31.2"
+version = "0.34.1"
 requires_python = ">=3.7"
 summary = "The official Python library for the anthropic API"
 groups = ["default"]
@@ -111,8 +111,8 @@ dependencies = [
     "typing-extensions<5,>=4.7",
 ]
 files = [
-    {file = "anthropic-0.31.2-py3-none-any.whl", hash = "sha256:28d176b98c72615bfae30f0a9eee6297cc33bf52535d38156fc2805556e2f09b"},
-    {file = "anthropic-0.31.2.tar.gz", hash = "sha256:0134b73df8d1f142fc68675fbadb75e920054e9e3437b99df63f10f0fc6ac26f"},
+    {file = "anthropic-0.34.1-py3-none-any.whl", hash = "sha256:2fa26710809d0960d970f26cd0be3686437250a481edb95c33d837aa5fa24158"},
+    {file = "anthropic-0.34.1.tar.gz", hash = "sha256:69e822bd7a31ec11c2edb85f2147e8f0ee0cfd3288fea70b0ca8808b2f9bf91d"},
 ]
 
 [[package]]
