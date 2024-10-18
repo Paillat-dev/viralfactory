@@ -5,7 +5,7 @@
 groups = ["default", "lint"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:00ed833de1febcce69f9c535314c695d3fe8e87e68d76691d143ad1a34cae8c1"
+content_hash = "sha256:e675a623b7869a8d3b43eac1ad0ea97e7497301036e5a79eb62bf84c016a6135"
 
 [[metadata.targets]]
 requires_python = "==3.10.*"
@@ -3616,13 +3616,13 @@ files = [
 
 [[package]]
 name = "windows-curses"
-version = "2.3.3"
+version = "2.4.0"
 summary = "Support for the standard curses module on Windows"
 groups = ["default"]
 marker = "platform_system == \"Windows\""
 files = [
-    {file = "windows_curses-2.3.3-cp310-cp310-win32.whl", hash = "sha256:859011e77d7d9d9eaabb4fe081760cec966454bdea18a9f3a98e6d10e802fb61"},
-    {file = "windows_curses-2.3.3-cp310-cp310-win_amd64.whl", hash = "sha256:cb0eaf41b90c0b7e33269a6cf34900d8b0d7f3fcf2c1f9dd8191bac11955b711"},
+    {file = "windows_curses-2.4.0-cp310-cp310-win32.whl", hash = "sha256:525fa12689aa54cd8e4cfa6d03f3d4d336f2e9ef0b6db4fdb4d3c1b22a71180b"},
+    {file = "windows_curses-2.4.0-cp310-cp310-win_amd64.whl", hash = "sha256:4621042a28f48e2240314a624eb36f18121483d47f12c488cad9670f402ba6d7"},
 ]
 
 [[package]]
