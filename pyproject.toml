@@ -23,7 +23,7 @@ dependencies = [
     "Google-Images-Search==1.4.7",
     "requests==2.32.3",
     "windows-curses==2.4.0; platform_system  == 'Windows'",
-    "coqui-tts==0.24.1",
+    "coqui-tts==0.24.2",
 ]
 
 requires-python = "==3.10.*"
