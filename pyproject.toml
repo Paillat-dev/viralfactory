@@ -6,7 +6,7 @@ authors = [
     {name = "Paillat", email = "me@paillat.dev"},
 ]
 dependencies = [
-    "anthropic==0.36.2",
+    "anthropic==0.37.1",
     "google-api-python-client==2.48.0",
     "google-auth-oauthlib==1.2.1",
     "gradio==4.44.1",
